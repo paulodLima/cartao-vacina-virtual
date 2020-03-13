@@ -1,0 +1,55 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+ <!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Pessoas</h3>
+        </div>
+        <div class="card-body "> <!--class="table-responsive"-->
+          <div class="row">
+            <div class="col-lg-3 ">
+            <table class="table">
+              <tr class="col-lg-4">
+                <th class="col-form-label-sm">Nome</th>
+                <th class="col-form-label-sm">Documento</th>
+                <th class="col-form-label-sm">Telefone</th>
+                <th class="col-form-label-sm">Nome da Mãe</th>
+                <th class="col-form-label-sm">Nome do Pai</th>
+                <th class="col-form-label-sm">Endereço</th>
+                <th class="col-form-label-sm">Peso</th>
+                <th class="col-form-label-sm">Altura</th>
+              </tr>
+              <tbody>
+              <tr *ngFor="let pessoa of pessoas" >
+                <td class="col-form-label-sm">{{pessoa.fullName}}</td>
+                <td class="col-form-label-sm">{{pessoa.documentNumber}}</td>
+                <td class="col-form-label-sm">{{pessoa.phone.areaCode}} {{pessoa.phone.number}}</td>
+                <td class="col-form-label-sm">{{pessoa.mothersName}}</td>
+                <td class="col-form-label-sm">{{pessoa.fathersName}}</td>
+                <td class="col-form-label-sm">
+                  {{pessoa.address.city}}
+                  {{pessoa.address.street}}
+                  {{pessoa.address.neighborhood}}
+                  {{pessoa.address.state}}
+                  {{pessoa.address.complement}}
+                </td>
+                <td class="col">{{pessoa.height.height}}</td>
+                <td class="col">{{pessoa.weight.weight}}</td>
+              </tr>
+              </tbody>
+
+            </table>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
