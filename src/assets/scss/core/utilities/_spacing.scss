@@ -34,7 +34,7 @@
     [class*="mr--"],
     [class*="mb--"],
     [class*="ml--"] {
-        
+
     }
 
 
@@ -46,11 +46,17 @@
     .mr--100 {
         margin-right: -100px !important;
     }
+    .mr--70 {
+    margin-right: -70px !important;
+    }
     .mb--100 {
         margin-bottom: -100px !important;
     }
     .ml--100 {
         margin-left: -100px !important;
+    }
+    .ml--70 {
+    margin-left: -70px !important;
     }
     .mt--150 {
         margin-top: -150px !important;

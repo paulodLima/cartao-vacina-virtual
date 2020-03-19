@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {PessoasService} from './pages/Services/PessoasService';
+import {PessoasService} from './pages/services/PessoasService';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
+import { RegisterVaccineComponent } from './pages/register-vaccine/register-vaccine.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ComponentsModule } from './components/components.module';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    RegisterVaccineComponent
   ],
   providers: [
     PessoasService,
