@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { RegisterVaccineComponent } from './pages/register-vaccine/register-vaccine.component';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
