@@ -1,0 +1,35 @@
+.imgTam {
+    width: 400% !important;
+}
+.p1{
+  margin-left:20px;
+}
+
+.pn1{
+  font-weight: bold;
+  text-align: center;
+}
+.pn{
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+}
+.tdn{
+  font-weight: bold;
+}
+.tdg{
+  font-weight: bold;
+  font-size: 10px;
+}
+.tdgn{
+  font-size: 10px;
+}
+.teste{
+  max-width:200px !important;
+  max-height:100px !important;
+}
+.icon
+{
+  width: 2rem !important;
+  height: 2rem !important;
+}
