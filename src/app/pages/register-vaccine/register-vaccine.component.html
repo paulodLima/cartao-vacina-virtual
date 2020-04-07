@@ -1,0 +1,129 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+      <div class="">
+          <img class="imgAtencao" src="../../../assets/img/info.png" title=" As cores dos icones servem para identificar pra quem as vacinas são destinadas.
+                  AZUL: Vacinas para as crianças.
+                  LARANJA: Vacinas para os adolecentes.
+                  ROSA: Vacinas para os adultos">
+      </div>
+
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas">
+          <div class="card card-stats mb-4 mb-xl-0 margin-card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">{{vacina.nome_vacina}}
+                  </h5>
+                </div>
+                <div class="col-auto" *ngIf="vacina.perfil == 'crianca'">
+                  <div class="icon icon-shape {{crianca}} text-white rounded-circle shadow">
+                    <img class="imgTam" [src]=[img_vacina]>
+                  </div>
+                </div>
+                <div class="col-auto" *ngIf="vacina.perfil == 'adulto'">
+                  <div class="icon icon-shape {{adulto}} text-white rounded-circle shadow">
+                    <img class="imgTam" [src]=[img_vacina]>
+                  </div>
+                </div>
+                <div class="col-auto" *ngIf="vacina.perfil == 'adolecente'">
+                  <div class="icon icon-shape {{adolecente}} text-white rounded-circle shadow">
+                    <img class="imgTam" [src]=[img_vacina]>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <button class=" mr-2 btn btn-sm btn-default float-right" (click)=abrirModal(modalVacina,vacina.nome_vacina)>Info</button>
+                <button class="text-nowrap btn btn-sm btn-primary" (click)="$event">Incluir</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <ng-template #modalVacina>
+      <div class="modal-register" *ngFor="let vacina of vacinaPorNome">
+
+        <div class="modal-body">
+            <table class="table-bordered" >
+              <thead class="text-uppercase text-muted mb-0" >
+              <tr class="row table-active">
+                <th class="col">
+                  <p class="pn1">DETALHAMENTO </p>
+                  <p class="pn">{{vacina.nome_vacina}}</p>
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr class="row">
+                <td class="col tdn"> Proteção Contra:</td>
+                <td class="col">{{vacina.protecao_contra}} </td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Composição:</td>
+                <td class="col">{{vacina.composicao}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Nº Doses:</td>
+                <td class="col"> {{vacina.n_doses[0].vacinacao_basica}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Revacinação</td>
+                <td class="col"> {{vacina.n_doses[1].revacinacao_reforco}}</td>
+              </tr>
+              <tr class="row">
+                <th class="col">
+                  <p class="pn">INÍCIO DA VACINAÇÃO</p>
+                </th>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Minima:</td>
+                <td class="col"> {{vacina.inicio_vacinacao[0].minima}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Máxima:</td>
+                <td class="col"> {{vacina.inicio_vacinacao[1].maxima}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Intervalo entre as doses:</td>
+                <td class="col">Recomendado: {{vacina.intervalo_doses[0].recomendado}} Min: {{vacina.intervalo_doses[1].minimo}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Dosagem:</td>
+                <td class="col">{{vacina.dosagem}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn">Via de administração:</td>
+                <td class="col">{{vacina.via_administracao}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Local da aplicação:</td>
+                <td class="col">{{vacina.local_aplicacao}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdn"> Agulha hipodérmica recomendada:</td>
+                <td class="col">{{vacina.agulha_recomendada}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdg"> Tempo de validade após aberto frasco:</td>
+                <td class="col">{{vacina.tempo_validade_frasco_aberto}}</td>
+              </tr>
+              <tr class="row">
+                <td class="col tdg"> Alguns eventos adversos:</td>
+                <td class="col tdgn"> {{vacina.eventos_adversos}}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Incluir</button>
+          </div>
+
+    </ng-template>

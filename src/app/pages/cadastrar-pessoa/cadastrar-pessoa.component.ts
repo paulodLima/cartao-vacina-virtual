@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.scss'],
-  providers: [PessoasService]
+  selector: 'app-cadastrar-pessoa',
+  templateUrl: './cadastrar-pessoa.component.html',
+  styleUrls: ['./cadastrar-pessoa.component.css']
 })
-export class RegistrarComponent implements OnInit {
+export class CadastrarPessoaComponent implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder, private pessoasService: PessoasService) { }
 
@@ -28,6 +27,8 @@ export class RegistrarComponent implements OnInit {
   public mothersName = '';
   public height = '';
   public weight = '';
+  public number = '';
+  public areaCode = '';
 
   ngOnInit(): void {
     this.formPerson = this.formBuilder.group({
@@ -35,7 +36,6 @@ export class RegistrarComponent implements OnInit {
       documentNumber: ['', [Validators.required, Validators.maxLength(12)]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.maxLength(9)]],
       fathersName: ['', [Validators.required, Validators.minLength(8)]],
       mothersName: ['', [Validators.required, Validators.minLength(8)]],
       address: this.formBuilder.group({
@@ -49,13 +49,17 @@ export class RegistrarComponent implements OnInit {
       height: this.formBuilder.group({
         height: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]],
         weight: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]]
+      }),
+      phone: this.formBuilder.group({
+        areaCode: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]],
+        number: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]]
       })
     });
   }
 
 
   cadastrar() {
-    console.log('passando aqui full name', this.formPerson.value, this.fullName);
+    console.log('passando aqui full name', this.formPerson.value);
   }
 
   public buscarCep(cep: string): void {
@@ -84,5 +88,4 @@ export class RegistrarComponent implements OnInit {
   get wight() {
     return this.formPerson.get('height').get('weight');
   }
-
 }

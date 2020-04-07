@@ -10,11 +10,12 @@ import {RegistrarComponent} from '../../pages/registrar/registrar.component';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AuthLayoutRoutes),
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AuthLayoutRoutes),
+        FormsModule,
+        ReactiveFormsModule
+    ],
   declarations: [
     LoginComponent,
     RegistrarComponent

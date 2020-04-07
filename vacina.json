@@ -1,0 +1,189 @@
+{
+  "vacina_crianca": [
+    {
+      "id": "1",
+      "nome_vacina": "BCG",
+      "protecao_contra": "Tuberculose",
+      "composicao": "Bactéria viva atenuada",
+      "n_doses": [
+        {
+          "vacinacao_basica": "Dose única"
+        },
+        {
+          "revacinacao_reforco": "Depende da indicacao"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "Ao nascer"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0.1 ml",
+      "via_administracao": "Intradérmia (ID)",
+      "local_aplicacao": "Inserção inferior do músculo deltoide direto",
+      "agulha_recomendada": "13x3,8",
+      "tempo_validade_frasco_aberto": "6 horas (multidose)",
+      "eventos_adversos": "Reações locais e/ou regionais. Granuloma. Úlcera> 1 cm, abscesso, linfadenopatias regionais",
+      "perfil": "crianca"
+    },
+    {
+      "id": "2",
+      "nome_vacina": "Hepatite B",
+      "protecao_contra": "Hepatite B",
+      "composicao": "Partícula da cápsula do vírus antígeno de superfície",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose(2)"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "Ao nascer"
+        },
+        {
+          "maxima": "30 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "10 e/ou 15 dias (multidose)",
+      "eventos_adversos": "Reações locais. Febre, cefaleia, fadiga, púrpura. desconforto gastrointerite leve.",
+      "perfil": "adolecente"
+    },
+    {
+      "id": "3",
+      "nome_vacina": "Poliomielite 1,2,3 (VIP - inativada)",
+      "protecao_contra": "Poliomielite",
+      "composicao": "Vírus inativado tipos I, II, e III",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "2 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "7 dias (multidose)",
+      "eventos_adversos": "Reações locais. Febre, reações hipersensibilidade.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "4",
+      "nome_vacina": "Poliomielite 1 e 3 (VOP - atenuada)",
+      "protecao_contra": "Poliomielite",
+      "composicao": "Vírus vivo atenuado tipos I e III",
+      "n_doses": [
+        {
+          "vacinacao_basica": "-"
+        },
+        {
+          "revacinacao_reforco": "1º ref. 15 meses 2º ref. 4 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "1º ref aos 15 meses, 2º ref. 3 anos após 1º ref."
+        },
+        {
+          "minimo": "1º ref. 6 meses após 3ª dose. 2º ref. 6 meses após 1º ref."
+        }
+      ],
+      "dosagem": "2 gotas",
+      "via_administracao": "Oral (VO)",
+      "local_aplicacao": "Cavidade oral",
+      "agulha_recomendada": "-",
+      "tempo_validade_frasco_aberto": "5 dias e/ou 4 semanas (multidose)",
+      "eventos_adversos": "Poliomielite associada ao vírus vacinal – VAPP.",
+      "perfil": "adulto"
+    },
+    {
+      "id": "5",
+      "nome_vacina": "Poliomielite 1 e 3 (VOP - atenuada)",
+      "protecao_contra": "Poliomielite",
+      "composicao": "Vírus vivo atenuado tipos I e III",
+      "n_doses": [
+        {
+          "vacinacao_basica": "-"
+        },
+        {
+          "revacinacao_reforco": "1º ref. 15 meses 2º ref. 4 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "1º ref aos 15 meses, 2º ref. 3 anos após 1º ref."
+        },
+        {
+          "minimo": "1º ref. 6 meses após 3ª dose. 2º ref. 6 meses após 1º ref."
+        }
+      ],
+      "dosagem": "2 gotas",
+      "via_administracao": "Oral (VO)",
+      "local_aplicacao": "Cavidade oral",
+      "agulha_recomendada": "-",
+      "tempo_validade_frasco_aberto": "5 dias e/ou 4 semanas (multidose)",
+      "eventos_adversos": "Poliomielite associada ao vírus vacinal – VAPP.",
+      "perfil": "adulto"
+    }
+  ]
+}

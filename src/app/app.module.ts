@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {PessoasService} from './pages/Services/PessoasService';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
+import {PessoasService} from './pages/services/pessoas.service';
+import {VacinaService} from './pages/services/vacina.service';
+import { CadastrarPessoaComponent } from './pages/cadastrar-pessoa/cadastrar-pessoa.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ComponentsModule } from './components/components.module';
   ],
   providers: [
     PessoasService,
+    VacinaService,
     HttpClientModule
   ],
   bootstrap: [AppComponent]

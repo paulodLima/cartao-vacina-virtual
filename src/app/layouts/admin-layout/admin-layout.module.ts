@@ -12,6 +12,8 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PessoasComponent} from '../../pages/pessoas/pessoas.component';
 import { RegistrarComponent} from '../../pages/registrar/registrar.component';
+import {RegisterVaccineComponent} from '../../pages/register-vaccine/register-vaccine.component';
+import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-pessoa.component';
 
 
 @NgModule({
@@ -21,14 +23,17 @@ import { RegistrarComponent} from '../../pages/registrar/registrar.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     PessoasComponent,
-    MapsComponent
+    MapsComponent,
+    RegisterVaccineComponent,
+    CadastrarPessoaComponent
   ]
 })
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PessoasService} from '../Services/PessoasService';
+import {PessoasService} from '../services/pessoas.service';
+
 
 @Component({
   selector: 'app-icons',

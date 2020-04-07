@@ -12,7 +12,7 @@
 </div>
 <!-- pagina content -->
 <div class="col-xl-8 order-xl-1 ml-sm-9 " >
-  <div class="card bg-secondary shadow my--10 my-auto1">
+  <div class="card bg-secondary shadow my--10 my-auto">
     <div class="card-header bg-white border-0">
       <div class="row align-items-center">
         <div class="col-8">
@@ -54,22 +54,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-3">
-              <div class="form-group" formArrayName="height">
-                <label class="form-control-label">Altura</label>
-                <input type="number" id="height" class="form-control" placeholder="Altura" formArrayName="height" [value]="height">
+            <div class="col-lg-6 ">
+              <div class="form-group">
+                <label class="form-control-label">CPF</label>
+                <input type="text" id="documentNumber" class="form-control" placeholder="CPF" formControlName="documentNumber" [value]="documentNumber">
               </div>
             </div>
-            <div class="col-lg-2">
-              <div class="form-group" formArrayName="height">
-                <label class="form-control-label" >Peso(KG)</label>
-                <input type="number" id="weight" class="form-control" placeholder="Peso" formArrayName="weight" [value]="weight">
-              </div>
-              <div [hidden]="!wight.errors.required">
-                    Tamanho máximo de {{wight.errors.required?.requiredLength}}
-              </div>
-            </div>
-            <div class="col-lg-4 offset-lg-1">
+            <div class="col-lg-6 ">
               <div class="form-group">
                 <label class="form-control-label">Data de Nascimento</label>
                 <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento" formControlName="birthDate" [value]="birthDate">
@@ -77,17 +68,33 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-4 ">
+            <div class="col-lg-2" formArrayName="phone">
               <div class="form-group">
-                <label class="form-control-label">CPF</label>
-                <input type="number" id="documentNumber" class="form-control" placeholder="CPF" formControlName="documentNumber" [value]="documentNumber">
+                <label class="form-control-label">DDD</label>
+                <input type="number" id="areaCode" class="form-control" placeholder="DDD" formControlName="areaCode" [value]="areaCode">
+              </div>
+            </div>
+            <div class="col-lg-4 " formArrayName="phone">
+              <div class="form-group">
+                <label class="form-control-label">Telefone</label>
+                <input type="number" id="number" class="form-control" placeholder="Telefone" formControlName="number" [value]="number">
+              </div>
+            </div>
+            <div class="col-lg-3" formArrayName="height">
+              <div class="form-group">
+                <label class="form-control-label">Altura</label>
+                <input type="number" id="height" class="form-control" placeholder="Altura" formArrayName="height" [value]="height">
+              </div>
+            </div>
+            <div class="col-lg-3" formArrayName="height">
+              <div class="form-group">
+                <label class="form-control-label" >Peso(KG)</label>
+                <input type="number" id="weight" class="form-control" placeholder="Peso" formArrayName="weight" [value]="weight">
               </div>
             </div>
           </div>
-          <hr class="my-4" />
           <!-- Address -->
           <h6 class="heading-small text-muted mb-4">Endereço</h6>
-          <div class="pl-lg-4">
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
@@ -106,7 +113,7 @@
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label" >Bairro</label>
-                  <input class="form-control" id="street" placeholder="" [value]="street" formControlName="street">
+                  <input class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
                 </div>
               </div>
             </div>
@@ -133,7 +140,6 @@
             <hr class="my-4" />
             <button [routerLink]="['/register-vaccine']" class="btn btn-info offset-lg-8 active" (click)="cadastrar()">Cadastrar Vacinas</button>
           </div>
-        </div>
       </form>
     </div>
   </div>
