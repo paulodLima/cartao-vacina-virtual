@@ -11,21 +11,20 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PessoasComponent} from '../../pages/pessoas/pessoas.component';
-import { RegistrarComponent} from '../../pages/registrar/registrar.component';
 import {RegisterVaccineComponent} from '../../pages/register-vaccine/register-vaccine.component';
 import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-pessoa.component';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    ClipboardModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        ClipboardModule,
+        ReactiveFormsModule
+    ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,

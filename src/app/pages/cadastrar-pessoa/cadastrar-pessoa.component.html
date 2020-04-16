@@ -11,7 +11,7 @@
   </div>
 </div>
 <!-- pagina content -->
-<div class="col-xl-8 order-xl-1 ml-sm-9 " >
+<div class="col-xl-8 order-xl-1 ml-sm-9 ">
   <div class="card bg-secondary shadow my--10 my-auto">
     <div class="card-header bg-white border-0">
       <div class="row align-items-center">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="card-body">
-      <form [formGroup]="formPerson">
+      <form #form='ngForm' [formGroup]="formPerson" novalidate>
         <h6 class="heading-small text-muted mb-4">Informações do Usuário</h6>
         <div class="pl-lg-4">
           <div class="row">
@@ -30,12 +30,28 @@
                 <label class="form-control-label">Nome completo</label>
                 <input type="text" id="fullName" class="form-control" placeholder="name" [value]="fullName"
                        required minlength="5" formControlName="fullName">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fullName').errors?.required
+                                  && form.submitted">
+                  Nome completo obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fullName').errors?.pattern">
+                  Nome inválido!
+                </small>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">Email</label>
-                <input type="email" id="email" required  class="form-control" placeholder="nome@exemplo.com" formControlName="email" [value]="email">
+                <input type="email" id="email" required class="form-control" placeholder="nome@exemplo.com"
+                       formControlName="email" [value]="email">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.required
+                                  && form.submitted">
+                  E-mail obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.pattern
+                                  && form.submitted">
+                  E-mail inválido!
+                </small>
               </div>
             </div>
           </div>
@@ -43,27 +59,72 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">Nome da Mãe</label>
-                <input type="text" id="mothersName" class="form-control" placeholder="Nome da Mãe" formControlName="mothersName" [value]="mothersName">
+                <input type="text" id="mothersName" class="form-control" placeholder="Nome da Mãe"
+                       formControlName="mothersName" [value]="mothersName">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.required
+                                  && form.submitted">
+                  Nome da Mãe obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.pattern
+                                  && form.submitted">
+                  Nome da Mãe inválido!
+                </small>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">Nome do Pai</label>
-                <input type="text" id="fathersName" class="form-control" placeholder="Nome do Pai" formControlName="fathersName" [value]="fathersName">
+                <input type="text" id="fathersName" class="form-control" placeholder="Nome do Pai"
+                       formControlName="fathersName" [value]="fathersName">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.required
+                                  && form.submitted">
+                  Nome do Pai obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.pattern
+                                  && form.submitted">
+                  Nome do Pai inválido!
+                </small>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 ">
+            <div class="col-lg-4 ">
               <div class="form-group">
                 <label class="form-control-label">CPF</label>
-                <input type="text" id="documentNumber" class="form-control" placeholder="CPF" formControlName="documentNumber" [value]="documentNumber">
+                <input id="documentNumber" class="form-control" placeholder="CPF"
+                       formControlName="documentNumber" [value]="documentNumber">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.required
+                                  && form.submitted">
+                  CPF obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.pattern
+                                  && form.submitted">
+                  CPF inválido!
+                </small>
               </div>
             </div>
-            <div class="col-lg-6 ">
+            <div class="col-lg-4 ">
               <div class="form-group">
                 <label class="form-control-label">Data de Nascimento</label>
-                <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento" formControlName="birthDate" [value]="birthDate">
+                <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
+                       formControlName="birthDate" [value]="birthDate">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('birthDate').errors?.required
+                                  && form.submitted">
+                  Data de Nascimento obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4 ">
+              <div class="form-group">
+                <label class="form-control-label">Sexo</label>
+                <select id="sexType" class="form-control" formControlName="sexType" [value]="sexType">
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
+                                  && form.submitted">
+                  Sexo obrigatório!
+                </small>
               </div>
             </div>
           </div>
@@ -71,75 +132,140 @@
             <div class="col-lg-2" formArrayName="phone">
               <div class="form-group">
                 <label class="form-control-label">DDD</label>
-                <input type="number" id="areaCode" class="form-control" placeholder="DDD" formControlName="areaCode" [value]="areaCode">
+                <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode"
+                       [value]="areaCode">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.required
+                                  && form.submitted">
+                  DDD obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.pattern
+                                  && form.submitted">
+                  DDD inválido!
+                </small>
               </div>
             </div>
             <div class="col-lg-4 " formArrayName="phone">
               <div class="form-group">
                 <label class="form-control-label">Telefone</label>
-                <input type="number" id="number" class="form-control" placeholder="Telefone" formControlName="number" [value]="number">
+                <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                       [value]="number">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.required
+                                  && form.submitted">
+                  Telefone obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.pattern
+                                  && form.submitted">
+                  Telefone inválido!
+                </small>
               </div>
             </div>
             <div class="col-lg-3" formArrayName="height">
               <div class="form-group">
                 <label class="form-control-label">Altura</label>
-                <input type="number" id="height" class="form-control" placeholder="Altura" formArrayName="height" [value]="height">
+                <input type="number" id="height" class="form-control" placeholder="Altura" formControlName="height"
+                       [value]="height">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.required
+                                  && form.submitted">
+                  Altura obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.pattern
+                                  && form.submitted">
+                  Altura inválido!
+                </small>
               </div>
             </div>
             <div class="col-lg-3" formArrayName="height">
               <div class="form-group">
-                <label class="form-control-label" >Peso(KG)</label>
-                <input type="number" id="weight" class="form-control" placeholder="Peso" formArrayName="weight" [value]="weight">
+                <label class="form-control-label">Peso(KG)</label>
+                <input type="number" id="weight" class="form-control" placeholder="Peso" formControlName="weight"
+                       [value]="weight">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.weight').errors?.required
+                                  && form.submitted">
+                  Peso obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.weight').errors?.pattern
+                                  && form.submitted">
+                  Peso inválido!
+                </small>
               </div>
             </div>
           </div>
           <!-- Address -->
           <h6 class="heading-small text-muted mb-4">Endereço</h6>
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label" >CEP</label>
-                  <input type="text" id="zipCode" class="form-control valid" placeholder="cep"
-                         [value]="zipCode" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
-                  <div class="invalid-feedback "> CEP invalido</div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label" >Logradouro</label>
-                  <input class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood" formControlName="neighborhood">
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label" >Bairro</label>
-                  <input class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
-                </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">CEP</label>
+                <input type="number" id="zipCode" class="form-control" placeholder="cep"
+                       [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.zipCode').errors?.required
+                                  && form.submitted">
+                  CEP obrigatório!
+                </small>
+                <small class="text-danger d-block mt-2" *ngIf="cepvalico">
+                  CEP inválido!
+                </small>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label">Cidade</label>
-                  <input type="text" id="city" class="form-control" placeholder="Cidade" [value]="city" formControlName="city">
-                </div>
-              </div>
-              <div class="col-lg-2">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label">Estado</label>
-                  <input type="text" id="state" class="form-control" placeholder="Estado" [value]="state" formControlName="state">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group" formArrayName="address">
-                  <label class="form-control-label">Complemento</label>
-                  <input type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement" formControlName="complement">
-                </div>
+            <div class="col-lg-4">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">Logradouro</label>
+                <input class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood"
+                       formControlName="neighborhood">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.neighborhood').errors?.required
+                                  && form.submitted">
+                  Logradouro obrigatório!
+                </small>
               </div>
             </div>
-            <hr class="my-4" />
-            <button [routerLink]="['/register-vaccine']" class="btn btn-info offset-lg-8 active" (click)="cadastrar()">Cadastrar Vacinas</button>
+            <div class="col-lg-4">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">Bairro</label>
+                <input class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.street').errors?.required
+                                  && form.submitted">
+                  Bairro obrigatório!
+                </small>
+              </div>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">Cidade</label>
+                <input type="text" id="city" class="form-control" placeholder="Cidade" [value]="city"
+                       formControlName="city">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.city').errors?.required
+                                  && form.submitted">
+                  Cidade obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">Estado</label>
+                <input type="text" id="state" class="form-control" placeholder="Estado" [value]="state"
+                       formControlName="state">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.state').errors?.required
+                                  && form.submitted">
+                  Estado obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group" formArrayName="address">
+                <label class="form-control-label">Complemento</label>
+                <input type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
+                       formControlName="complement">
+              </div>
+            </div>
+          </div>
+          <hr class="my-4"/>
+          <button class="btn btn-info offset-lg-8 active"
+                  (click)="cadastrar()">
+            Cadastrar Vacinas
+          </button>
+        </div>
       </form>
     </div>
   </div>

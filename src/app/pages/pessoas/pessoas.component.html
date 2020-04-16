@@ -11,22 +11,24 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="header-body">
       <!-- Page content -->
-      <div class="container-fluid mt--7 ">
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <div class="container float-right mbt">
+          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+            <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control " placeholder="Pesquisar" type="text"
+                       #termoPesquisa (keyup)="pesquisarPessoa(termoPesquisa.value)">
               </div>
-              <input class="form-control" placeholder="Pesquisar" type="text" (focus)="focus = true"
-                     (blur)="focus = false">
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
         <!-- Table -->
+  <div class="container-fluid mt-lg-3">
+    <div class="header-body">
+      <div class="container-fluid mt--7 ">
             <div class="card shadow ml--100i mr--100i" >
               <div class="card-header bg-transparent">
                 <h3 class="mb-0">Usuários</h3>
@@ -64,7 +66,7 @@
                             </td>
                             <td>{{pessoa.height.height}}</td>
                             <td>{{pessoa.height.weight}}</td>
-                            <td><button class="btn btn-danger">Editar</button></td>
+                            <td><button class="btn btn-danger" (click)="editarPessoa(pessoa.documentNumber)">Editar</button></td>
                           </tr>
                     </table>
                   </div>

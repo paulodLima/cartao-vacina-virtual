@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {error} from '@angular/compiler/src/util';
+import {map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -10,9 +12,13 @@ import {Router} from '@angular/router';
 })
 export class CadastrarPessoaComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private pessoasService: PessoasService) { }
+  constructor(private router: Router,
+              private formBuilder: FormBuilder,
+              private pessoasService: PessoasService,
+              private route: ActivatedRoute) {
+  }
 
-  public  formPerson: FormGroup;
+  public formPerson: FormGroup;
   public fullName = '';
   public documentNumber = '';
   public email = '';
@@ -29,37 +35,79 @@ export class CadastrarPessoaComponent implements OnInit {
   public weight = '';
   public number = '';
   public areaCode = '';
+  public sexType = '';
+  public cepvalico = false;
 
   ngOnInit(): void {
     this.formPerson = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
-      documentNumber: ['', [Validators.required, Validators.maxLength(12)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.minLength(8)]],
-      mothersName: ['', [Validators.required, Validators.minLength(8)]],
+      sexType: ['', Validators.required],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
       address: this.formBuilder.group({
-        zipCode: ['', Validators.required],
+        zipCode: ['', [Validators.required]],
         city: ['', Validators.required],
         street: ['', Validators.required],
         state: ['', Validators.required],
         complement: [''],
         neighborhood: ['', Validators.required]
       }),
-      height: this.formBuilder.group({
-        height: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]],
-        weight: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]]
-      }),
       phone: this.formBuilder.group({
-        areaCode: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]],
-        number: ['', [Validators.required, Validators.pattern(/^[]0-9_\-]+$/)]]
+        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/)]],
+        number: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{8,9}\d*)?$/)]]
+      }),
+      height: this.formBuilder.group({
+        height: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]],
+        weight: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]]
+      })
+    });
+
+    this.route.params.pipe(
+      map((params) => params.id),
+      switchMap(documentNumber => this.pessoasService.consutarPessoa(documentNumber))
+    ).subscribe(pessoa => this.atualizarFormulario(pessoa));
+  }
+
+  atualizarFormulario(pessoa) {
+    this.formPerson.patchValue({
+      fullName: pessoa.fullName,
+      documentNumber: pessoa.document,
+      email: pessoa.email,
+      birthDate: pessoa.birthDate,
+      sexType: pessoa.sexType,
+      fathersName: pessoa.fathersName,
+      mothersName: pessoa.mothersName,
+      address: ({
+        city: pessoa.localidade,
+        neighborhood: pessoa.logradouro,
+        zipCode: pessoa.zipCode,
+        state: pessoa.uf,
+        street: pessoa.bairro,
+        complement: pessoa.complemento
+      }),
+      phone: ({
+        areaCode: pessoa.areaCode,
+        number: pessoa.number
+      }),
+      height: ({
+        height: pessoa.height,
+        weight: pessoa.weight
       })
     });
   }
 
-
   cadastrar() {
-    console.log('passando aqui full name', this.formPerson.value);
+    console.log('chamadno o metodo cadastrar', this.formPerson);
+    if (this.formPerson.valid) {
+      this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
+        console.log('passando aqui', pessoa);
+        this.router.navigateByUrl('/register-vaccine');
+
+      }, erro => console.log('erro ao cadastrar pessoa', erro));
+    }
   }
 
   public buscarCep(cep: string): void {
@@ -71,21 +119,21 @@ export class CadastrarPessoaComponent implements OnInit {
       if (validaCep.test(cep)) {
 
         this.pessoasService.buscarCep(cep).subscribe(endereco => {
-          console.log(endereco)
-          this.city = endereco.localidade;
-          this.zipCode = endereco.cep;
-          this.neighborhood = endereco.logradouro;
-          this.state = endereco.uf;
-          this.street = endereco.bairro;
-          this.complement = endereco.complemento;
-        }, error => {
-          console.log('ocorreu um erro ao listar o cep', error);
+
+          this.formPerson.patchValue({
+            address: ({
+              city: endereco.localidade,
+              neighborhood: endereco.logradouro,
+              state: endereco.uf,
+              street: endereco.bairro,
+              complement: endereco.complemento
+            })
+          });
+        }, error1 => {
+          this.cepvalico = true;
+          console.log('ocorreu um erro ao listar o cep', error1);
         });
       }
     }
-  }
-
-  get wight() {
-    return this.formPerson.get('height').get('weight');
   }
 }

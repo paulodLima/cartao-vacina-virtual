@@ -11,29 +11,28 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {PessoasService} from './pages/services/pessoas.service';
 import {VacinaService} from './pages/services/vacina.service';
-import { CadastrarPessoaComponent } from './pages/cadastrar-pessoa/cadastrar-pessoa.component';
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    NgbModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent
-  ],
-  providers: [
-    PessoasService,
-    VacinaService,
-    HttpClientModule
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        NgbModule,
+        RouterModule,
+        AppRoutingModule
+    ],
+    declarations: [
+        AppComponent,
+        AdminLayoutComponent,
+        AuthLayoutComponent
+    ],
+    providers: [
+        PessoasService,
+        VacinaService
+    ],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

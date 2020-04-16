@@ -16,5 +16,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'pessoas',          component: PessoasComponent },
     { path: 'maps',           component: MapsComponent },
     {path: 'register-vaccine', component: RegisterVaccineComponent},
-    {path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}
+    {path: 'cadastrar-pessoa', component: CadastrarPessoaComponent},
+    {path: 'editar-pessoa/:id', component: CadastrarPessoaComponent}
 ];

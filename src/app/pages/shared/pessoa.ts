@@ -1,6 +1,6 @@
 export class Pessoa {
 
-  public fullName = '53w';
+  public fullName: string;
   public documentNumber: string;
   public fathersName: string;
   public mothersName: string;

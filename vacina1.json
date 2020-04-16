@@ -1,0 +1,1003 @@
+{
+  "vacina_crianca": [
+    {
+      "id": "1",
+      "nome_vacina": "BCG",
+      "protecao_contra": "Tuberculose",
+      "composicao": "Bactéria viva atenuada",
+      "n_doses": [
+        {
+          "vacinacao_basica": "Dose única"
+        },
+        {
+          "revacinacao_reforco": "Depende da indicacao"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "Ao nascer"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0.1 ml",
+      "via_administracao": "Intradérmia (ID)",
+      "local_aplicacao": "Inserção inferior do músculo deltoide direto",
+      "agulha_recomendada": "13x3,8",
+      "tempo_validade_frasco_aberto": "6 horas (multidose)",
+      "eventos_adversos": "Reações locais e/ou regionais. Granuloma. Úlcera> 1 cm, abscesso, linfadenopatias regionais",
+      "perfil": "crianca"
+    },
+    {
+      "id": "2",
+      "nome_vacina": "Hepatite B",
+      "protecao_contra": "Hepatite B",
+      "composicao": "Partícula da cápsula do vírus antígeno de superfície",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose(2)"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "Ao nascer"
+        },
+        {
+          "maxima": "30 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "10 e/ou 15 dias (multidose)",
+      "eventos_adversos": "Reações locais. Febre, cefaleia, fadiga, púrpura. desconforto gastrointerite leve.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "3",
+      "nome_vacina": "Poliomielite 1,2,3 (VIP - inativada)",
+      "protecao_contra": "Poliomielite",
+      "composicao": "Vírus inativado tipos I, II, e III",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "2 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "7 dias (multidose)",
+      "eventos_adversos": "Reações locais. Febre, reações hipersensibilidade.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "4",
+      "nome_vacina": "Poliomielite 1 e 3 (VOP - atenuada)",
+      "protecao_contra": "Poliomielite",
+      "composicao": "Vírus vivo atenuado tipos I e III",
+      "n_doses": [
+        {
+          "vacinacao_basica": "-"
+        },
+        {
+          "revacinacao_reforco": "1º ref. 15 meses 2º ref. 4 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "1º ref aos 15 meses, 2º ref. 3 anos após 1º ref."
+        },
+        {
+          "minimo": "1º ref. 6 meses após 3ª dose. 2º ref. 6 meses após 1º ref."
+        }
+      ],
+      "dosagem": "2 gotas",
+      "via_administracao": "Oral (VO)",
+      "local_aplicacao": "Cavidade oral",
+      "agulha_recomendada": "-",
+      "tempo_validade_frasco_aberto": "5 dias e/ou 4 semanas (multidose)",
+      "eventos_adversos": "Poliomielite associada ao vírus vacinal – VAPP.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "5",
+      "nome_vacina": "Rotavírus humano G1P1 (VORH) (3)",
+      "protecao_contra": "Diarreia por Rotavírus",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "2 doses"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "1ª dose: 1 mês e 15 dias. 2ª dose: 3 meses e 15 dias"
+        },
+        {
+          "maxima": "1ª dose:3 meses e 15 dias 2ª dose: 7meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "** 30 dias"
+        }
+      ],
+      "dosagem": "1,5 ml",
+      "via_administracao": "Oral (VO)",
+      "local_aplicacao": "Cavidade  oral",
+      "agulha_recomendada": "-",
+      "tempo_validade_frasco_aberto": "Uso imediato (monodose)",
+      "eventos_adversos": "Irritabilidade, vômito e diarreia moderados. Invaginação intestinal.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "6",
+      "nome_vacina": "DTP+Hib+HB (Penta)",
+      "protecao_contra": "Difteria, Tétano, Coqueluche. Meningite por Haemophilus Influenzae b, Hepatite B",
+      "composicao": "Bactéria morta e produto de toxinas. Polissacarídeo do Hib, conjugado a uma proteína/ antígeno de superfície de  HB",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses"
+        },
+        {
+          "revacinacao_reforco": "1º  ref. 15 meses 2º ref. 4 anos com a vacina DTP"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "2 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa direita",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações locais,  febre, sonolência, vômito, irritabilidade, choro persistente, EHH, convulsão e reações imunoalérgicas.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "7",
+      "nome_vacina": "Pneumocócica 10 valente (Pncc 10)",
+      "protecao_contra": "Pneumonias, Meningites, Otites, Sinusites pelos sorotipos que compõem a vacina",
+      "composicao": "Polissacarídeo capsular de 10 sorotipos pneumococos",
+      "n_doses": [
+        {
+          "vacinacao_basica": "2 doses Difiteria, Tétano, Coqueluche"
+        },
+        {
+          "revacinacao_reforco": "12 meses"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "2 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações  locais. Febre, irritabilidade, sonolência, perda de apetite, convulsões, EHH.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "8",
+      "nome_vacina": "Meningocócica C conjugada (MncC)",
+      "protecao_contra": "Meningite Tipo C",
+      "composicao": "Oligossacarídeo conjugado com a proteína CRM (197)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "2 doses"
+        },
+        {
+          "revacinacao_reforco": "12 meses"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "3 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa direita",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "Uso imediato após reconstituição (monodose)",
+      "eventos_adversos": "Reações  locais. Febre, irritabilidade, sonolência, cefaleia, diarreia e vômito.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "9",
+      "nome_vacina": "Febre Amarela (FA)",
+      "protecao_contra": "Febre Amarela (4)",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "4 anos de idade"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "*** 9 meses"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 horas (multidose)",
+      "eventos_adversos": "Reações locais. Febre, mialgia, cefaleia.  D. Viscerotrópica. Aguda.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "10",
+      "nome_vacina": "Sarampo, Caxumba, Rubéola (SCR) (5)",
+      "protecao_contra": "Sarampo Caxumba Rubéola",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "15 meses com Tetra Viral"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "12 meses (5)"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 e/ou 8 horas (multidose)",
+      "eventos_adversos": "Febre, cefaleia, exantema, artralgia, artrite, púrpura",
+      "perfil": "crianca"
+    },
+    {
+      "id": "11",
+      "nome_vacina": "Sarampo, Caxumba, Rubéola, Varicela (SCRV)",
+      "protecao_contra": "Sarampo Caxumba Rubéola + Varicela",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "Uso imediato após reconstituição (monodose)",
+      "eventos_adversos": "EAPV da SCR + reação local, vesículas local aplicação, maculopapulas ou",
+      "perfil": "crianca"
+    },
+    {
+      "id": "12",
+      "nome_vacina": "Hepatite A (HA)",
+      "protecao_contra": "Hepatite A",
+      "composicao": "Culturas celulares em inativadas pela formalina",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "4 anos, 11 meses e  29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa esquerda",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações locais. Febre, diarreia, vômito,",
+      "perfil": "crianca"
+    },
+    {
+      "id": "13",
+      "nome_vacina": "Difteria, Tétano, Pertussis (DTP) (6)",
+      "protecao_contra": "Difteria Tétano Coqueluche",
+      "composicao": "Bactéria morta e produto de bactéria (Toxina)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "Considerar doses anteriores (3 doses)"
+        },
+        {
+          "revacinacao_reforco": "1º  ref. 15 meses 2º ref. 4 anos (6)"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "15 meses"
+        },
+        {
+          "maxima": "6 anos, 11 meses e 29 dias"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "1º ref.  9 meses após 3ª dose. 2º ref. 3 anos após 1º ref."
+        },
+        {
+          "minimo": "1º ref.  6 meses após 3ª dose , 2º ref. 6 meses após  1º ref."
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Vasto lateral da coxa direita",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "15 dias (multidose)",
+      "eventos_adversos": "Reações locais. Febre, sonolência, vômito, choro persistente, irritabilidade, EHH, convulsão e reações imunoalérgicas.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "14",
+      "nome_vacina": "Difteria, Tétano (dT)",
+      "protecao_contra": "Difteria e Tétano",
+      "composicao": "Produto de bactéria (Toxina)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "Considerar doses anteriores (3 doses)"
+        },
+        {
+          "revacinacao_reforco": "A cada 10 anos. Ferimentos graves a cada 5 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "7 anos"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Deltoide, vasto lateral da coxa direita",
+      "agulha_recomendada": "25x6",
+      "tempo_validade_frasco_aberto": "15 dias (multidose)",
+      "eventos_adversos": "Reações locais. Nódulos, febre, cefaleia, sonolência, vômito e linfonodomegalia.",
+      "perfil": "crianca"
+    },
+    {
+      "id": "15",
+      "nome_vacina": "Hepatite B (HB recombinante) (2)",
+      "protecao_contra": "Hepatite B",
+      "composicao": "Partícula da cápsula do vírus antígeno de superfície",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses (considerar doses anteriores)"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "2ª dose 1 mês após 1ª dose, 3ª dose 5 meses após 2ª dose"
+        },
+        {
+          "minimo": "2ª dose: 1 mês após  1ª. 3ª dose 2 meses após 2ª dose"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "15 dias",
+      "eventos_adversos": "Reações  locais. Febre, cefaleia, fadiga, púrpura. Desconforto gastrointerite leve.",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "16",
+      "nome_vacina": "Difteria, Tétano (dT)",
+      "protecao_contra": "Difteria e Tétano",
+      "composicao": "Produto de bactéria (Toxina)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses (considerar doses anteriores)"
+        },
+        {
+          "revacinacao_reforco": "A cada 10 anos. Ferimentos graves, a  cada 5 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "15 dias (multidose)",
+      "eventos_adversos": "Reações locais, nódulos. Febre, cefaleia,  abscessos, sonolência, vômitos, linfonodomegalia.",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "17",
+      "nome_vacina": "Febre amarela (FA)",
+      "protecao_contra": "Febre Amarela (4)",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "Único, após 10 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "10 anos"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 horas (multidose)",
+      "eventos_adversos": "Reações locais. Febre, mialgia, cefaleia.  D. Viscerotrópica. Aguda",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "18",
+      "nome_vacina": "Sarampo, Caxumba, Rubéola (SCR) (5)",
+      "protecao_contra": "Sarampo, Caxumba e Rubéola",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "2 doses [(≤ 29 anos) (considerar doses anteriores)]"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "90 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 e/ou 8 horas (multidose)",
+      "eventos_adversos": "Febre, cefaleia, exantema, artralgia, artrite, púrpura trombocitop. Anafilaxia.",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "19",
+      "nome_vacina": "Papilomavírus humano (HPV)",
+      "protecao_contra": "Papilomavírus Humano 6, 11, 16 e 18 (recombinante)",
+      "composicao": "Partícula da cápsula do vírus antígeno de superfície",
+      "n_doses": [
+        {
+          "vacinacao_basica": "2 doses"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "09 anos para meninas; 12 anos para meninos-"
+        },
+        {
+          "maxima": "14 anos para meninas; 13 anos para meninos"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "2ª dose: 6 meses após 1ª dose"
+        },
+        {
+          "minimo": "2ª dose: 6 meses após 1ª dose"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações locais, febre, cefaleia, gastroenterite, síncope. Anafilaxia.",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "20",
+      "nome_vacina": "Difteria, Tétano, Pertussis acelular (dTpa)  (7)",
+      "protecao_contra": "Difteria Tétano Coqueluche",
+      "composicao": "Bactéria Morta e Produto de Bactéria (Toxina)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "1 dose a cada gestação"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "Gestantes a partir de 10 anos de idade, a partir da 20ª semana"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias após dT"
+        },
+        {
+          "minimo": "30 dias após dT"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações locais, febre, EHH, convulsão e anafilaxia (raramente).",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "21",
+      "nome_vacina": "Meningocócica C conjugada (MncC)",
+      "protecao_contra": "Meningite Tipo C",
+      "composicao": "Oligossacarídeo conjugado com a proteína CRM(197)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "12 anos"
+        },
+        {
+          "maxima": "13 anos"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide direito",
+      "agulha_recomendada": "20x5,5 25x6",
+      "tempo_validade_frasco_aberto": "Uso imediato após reconstituição (monodose)",
+      "eventos_adversos": "Reações locais. Febre, irritabilidade, sonolência, cefaleia, diarreia e vômito.",
+      "perfil": "adolescente"
+    },
+    {
+      "id": "22",
+      "nome_vacina": "Hepatite B (HB recombinante) (2)",
+      "protecao_contra": "Hepatite B",
+      "composicao": "Partícula da cápsula do vírus antígeno de superfície",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses (considerar doses anteriores)"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "2ª dose 1mês após1ª dose, 3ª dose 5 meses após 2ª dose"
+        },
+        {
+          "minimo": "2ª dose 1mês após 1ª dose, 3ª dose 2 meses após 2ª dose"
+        }
+      ],
+      "dosagem": "0,5 ml até 19 anos - acima 1ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "15 dias (multidose)",
+      "eventos_adversos": "Reações  locais. Febre, cefaleia, fadiga, púrpura. Desconforto gastrointerite leve.",
+      "perfil": "adulto e idoso"
+    },
+    {
+      "id": "23",
+      "nome_vacina": "Difteria, Tétano (dT)",
+      "protecao_contra": "Difteria e Tétano",
+      "composicao": "Produto de bactéria (Toxina)",
+      "n_doses": [
+        {
+          "vacinacao_basica": "3 doses (considerar doses anteriores)"
+        },
+        {
+          "revacinacao_reforco": "A cada 10 anos Ferimentos graves a cada 5 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "60 dias"
+        },
+        {
+          "minimo": "30 dias"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "15 dias (multidose)",
+      "eventos_adversos": "Reações locais, nódulos. Febre, cefaleia,  abscessos, sonolência, vômitos, linfonodomegalia.",
+      "perfil": "adulto e idoso"
+    },
+    {
+      "id": "24",
+      "nome_vacina": "Febre Amarela (FA)",
+      "protecao_contra": "Febre Amarela (4)",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "Único, após 10 anos"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 horas (multidose)",
+      "eventos_adversos": "Reações locais. Febre, mialgia, cefaleia.  D. Viscerotrópica. Aguda.",
+      "perfil": "adulto e idoso"
+    },
+    {
+      "id": "25",
+      "nome_vacina": "Sarampo,Caxumba, Rubéola (SCR) (5)",
+      "protecao_contra": "Sarampo, Caxumba e Rubéola",
+      "composicao": "Vírus vivo atenuado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose (> 29 anos considerar doses anteriores)"
+        },
+        {
+          "revacinacao_reforco": "-"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "-"
+        },
+        {
+          "maxima": "49 anos"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Subcutânea (SC)",
+      "local_aplicacao": "Região deltoideana",
+      "agulha_recomendada": "13x4,5",
+      "tempo_validade_frasco_aberto": "6 e/ou 8 horas (multidose)",
+      "eventos_adversos": "Febre, cefaleia, exantema, artralgia, artrite, púrpura trombocitop. Anafilaxia.",
+      "perfil": "adulto e idoso"
+    },
+    {
+      "id": "26",
+      "nome_vacina": "Influenza (8)",
+      "protecao_contra": "Gripe por Influenza",
+      "composicao": "Vírus fracionado, inativado",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "Dose anual"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "60 anos"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "7 dias (multidose)",
+      "eventos_adversos": "Reações locais, cefaleia, febre, mal-estar, mialgia. SGB.",
+      "perfil": "adulto e idoso"
+    },
+    {
+      "id": "27",
+      "nome_vacina": "Pneumocócica 23-valente (Pncc 23) (9)",
+      "protecao_contra": "Meningites bacterianas, Pneumonias, Sinusite etc.",
+      "composicao": "Polissacarídeo capsular de 23 sorotipos pneumococos",
+      "n_doses": [
+        {
+          "vacinacao_basica": "1 dose"
+        },
+        {
+          "revacinacao_reforco": "Se necessário 5 anos após 1ª dose (8)"
+        }
+      ],
+      "inicio_vacinacao": [
+        {
+          "minima": "60 anos"
+        },
+        {
+          "maxima": "-"
+        }
+      ],
+      "intervalo_doses": [
+        {
+          "recomendado": "-"
+        },
+        {
+          "minimo": "-"
+        }
+      ],
+      "dosagem": "0,5 ml",
+      "via_administracao": "Intramuscular (IM)",
+      "local_aplicacao": "Músculo deltoide",
+      "agulha_recomendada": "25x6 25x7",
+      "tempo_validade_frasco_aberto": "Uso imediato após preparo (monodose)",
+      "eventos_adversos": "Reações locais, febre, mialgias, artralgia, cefaleia, astenia.",
+      "perfil": "adulto e idoso"
+    }
+  ]
+}
