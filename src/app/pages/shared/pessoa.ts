@@ -1,5 +1,5 @@
 export class Pessoa {
-
+  public id: number;
   public fullName: string;
   public documentNumber: string;
   public fathersName: string;
@@ -10,5 +10,4 @@ export class Pessoa {
   public address: Array<object>;
   public phone: Array<object>;
   public height: Array<object>;
-
 }

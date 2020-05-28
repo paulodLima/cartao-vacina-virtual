@@ -1,4 +1,4 @@
-<div class="header bg-gradient-danger py-4 py-lg-8">
+<div class="header bg-gradient-danger py-4">
   <div class="container">
     <div class="header-body text-center mb-2">
       <div class="row justify-content-center">
@@ -261,9 +261,13 @@
             </div>
           </div>
           <hr class="my-4"/>
-          <button class="btn btn-info offset-lg-8 active"
+          <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id === undefined"
                   (click)="cadastrar()">
-            Cadastrar Vacinas
+            Cadastrar
+          </button>
+          <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
+                  (click)="cadastrar()">
+            Atualizar
           </button>
         </div>
       </form>

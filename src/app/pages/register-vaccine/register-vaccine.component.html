@@ -17,10 +17,20 @@
       </div>
 
   <div class="container-fluid">
+    <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto mbt">
+      <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+        <div class="input-group input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input class="form-control " placeholder="Pesquisar por nome" type="text"  #termoPesquisa (keyup)="pesquisa(termoPesquisa.value)">
+        </div>
+      </div>
+    </form>
     <div class="header-body">
       <!-- Card stats -->
       <div class="row">
-        <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas">
+        <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas | filterVacina: searchterm">
           <div class="card card-stats mb-4 mb-xl-0 margin-card">
             <div class="card-body">
               <div class="row">

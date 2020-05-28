@@ -1,0 +1,171 @@
+<div class="header bg-gradient-danger py-4">
+  <div class="container">
+    <div class="header-body text-center mb-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Cadastro de Vacina</h1>
+          <p class="text-lead text-light">Preencha com atenção todos os dados!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-4 center">
+  <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+    Vacina cadastrada com sucesso!
+  </div>
+</div>
+<div class="col-4 center" *ngIf="erro">
+  <div class="alert alert-danger center" role="alert">
+    Erro ao cadastrar vaciana!
+  </div>
+</div>
+<!-- pagina content -->
+<div class="col-xl-8 order-xl-1 ml-sm-9">
+  <div class="card bg-secondary shadow my--10 my-auto">
+    <div class="card-header bg-white border-0 ">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 class="mb-0">Cadastro de Vacina</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form  #form='ngForm'[formGroup]="formVacina" novalidate #ids>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group" formArrayName="dosageIds">
+                <label class="form-control-label">Dosagem</label>
+                <select class="form-control" formControlName="ids" [value]="ids" (blur)="valorId($event.target.value)">
+                  <option *ngFor="let dosagem of dosageIds" [value]="dosagem.uuid">{{dosagem.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('dosageIds').errors?.required">
+                  Dosagem obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Agulha hipodérmica</label>
+                <select class="form-control" formControlName="needleId" [value]="needleId">
+                  <option *ngFor="let agulha of needleId" [value]="agulha.uuid">{{agulha.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('needleId').errors?.required">
+                  Agulha hipodérmica obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Tempo de validade após aberto frasco</label>
+                <select class="form-control" formControlName="validityAfterOpenId" [value]="validityAfterOpenId">
+                  <option *ngFor="let validade of validityAfterOpenId" [value]="validade.uuid">{{validade.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('validityAfterOpenId').errors?.required">
+                  Tempo de validade após aberto frasco obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Local de aplicação</label>
+                <select class="form-control" formControlName="applicationLocationId" [value]="applicationLocationId">
+                  <option *ngFor="let local of applicationLocationId" [value]="local.uuid">{{local.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('applicationLocationId').errors?.required">
+                  Local de aplicação obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Composição</label>
+                <select class="form-control" formControlName="compositionId" [value]="compositionId">
+                  <option *ngFor="let composicao of compositionId"[value]="composicao.uuid">{{composicao.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('compositionId').errors?.required">
+                  Composição obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Proteção Contra</label>
+                <select class="form-control" formControlName="diseaseId" [value]="diseaseId">
+                  <option *ngFor="let protecao of diseaseId" [value]="protecao.uuid">{{protecao.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('diseaseId').errors?.required">
+                  Proteção Contra obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Nº Doses</label>
+                <select class="form-control" formControlName="basicVaccinationId" [value]="basicVaccinationId">
+                  <option *ngFor="let doses of basicVaccinationId" [value]="doses.uuid">{{doses.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('basicVaccinationId').errors?.required">
+                  Nº Doses obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Via de administração</label>
+                <select class="form-control" formControlName="routeAdministrationId" [value]="routeAdministrationId">
+                  <option *ngFor="let via of routeAdministrationId" [value]="via.uuid">{{via.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('routeAdministrationId').errors?.required">
+                  Via de administração obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Alguns eventos adversos</label>
+                <select class="form-control" formControlName="sideEffectId" [value]="sideEffectId">
+                  <option *ngFor="let eventos of sideEffectId" [value]="eventos.uuid">{{eventos.description}}</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('sideEffectId').errors?.required">
+                  Alguns eventos adversos obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 ">
+              <div class="form-group">
+                <label form-control-label>Nome da vacina</label>
+                <input class="form-control" placeholder="Nome da Vacina" formControlName="name" [value]="name">
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('name').errors?.required">
+                  Nome da vacina obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Descrição</label>
+                <textarea class="form-control" type="text" formControlName="description" cols="10"
+                       [value]="description" placeholder="Descrição"></textarea>
+                <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('description').errors?.required">
+                  Descricao obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-info offset-lg-8 active mt-10" (click)="cadastrarVacina()">
+            Cadastrar Vacina
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

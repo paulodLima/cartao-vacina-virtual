@@ -14,4 +14,17 @@ export class Vacina {
  public tempo_validade_frasco_aberto: string;
  public eventos_adversos: string;
  public perfil: string;
+
+  public applicationLocationId: string;
+  public basicVaccinationId: string;
+  public compositionId: string;
+  public description: string;
+  public diseaseId: string;
+  public dosageIds: Array<object>;
+  public name: string;
+  public needleId: string;
+  public routeAdministrationId: string;
+  public sideEffectId: string;
+  public validityAfterOpenId: string;
+
 }

@@ -37,6 +37,7 @@ export class CadastrarPessoaComponent implements OnInit {
   public areaCode = '';
   public sexType = '';
   public cepvalico = false;
+  public id: number;
 
   ngOnInit(): void {
     this.formPerson = this.formBuilder.group({
@@ -66,48 +67,56 @@ export class CadastrarPessoaComponent implements OnInit {
     });
 
     this.route.params.pipe(
-      map((params) => params.id),
-      switchMap(documentNumber => this.pessoasService.consutarPessoa(documentNumber))
+      map((params) => params.id ),
+      switchMap(id => this.pessoasService.consutarPessoa(this.id = id))
     ).subscribe(pessoa => this.atualizarFormulario(pessoa));
+
+    console.log(this.id);
   }
 
   atualizarFormulario(pessoa) {
+
     this.formPerson.patchValue({
+      id: pessoa.id,
       fullName: pessoa.fullName,
-      documentNumber: pessoa.document,
+      documentNumber: pessoa.documentNumber,
       email: pessoa.email,
       birthDate: pessoa.birthDate,
       sexType: pessoa.sexType,
       fathersName: pessoa.fathersName,
       mothersName: pessoa.mothersName,
       address: ({
-        city: pessoa.localidade,
-        neighborhood: pessoa.logradouro,
-        zipCode: pessoa.zipCode,
-        state: pessoa.uf,
-        street: pessoa.bairro,
-        complement: pessoa.complemento
+        city: pessoa.address.city,
+        neighborhood: pessoa.address.neighborhood,
+        zipCode: pessoa.address.zipCode,
+        state: pessoa.address.state,
+        street: pessoa.address.street,
+        complement: pessoa.address.complement
       }),
       phone: ({
-        areaCode: pessoa.areaCode,
-        number: pessoa.number
+        areaCode: pessoa.phone.areaCode,
+        number: pessoa.phone.number
       }),
       height: ({
-        height: pessoa.height,
-        weight: pessoa.weight
+        height: pessoa.height.height,
+        weight: pessoa.height.weight
       })
     });
   }
 
   cadastrar() {
-    console.log('chamadno o metodo cadastrar', this.formPerson);
-    if (this.formPerson.valid) {
+
+    if (this.formPerson.valid && this.id === undefined) {
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
-        console.log('passando aqui', pessoa);
         this.router.navigateByUrl('/register-vaccine');
 
       }, erro => console.log('erro ao cadastrar pessoa', erro));
-    }
+    } else {
+      this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
+          this.formPerson.reset();
+        this.router.navigateByUrl('/pessoas');
+      }, error1 => console.log(error1)); }
+
   }
 
   public buscarCep(cep: string): void {

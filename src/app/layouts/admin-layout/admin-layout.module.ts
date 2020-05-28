@@ -13,6 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PessoasComponent} from '../../pages/pessoas/pessoas.component';
 import {RegisterVaccineComponent} from '../../pages/register-vaccine/register-vaccine.component';
 import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-pessoa.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {FilterPipe} from '../../filter.pipe';
+import {FilterVacinaPipe} from '../../filter-vacina.pipe';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-p
         HttpClientModule,
         NgbModule,
         ClipboardModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        Ng2SearchPipeModule
     ],
   declarations: [
     DashboardComponent,
@@ -32,7 +36,9 @@ import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-p
     PessoasComponent,
     MapsComponent,
     RegisterVaccineComponent,
-    CadastrarPessoaComponent
+    CadastrarPessoaComponent,
+    FilterPipe,
+    FilterVacinaPipe
   ]
 })
 

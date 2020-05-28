@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -11,25 +11,39 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {PessoasService} from './pages/services/pessoas.service';
 import {VacinaService} from './pages/services/vacina.service';
+import {AuthGuard} from './pages/guards/auth-guard';
+import {LoginService} from './pages/services/login.service';
+import { CampanhaComponent } from './pages/campanha/campanha.component';
+import { ConfirmModalComponent } from './pages/shared/confirm-modal/confirm-modal.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { FilterVacinaPipe } from './filter-vacina.pipe';
+import { CadastrarVacinaComponent } from './pages/cadastrar-vacina/cadastrar-vacina.component';
 
 @NgModule({
-    imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        ComponentsModule,
-        NgbModule,
-        RouterModule,
-        AppRoutingModule
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ComponentsModule,
+    NgbModule,
+    RouterModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
+  ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
+        CampanhaComponent,
+        ConfirmModalComponent,
+        CadastrarVacinaComponent
     ],
     providers: [
         PessoasService,
-        VacinaService
+        VacinaService,
+        AuthGuard,
+        LoginService
     ],
     exports: [
     ],

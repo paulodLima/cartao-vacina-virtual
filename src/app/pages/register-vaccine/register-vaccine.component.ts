@@ -18,11 +18,16 @@ export class RegisterVaccineComponent implements OnInit {
 
   vacinas: Vacina[];
   vacinaPorNome: Vacina[];
+  searchterm = '';
 
 
   constructor(private modalVacina: NgbModal, private vacinaService: VacinaService) { }
 
   ngOnInit(): void {
+   this.listarVacinas();
+  }
+
+  listarVacinas() {
     this.vacinaService.getVacinas().subscribe(vacinas => {
       this.vacinas = vacinas;
       console.log(vacinas);
@@ -39,4 +44,10 @@ export class RegisterVaccineComponent implements OnInit {
     this.modalVacina.open(modal);
   }
 
+  pesquisa(event: string) {
+
+    this.searchterm = event;
+    console.log(event);
+    this.listarVacinas();
+  }
 }

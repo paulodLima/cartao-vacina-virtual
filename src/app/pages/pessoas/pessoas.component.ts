@@ -16,6 +16,8 @@ export class PessoasComponent implements OnInit {
   public pessoaPesquisa: Observable<Pessoa[]>;
 
   public copy: string;
+  searchterm = '';
+
 
   constructor(private pessoasService: PessoasService,
               private router: Router) {
@@ -44,7 +46,13 @@ export class PessoasComponent implements OnInit {
     );
   }
 
-  editarPessoa(documentNumber: string) {
-    this.router.navigate(['editar-pessoa', documentNumber]);
+  editarPessoa(id: number) {
+    this.router.navigate(['editar-pessoa', id]);
+  }
+
+  pesquisa(event: string) {
+    this.searchterm = event;
+    console.log(event);
+    this.listarPessoas();
   }
 }
