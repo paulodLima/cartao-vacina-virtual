@@ -39,7 +39,7 @@
               <div class="form-group" formArrayName="dosageIds">
                 <label class="form-control-label">Dosagem</label>
                 <select class="form-control" formControlName="ids" [value]="ids" (blur)="valorId($event.target.value)">
-                  <option *ngFor="let dosagem of dosageIds" [value]="dosagem.uuid">{{dosagem.description}}</option>
+                  <option *ngFor="let dosagem of dosageIds" [value]="dosagem.uuid" (search)="dosagem">{{dosagem.description}}</option>
                 </select>
                 <small class="text-danger d-block mt-2" *ngIf="form.submitted && formVacina.get('dosageIds').errors?.required">
                   Dosagem obrigatório!

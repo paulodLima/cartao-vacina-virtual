@@ -68,6 +68,7 @@ export class CadastrarVacinaComponent implements OnInit {
     }, error => console.log('Erro ao listar basicVaccination', error));
 
     this.vacinaService.getDosage().subscribe(dosage => {
+      console.log('vacinas', dosage);
         this.dosageIds = dosage;
     }, error => console.log('Erro ao listar basicVaccination', error));
 

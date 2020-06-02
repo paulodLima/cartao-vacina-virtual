@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 
@@ -12,16 +12,14 @@ import {Vacina} from '../shared/vacina.model';
 export class RegisterVaccineComponent implements OnInit {
 
   img_vacina = '../../../assets/img/vacina.png';
-  crianca = 'bg-info';
-  adolecente = 'bg-warning';
-  adulto = 'bg-danger';
 
   vacinas: Vacina[];
   vacinaPorNome: Vacina[];
   searchterm = '';
 
 
-  constructor(private modalVacina: NgbModal, private vacinaService: VacinaService) { }
+  constructor(private modalVacina: NgbModal,
+              private vacinaService: VacinaService) { }
 
   ngOnInit(): void {
    this.listarVacinas();
@@ -39,15 +37,15 @@ export class RegisterVaccineComponent implements OnInit {
 
     this.vacinaService.getVacinasNome(nome).subscribe(vacina => {
       this.vacinaPorNome = vacina;
-      console.log(vacina);
+      console.log('vacina filtrada', vacina);
+
     }, error => {console.log('Ocorreu um erro ao buscar vacina pelo nome', error); });
+
     this.modalVacina.open(modal);
   }
 
   pesquisa(event: string) {
-
     this.searchterm = event;
-    console.log(event);
     this.listarVacinas();
   }
 }

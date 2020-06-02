@@ -262,12 +262,12 @@
           </div>
           <hr class="my-4"/>
           <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id === undefined"
-                  (click)="cadastrar()">
-            Cadastrar
+                  (click)=cadastrar()>
+            Prosseguir
           </button>
           <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
                   (click)="cadastrar()">
-            Atualizar
+            Atualizar Dados
           </button>
         </div>
       </form>

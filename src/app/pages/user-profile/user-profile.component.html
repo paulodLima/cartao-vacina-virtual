@@ -71,28 +71,28 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nome</label>
-                    <input [disabled]="edit" type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
+                    <label class="form-control-label">Nome</label>
+                    <input [disabled]="edit" type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email">Email</label>
-                    <input [disabled]="edit"  type="email" id="input-email" class="form-control form-control-alternative" [value]="pessoa.email">
+                    <label class="form-control-label">Email</label>
+                    <input [disabled]="edit"  type="email"  formControlName="email" id="email" class="form-control form-control-alternative" [value]="pessoa.email">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">Nome da Mãe</label>
-                    <input [disabled]="edit" type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
+                    <label class="form-control-label">Nome da Mãe</label>
+                    <input [disabled]="edit" type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Nome do Pai</label>
-                    <input [disabled]="edit" type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
+                    <label class="form-control-label">Nome do Pai</label>
+                    <input [disabled]="edit" type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
                   </div>
                 </div>
               </div>
@@ -198,6 +198,11 @@
                   <input [disabled]="edit" type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
                          formControlName="complement">
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <button class="btn btn-sm  btn-default float-right" (click)="editarDados()">Salvar alterações</button>
               </div>
             </div>
            </form>

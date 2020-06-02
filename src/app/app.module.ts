@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {PessoasService} from './pages/services/pessoas.service';
@@ -16,8 +16,9 @@ import {LoginService} from './pages/services/login.service';
 import { CampanhaComponent } from './pages/campanha/campanha.component';
 import { ConfirmModalComponent } from './pages/shared/confirm-modal/confirm-modal.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
-import { FilterVacinaPipe } from './filter-vacina.pipe';
 import { CadastrarVacinaComponent } from './pages/cadastrar-vacina/cadastrar-vacina.component';
+import { AdicionarVacinaComponent } from './pages/adicionar-vacina/adicionar-vacina.component';
+import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { CadastrarVacinaComponent } from './pages/cadastrar-vacina/cadastrar-vac
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    AdminLayoutModule
   ],
     declarations: [
         AppComponent,
@@ -37,7 +39,8 @@ import { CadastrarVacinaComponent } from './pages/cadastrar-vacina/cadastrar-vac
         AuthLayoutComponent,
         CampanhaComponent,
         ConfirmModalComponent,
-        CadastrarVacinaComponent
+        CadastrarVacinaComponent,
+        AdicionarVacinaComponent
     ],
     providers: [
         PessoasService,

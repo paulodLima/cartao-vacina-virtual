@@ -10,6 +10,10 @@
 .mt-10{
   margin-top: 10px !important;
 }
+.mbt{
+  margin-bottom: 20px;
+  margin-top: -30px;
+}
 .mt{
   margin-bottom: 20px !important;
   margin-top: 30px !important;

@@ -52,7 +52,6 @@ export class PessoasComponent implements OnInit {
 
   pesquisa(event: string) {
     this.searchterm = event;
-    console.log(event);
     this.listarPessoas();
   }
 }

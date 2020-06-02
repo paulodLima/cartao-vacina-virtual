@@ -4,6 +4,7 @@ import {PessoasService} from '../services/pessoas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {error} from '@angular/compiler/src/util';
 import {map, switchMap} from 'rxjs/operators';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -15,7 +16,8 @@ export class CadastrarPessoaComponent implements OnInit {
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private modal: NgbModal) {
   }
 
   public formPerson: FormGroup;
@@ -109,7 +111,6 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.formPerson.valid && this.id === undefined) {
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.router.navigateByUrl('/register-vaccine');
-
       }, erro => console.log('erro ao cadastrar pessoa', erro));
     } else {
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
@@ -144,5 +145,11 @@ export class CadastrarPessoaComponent implements OnInit {
         });
       }
     }
+  }
+
+  abrirModal(modal) {
+
+      this.modal.open(modal);
+
   }
 }

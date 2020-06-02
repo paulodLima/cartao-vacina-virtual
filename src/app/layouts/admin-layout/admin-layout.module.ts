@@ -19,16 +19,20 @@ import {FilterVacinaPipe} from '../../filter-vacina.pipe';
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(AdminLayoutRoutes),
-        FormsModule,
-        HttpClientModule,
-        NgbModule,
-        ClipboardModule,
-        ReactiveFormsModule,
-        Ng2SearchPipeModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    FormsModule,
+    HttpClientModule,
+    NgbModule,
+    ClipboardModule,
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
+  ],
+  exports: [
+    FilterPipe,
+    FilterVacinaPipe
+  ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,

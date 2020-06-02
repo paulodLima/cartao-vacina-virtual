@@ -10,6 +10,7 @@ import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-p
 import {AuthGuard} from '../../pages/guards/auth-guard';
 import {CampanhaComponent} from '../../pages/campanha/campanha.component';
 import {CadastrarVacinaComponent} from '../../pages/cadastrar-vacina/cadastrar-vacina.component';
+import {AdicionarVacinaComponent} from '../../pages/adicionar-vacina/adicionar-vacina.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -22,5 +23,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'pessoas',          component: PessoasComponent, canActivate: [AuthGuard] },
     {path: 'cadastrar-pessoa', component: CadastrarPessoaComponent, canActivate: [AuthGuard]},
     {path: 'cadastrar-vacina', component: CadastrarVacinaComponent, canActivate: [AuthGuard]},
-    {path: 'editar-pessoa/:id', component: CadastrarPessoaComponent, canActivate: [AuthGuard]}
+    {path: 'editar-pessoa/:id', component: CadastrarPessoaComponent, canActivate: [AuthGuard]},
+    {path: 'adicionar-vacina', component: AdicionarVacinaComponent, canActivate: [AuthGuard]}
 ];

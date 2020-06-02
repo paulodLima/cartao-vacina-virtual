@@ -31,6 +31,5 @@ export class AuthService {
         }
     }
 
-    //this.http.post(URL_API_PESSOA + '/login', {usuario, senha});
   }
 }

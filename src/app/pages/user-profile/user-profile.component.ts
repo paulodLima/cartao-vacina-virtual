@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Pessoa} from '../shared/pessoa';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PessoasService} from '../services/pessoas.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,12 +12,13 @@ export class UserProfileComponent implements OnInit {
   private pessoa: Pessoa;
   public formPerson: FormGroup;
   edit = true;
-  public idade;
+  public id: number;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private pessoasService: PessoasService) {
+  }
 
   ngOnInit() {
-
     this.formPerson = this.formBuilder.group({
       fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
       documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
@@ -44,11 +46,11 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.pessoa = JSON.parse(localStorage.getItem('usuario'));
-    console.log('listando pessoa', this.pessoa);
 
     this.atualizarPerfil(this.pessoa);
 
   }
+
   atualizarPerfil(pessoa) {
     this.formPerson.patchValue({
       id: pessoa.id,
@@ -80,5 +82,15 @@ export class UserProfileComponent implements OnInit {
 
   editar() {
     this.edit = false;
+  }
+
+  editarDados() {
+    if (this.formPerson.value) {
+      localStorage.clear();
+      localStorage.setItem('usuario', JSON.stringify(this.formPerson.value));
+      this.pessoasService.atualizarPessoa(this.pessoa.id, this.formPerson.value).subscribe(pessoa => {
+        console.log(pessoa);
+      }, error1 => console.log('erro ao atualizar', error1));
+    }
   }
 }
