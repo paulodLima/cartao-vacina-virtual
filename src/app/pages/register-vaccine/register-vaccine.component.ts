@@ -28,19 +28,14 @@ export class RegisterVaccineComponent implements OnInit {
   listarVacinas() {
     this.vacinaService.getVacinas().subscribe(vacinas => {
       this.vacinas = vacinas;
-      console.log(vacinas);
     }, error => { console.log('ocorreu um erro ao listar vacinas', error);
     });
   }
 
-  abrirModal(modal, nome: string) {
-
-    this.vacinaService.getVacinasNome(nome).subscribe(vacina => {
+  abrirModal(modal, uuid: string) {
+    this.vacinaService.getVacinasNome(uuid).subscribe(vacina => {
       this.vacinaPorNome = vacina;
-      console.log('vacina filtrada', vacina);
-
     }, error => {console.log('Ocorreu um erro ao buscar vacina pelo nome', error); });
-
     this.modalVacina.open(modal);
   }
 

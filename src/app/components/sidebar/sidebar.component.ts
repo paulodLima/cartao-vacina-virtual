@@ -13,22 +13,20 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
     { path: '/maps', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
     { path: '/user-profile', title: 'User profile',  icon: 'ni-single-02 text-yellow', class: '' },
-    { path: '/tables', title: 'Tables',  icon: 'ni-bullet-list-67 text-red', class: '' },
+    { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' }
 ];
 
 export const ROUTESADMIN: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
+  { path: '/maps', title: 'Locais',  icon: 'ni-tv-2 text-primary', class: ''},
   { path: '/pessoas', title: 'Consulta de Pessoas',  icon: 'fas fa-search', class: '' },
   { path: '/adicionar-vacina', title: 'Adicionar vacina a pessoa',  icon: 'ni-planet text-blue', class: '' },
-  { path: '/maps', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
   { path: '/user-profile', title: 'Perfil',  icon: 'ni-single-02 text-yellow', class: '' },
+  { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' },
   { path: '/campanha', title: 'Campanha',  icon: 'ni-single-02 text-yellow', class: '' },
-  { path: '/tables', title: 'Tables',  icon: 'ni-bullet-list-67 text-red', class: '' },
   { path: '/cadastrar-vacina', title: 'Cadastrar Nova Vacina',  icon: 'ni-key-25 text-info', class: '' },
   { path: '/register-vaccine', title: 'Listar Vacinas',  icon: 'fas fa-search', class: '' },
   { path: '/cadastrar-pessoa', title: 'Cadastro de pessoa',  icon: 'fas fa-users', class: '' },
-  { path: '/register', title: 'Registra-se',  icon: 'ni-circle-08 text-pink', class: '' },
-  { path: '/login', title: 'Login',  icon: 'ni-key-25 text-info', class: '' }
 ];
 
 @Component({

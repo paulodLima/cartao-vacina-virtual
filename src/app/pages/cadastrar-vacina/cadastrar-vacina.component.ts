@@ -23,6 +23,8 @@ export class CadastrarVacinaComponent implements OnInit {
   public name: string;
   public description: string;
   private ids;
+  public erro = false;
+  public mensagemErro: string;
 
   constructor(private formBuilder: FormBuilder,
               private vacinaService: VacinaService) { }
@@ -92,13 +94,30 @@ export class CadastrarVacinaComponent implements OnInit {
   cadastrarVacina() {
 
     if (this.formVacina.valid) {
-    console.log(JSON.stringify(this.formVacina.value));
       this.vacinaService.cadastrarVacina(this.formVacina.value).subscribe(vacina => {
         this.formVacina.reset();
-      }, error => console.log('Ocorreu um erro ao cadastrar vacina', error));
+      }, erro => {
+        console.log('Ocorreu um erro ao cadastrar vacina', erro);
+        this.mensagemErro = erro.error.messages;
+        this.erro = true;
+
+        setTimeout(() => {
+
+          this.erro = false;
+
+        }, 6000);
+
+        const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20); // how far to scroll on each step
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
+      });
     }
   }
-
   valorId(uuid: string) {
    this.ids = uuid;
    this.formulario();

@@ -8,7 +8,6 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PessoasComponent} from '../../pages/pessoas/pessoas.component';
 import {RegisterVaccineComponent} from '../../pages/register-vaccine/register-vaccine.component';
@@ -16,6 +15,7 @@ import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-p
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {FilterPipe} from '../../filter.pipe';
 import {FilterVacinaPipe} from '../../filter-vacina.pipe';
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import {FilterVacinaPipe} from '../../filter-vacina.pipe';
     NgbModule,
     ClipboardModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    GooglePlaceModule
   ],
   exports: [
     FilterPipe,
@@ -36,7 +37,6 @@ import {FilterVacinaPipe} from '../../filter-vacina.pipe';
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    TablesComponent,
     PessoasComponent,
     MapsComponent,
     RegisterVaccineComponent,

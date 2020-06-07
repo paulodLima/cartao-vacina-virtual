@@ -9,8 +9,6 @@
       </div>
     </div>
   </div>
-</div>
-
 <div class="col-4 center">
   <div class="alert alert-success center" role="alert" *ngIf="sucesso">
     Vacina cadastrada com sucesso!
@@ -22,13 +20,18 @@
   </div>
 </div>
 <!-- pagina content -->
-<div class="col-xl-8 order-xl-1 ml-sm-9">
+<div class="container-fluid mt--7 mt-10">
   <div class="card bg-secondary shadow my--10 my-auto">
     <div class="card-header bg-white border-0 ">
       <div class="row align-items-center">
         <div class="col-8">
           <h3 class="mb-0">Cadastro de Vacina</h3>
         </div>
+      </div>
+    </div>
+    <div class="col-4 center" *ngIf="erro">
+      <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
+        {{mensagem}}
       </div>
     </div>
     <div class="card-body">
@@ -168,4 +171,4 @@
     </div>
   </div>
 </div>
-
+</div>

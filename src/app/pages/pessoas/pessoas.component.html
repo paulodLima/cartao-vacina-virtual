@@ -44,21 +44,16 @@
         <div class="card-header border-0">
           <h3 class="mb-0">Tabela de Pessoas</h3>
         </div>
-        <div class="table-responsive">
+        <div class="">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
             <tr>
               <th scope="col">Nome</th>
               <th scope="col">Documento</th>
               <th scope="col">Telefone</th>
-              <th scope="col">Nome do Pai</th>
-              <th scope="col">Nome da Mãe</th>
               <th scope="col">Email</th>
-              <th scope="col">Data de Nascimento</th>
-              <th scope="col">Endereço</th>
-              <th scope="col">Peso</th>
-              <th scope="col">Altura</th>
-              <th scope="col"></th>
+              <th scope="col">Data de nascimento</th>
+              <th scope="col">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -78,26 +73,15 @@
                     <i class="bg-warning"></i>{{pessoa.phone.areaCode}} {{pessoa.phone.number}}
                   </span>
               </td>
-              <td>{{pessoa.mothersName}}</td>
-              <td>{{pessoa.fathersName}}</td>
               <td>{{pessoa.email}}</td>
               <td>{{pessoa.birthDate}}</td>
-              <td>
-                {{pessoa.address.city}}
-                {{pessoa.address.street}}
-                {{pessoa.address.neighborhood}}
-                {{pessoa.address.state}}
-                {{pessoa.address.complement}}
-              </td>
-              <td>{{pessoa.height.height}}</td>
-              <td>{{pessoa.height.weight}}</td>
               <td class="text-right">
                 <div ngbDropdown placement="bottom-right">
                   <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" (click)="editarPessoa(pessoa.id)">Editar</a>
+                    <a class="dropdown-item" (click)="editarPessoa(pessoa.uuid)">Perfil completo/Editar</a>
                   </div>
                 </div>
               </td>

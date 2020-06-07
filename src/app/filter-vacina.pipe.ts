@@ -11,8 +11,7 @@ export class FilterVacinaPipe implements PipeTransform {
       return names;
     }
     return names.filter(function (name) {
-      console.log('dentro do filter', name);
-      return name.nome_vacina.toLowerCase().includes(searchTerm.toLowerCase());
+      return name.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
   }
 

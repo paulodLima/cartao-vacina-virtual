@@ -13,6 +13,8 @@ export class UserProfileComponent implements OnInit {
   public formPerson: FormGroup;
   edit = true;
   public id: number;
+  public erro = false;
+  public mensagemErro: string;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService) {
@@ -41,6 +43,8 @@ export class UserProfileComponent implements OnInit {
       }),
       height: this.formBuilder.group({
         height: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]],
+      }),
+      weight: this.formBuilder.group({
         weight: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]]
       })
     });
@@ -75,7 +79,9 @@ export class UserProfileComponent implements OnInit {
       }),
       height: ({
         height: pessoa.height.height,
-        weight: pessoa.height.weight
+      }),
+      weight: ({
+        weight: pessoa.weight.weight
       })
     });
   }
@@ -88,9 +94,27 @@ export class UserProfileComponent implements OnInit {
     if (this.formPerson.value) {
       localStorage.clear();
       localStorage.setItem('usuario', JSON.stringify(this.formPerson.value));
-      this.pessoasService.atualizarPessoa(this.pessoa.id, this.formPerson.value).subscribe(pessoa => {
+      this.pessoasService.atualizarPessoa(this.pessoa.uuid, this.formPerson.value).subscribe(pessoa => {
         console.log(pessoa);
-      }, error1 => console.log('erro ao atualizar', error1));
+      }, erro => {console.log('erro ao atualizar', erro);
+      this.mensagemErro = erro.error.messages;
+      this.erro = true;
+
+      setTimeout(() => {
+
+        this.erro = false;
+
+      }, 6000);
+
+      const scrollToTop = window.setInterval(() => {
+        const pos = window.pageYOffset;
+        if (pos > 0) {
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
+        } else {
+          window.clearInterval(scrollToTop);
+        }
+      }, 16);
+    });
     }
   }
 }

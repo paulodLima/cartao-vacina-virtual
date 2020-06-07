@@ -19,6 +19,9 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { CadastrarVacinaComponent } from './pages/cadastrar-vacina/cadastrar-vacina.component';
 import { AdicionarVacinaComponent } from './pages/adicionar-vacina/adicionar-vacina.component';
 import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
+import { MinhasVacinasComponent } from './pages/minhas-vacinas/minhas-vacinas.component';
+import {TextMaskModule} from 'angular2-text-mask';
+import { GooglePlaceModule} from 'ngx-google-places-autocomplete';
 
 @NgModule({
   imports: [
@@ -31,7 +34,9 @@ import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
     AppRoutingModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    AdminLayoutModule
+    AdminLayoutModule,
+    TextMaskModule,
+    GooglePlaceModule
   ],
     declarations: [
         AppComponent,
@@ -40,7 +45,8 @@ import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
         CampanhaComponent,
         ConfirmModalComponent,
         CadastrarVacinaComponent,
-        AdicionarVacinaComponent
+        AdicionarVacinaComponent,
+        MinhasVacinasComponent
     ],
     providers: [
         PessoasService,

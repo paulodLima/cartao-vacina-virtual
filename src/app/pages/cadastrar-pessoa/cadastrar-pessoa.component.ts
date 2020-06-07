@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {error} from '@angular/compiler/src/util';
 import {map, switchMap} from 'rxjs/operators';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {VacinaService} from '../services/vacina.service';
+import {Vacina} from '../shared/vacina.model';
+import {Pessoa} from '../shared/pessoa';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -12,15 +14,19 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./cadastrar-pessoa.component.css']
 })
 export class CadastrarPessoaComponent implements OnInit {
+  private pessoa: Pessoa;
+  private value: FormControl[] = [];
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
               private route: ActivatedRoute,
-              private modal: NgbModal) {
+              private modal: NgbModal,
+              private vacinaService: VacinaService) {
   }
 
   public formPerson: FormGroup;
+  public formCalendario: FormGroup;
   public fullName = '';
   public documentNumber = '';
   public email = '';
@@ -39,7 +45,14 @@ export class CadastrarPessoaComponent implements OnInit {
   public areaCode = '';
   public sexType = '';
   public cepvalico = false;
-  public id: number;
+  public id: string;
+  public vaccineUuid = '';
+  public required = '';
+  public array = [''];
+  public vacinas: Vacina[];
+  public erro = false;
+  public mensagemErro: string;
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   ngOnInit(): void {
     this.formPerson = this.formBuilder.group({
@@ -64,6 +77,8 @@ export class CadastrarPessoaComponent implements OnInit {
       }),
       height: this.formBuilder.group({
         height: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]],
+      }),
+      weight: this.formBuilder.group({
         weight: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]]
       })
     });
@@ -73,7 +88,7 @@ export class CadastrarPessoaComponent implements OnInit {
       switchMap(id => this.pessoasService.consutarPessoa(this.id = id))
     ).subscribe(pessoa => this.atualizarFormulario(pessoa));
 
-    console.log(this.id);
+    this.listarVacinas();
   }
 
   atualizarFormulario(pessoa) {
@@ -100,28 +115,51 @@ export class CadastrarPessoaComponent implements OnInit {
         number: pessoa.phone.number
       }),
       height: ({
-        height: pessoa.height.height,
-        weight: pessoa.height.weight
+        height: pessoa.height.height
+      }),
+      weight: ({
+        weight: pessoa.weight.weight
       })
     });
   }
 
   cadastrar() {
-
     if (this.formPerson.valid && this.id === undefined) {
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.router.navigateByUrl('/register-vaccine');
-      }, erro => console.log('erro ao cadastrar pessoa', erro));
+        this.pessoa = pessoa;
+        this.criarCalendario(pessoa);
+        this.pessoasService.cadastrarCalendario(this.formCalendario.value).subscribe(calendario => {
+
+        }, error => console.log('erro ao cadastrar calendario de vacina', error));
+      }, erro => {console.log('erro ao cadastrar pessoa', erro.error.messages);
+          this.mensagemErro = erro.error.messages;
+          this.erro = true;
+
+          setTimeout(() => {
+
+          this.erro = false;
+
+        }, 6000);
+
+          const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20); // how far to scroll on each step
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
+      });
     } else {
+      console.log(this.formPerson.value);
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
           this.formPerson.reset();
-        this.router.navigateByUrl('/pessoas');
+          this.router.navigateByUrl('/pessoas');
       }, error1 => console.log(error1)); }
-
   }
 
   public buscarCep(cep: string): void {
-
     cep = cep.replace(/\D/g, '');
     if (cep !== '') {
       const validaCep = /^[0-9]{8}$/;
@@ -147,9 +185,32 @@ export class CadastrarPessoaComponent implements OnInit {
     }
   }
 
-  abrirModal(modal) {
+  criarCalendario(pessoa) {
 
-      this.modal.open(modal);
+    this.formCalendario =  this.formBuilder.group({
+      personUuid: pessoa.uuid,
+      vaccines : this.bulderVaccines()
+    });
 
+    console.log(this.formCalendario.value);
+  }
+
+  bulderVaccines() {
+    for (let i = 0; i < this.vacinas.length; i++) {
+
+       this.value = this.value.concat(new FormControl({'required': true, 'vaccineUuid': this.vacinas[i].uuid}));
+
+    }
+     return this.formBuilder.array(this.value);
+  }
+
+  listarVacinas() {
+    this.vacinaService.getVacinas().subscribe(vacinas => {
+          this.vacinas = vacinas;
+    }, erro => console.log('erro ao listar vacinas', erro));
+  }
+
+  voltar() {
+    this.router.navigateByUrl('/pessoas');
   }
 }

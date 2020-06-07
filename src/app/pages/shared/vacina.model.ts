@@ -1,6 +1,8 @@
 export class Vacina {
 
  public id: number;
+ public uuid: string;
+ public vaccineUuid: string;
  public nome_vacina: string;
  public protecao_contra: string;
  public composicao: string;
@@ -14,6 +16,7 @@ export class Vacina {
  public tempo_validade_frasco_aberto: string;
  public eventos_adversos: string;
  public perfil: string;
+ public dosages: Array<any>;
 
   public applicationLocationId: string;
   public basicVaccinationId: string;

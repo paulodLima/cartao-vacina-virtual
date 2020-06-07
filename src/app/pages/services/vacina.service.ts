@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Vacina} from '../shared/vacina.model';
-import {URL_API_VACINA} from '../../app.api';
+import {URL_API_VACCINECARD, URL_API_VACINA} from '../../app.api';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,11 @@ export class VacinaService {
   public getVacinas(): Observable<Vacina[]> {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine`);
   }
-  public getVacinasNome(nome: string): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine?name=${nome}`);
+  public getVacinaUuid(uuid: string): Observable<Vacina[]> {
+    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine/${uuid}`);
+  }
+  public getVacinasNome(uuid: string): Observable<Vacina[]> {
+    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine/${uuid}`);
   }
   public getApplicationLocation(): Observable<any> {
       return this.http.get(`${URL_API_VACINA}application-location`);
@@ -45,7 +48,12 @@ export class VacinaService {
       return this.http.get(`${URL_API_VACINA}basic-vaccination`);
   }
   public cadastrarVacina(vacina: Object[]): Observable<any> {
-    console.log('vacina', vacina);
       return this.http.post(`${URL_API_VACINA}vaccine`, vacina);
+  }
+  public cadastrarVaccineCard(vacina): Observable<any> {
+    return this.http.post(`${URL_API_VACCINECARD}/calendar`, vacina);
+  }
+  public getHistoricoVacina(pessoa: string): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}`);
   }
 }

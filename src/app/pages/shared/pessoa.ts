@@ -1,5 +1,6 @@
 export class Pessoa {
   public id: number;
+  public uuid: string;
   public fullName: string;
   public documentNumber: string;
   public fathersName: string;

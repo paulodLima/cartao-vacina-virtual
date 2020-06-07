@@ -21,7 +21,7 @@ export class AuthService {
   autenticacao(usuario: string, senha: string, person: Pessoa[]) {
 
     for (let i = 0; i <= person.length; i++) {
-        if (usuario === person[i].documentNumber && senha === person[i].documentNumber) {
+          if (usuario === person[i].documentNumber && senha === person[i].documentNumber) {
         localStorage.setItem('usuario', JSON.stringify(person[i]));
 
           this.admin = true;

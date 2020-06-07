@@ -1,0 +1,66 @@
+.imgTam {
+  width: 400% !important;
+}
+.imgAtencao{
+  width: 20px;
+}
+.p1{
+  margin-left:20px;
+}
+
+.pn1{
+  font-weight: bold;
+  text-align: center;
+}
+.pn{
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+}
+.tdn{
+  font-weight: bold;
+}
+.tdg{
+  font-weight: bold;
+  font-size: 10px;
+}
+.tdgn{
+  font-size: 10px;
+}
+.teste{
+  max-width:200px !important;
+  max-height:100px !important;
+}
+.icon
+{
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.modal-body-modal {
+  position:absolute;
+  flex: 1 1 auto;
+}
+
+.modal-register {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+.table-bordered{
+  height: 1rem !important;
+}
+
+.margin-card{
+  margin-bottom: 1rem !important;
+}
+/*
+.mg-bt{
+  margin-top: -50px;
+  margin-bottom: -190px;
+}
+*/
+.mbt{
+  margin-bottom: 20px;
+  margin-top: -30px;
+}

@@ -14,6 +14,7 @@ export class PessoasComponent implements OnInit {
 
   public pessoas: Pessoa[];
   public pessoaPesquisa: Observable<Pessoa[]>;
+  public dataFormatada: string;
 
   public copy: string;
   searchterm = '';
@@ -30,24 +31,32 @@ export class PessoasComponent implements OnInit {
   listarPessoas() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
+
+    for (let i = 0; i <= pessoas.length; i++) {
+      const dataFormat = this.pessoas[i].birthDate;
+      const str = dataFormat.split('-');
+      this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
+      this.pessoas[i].birthDate = this.dataFormatada;
+    }
+      console.log(this.pessoas);
+
     }, error => {
       console.log('Erro ao listar pessoas', error);
     });
   }
 
   pesquisarPessoa(termoPesquisa: string): void {
-    console.log(termoPesquisa);
     this.pessoasService.pesquisarPessoas(termoPesquisa).subscribe(
       (pessoas) => {
-        console.log(pessoas);
+
       }, error => {
         console.log('erro ao pesquisar pessoa', error.status);
       }
     );
   }
 
-  editarPessoa(id: number) {
-    this.router.navigate(['editar-pessoa', id]);
+  editarPessoa(uuid: number) {
+    this.router.navigate(['editar-pessoa', uuid]);
   }
 
   pesquisa(event: string) {

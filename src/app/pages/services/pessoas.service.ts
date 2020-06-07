@@ -1,17 +1,24 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {Endereco} from '../shared/endereco';
 import {Pessoa} from '../shared/pessoa';
-import {URL_API_CEP, URL_API_PESSOA} from '../../app.api';
-import {retry} from 'rxjs/operators';
+import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD} from '../../app.api';
+import {catchError, retry} from 'rxjs/operators';
 import {Email} from '../shared/email';
+import {getResponseURL} from '@angular/http/src/http_utils';
+import {any} from 'codelyzer/util/function';
 
 @Injectable()
 export class PessoasService {
 
+
   constructor(private http: HttpClient) {
   }
+  // Headers
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   public listarPessoas(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(`${URL_API_PESSOA}`);
@@ -21,9 +28,8 @@ export class PessoasService {
     return this.http.get<Endereco>(`${URL_API_CEP}/${cep}/json`);
   }
 
-  public criarPessoa(pessoa: Pessoa): Observable<Pessoa> {
-    console.log(pessoa);
-    return this.http.post<Pessoa>(`${URL_API_PESSOA}/insert`, pessoa);
+  public criarPessoa(pessoa: Pessoa): Observable<any> {
+    return this.http.post(`${URL_API_PESSOA}`, pessoa);
   }
 
   public pesquisarPessoas(termoPesquisa: string): Observable<Pessoa[]> {
@@ -35,16 +41,20 @@ export class PessoasService {
     return this.http.get<Pessoa>(`${URL_API_PESSOA}/${termoPesquisa}`);
   }
 
-  public atualizarPessoa(id: number, pessoa: Pessoa): Observable<any> {
+  public atualizarPessoa(id: string, pessoa: Pessoa): Observable<any> {
     return this.http.patch(`${URL_API_PESSOA}/${id}`, pessoa);
   }
 
   public salvarAnexo (anexo: FormData): Observable<FormData> {
-    return this.http.post<FormData>(`${URL_API_PESSOA}/anexo`, anexo);
+    return this.http.post<FormData>(`${URL_API_VACCINECARD}/calendar/anexo`, anexo);
   }
 
   public enviarEmail (email: Email): Observable<Email> {
-    return this.http.post<Email>(`${URL_API_PESSOA}`, email);
+    return this.http.post<Email>(`${URL_API_VACCINECARD}/calendar/email`, email);
+  }
+
+  public cadastrarCalendario(calendario): Observable<any> {
+    return this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario);
   }
 
 }

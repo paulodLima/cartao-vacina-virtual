@@ -8,7 +8,6 @@ import {LoginService} from '../../pages/services/login.service';
 })
 export class AdminLayoutComponent implements OnInit {
   mostrarMenu = true;
-
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
