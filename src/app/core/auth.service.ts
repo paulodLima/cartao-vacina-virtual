@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from '../pages/services/login.service';
 import {Router} from '@angular/router';
 import {PessoasService} from '../pages/services/pessoas.service';
 import {Pessoa} from '../pages/shared/pessoa';
-import {CLIENTSECURITY, USER, PASSWORD, CLIENTID, URL_AUTH, URL_REFRESH} from '../app.api';
-import {Observable, Subscription} from 'rxjs';
-import {RequestOptions} from '@angular/http';
-import {any} from 'codelyzer/util/function';
+import {CLIENTID, CLIENTSECURITY, PASSWORD, URL_AUTH, USER} from '../app.api';
+import {Subscription} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,17 +21,18 @@ export class AuthService {
               private router: Router,
               private loginService: LoginService,
               private pessoa: PessoasService
-              ) { }
+  ) {
+  }
 
   autenticacao(usuario: string, senha: string, person: Pessoa[]) {
 
 
-          if (usuario === 'admin' && senha === 'admin123') {
-          this.getRoles();
-          localStorage.setItem('usuario', JSON.stringify(''));
-          this.admin = true;
-          this.loginService.autenticarUsario();
-          this.router.navigateByUrl('/dashboard');
+    if (usuario === 'admin' && senha === 'admin123') {
+      this.getRoles();
+      localStorage.setItem('usuario', JSON.stringify(''));
+      this.admin = true;
+      this.loginService.autenticarUsario();
+      this.router.navigateByUrl('/dashboard');
 
     }
 
@@ -47,7 +46,7 @@ export class AuthService {
   geraAcToken() {
     console.log(this.refreshToken);
     return this.http.post(`${URL_AUTH}/v1/api/auth/refresh`, this.refreshToken).subscribe(refresh => {
-        console.log('novo token', refresh);
+      console.log('novo token', refresh);
     }, error => console.log('erro ao gerar novo token', error));
   }
 
@@ -58,7 +57,7 @@ export class AuthService {
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
 
-      this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'} ).subscribe(resposta => {
+      this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'}).subscribe(resposta => {
         console.log(resposta);
       }, error => console.log('erro', error));
 
