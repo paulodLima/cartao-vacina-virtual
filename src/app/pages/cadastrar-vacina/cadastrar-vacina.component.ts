@@ -25,6 +25,7 @@ export class CadastrarVacinaComponent implements OnInit {
   private ids;
   public erro = false;
   public mensagemErro: string;
+  public sucesso = false;
 
   constructor(private formBuilder: FormBuilder,
               private vacinaService: VacinaService) { }

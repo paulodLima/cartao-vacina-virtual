@@ -11,7 +11,8 @@ declare const google: any;
 })
 
 export class MapsComponent implements OnInit {
-  private locais: any;
+  public locais: any;
+  public searchterm: string;
 
   constructor(private modalVacina: NgbModal,
               private vacinaService: VacinaService,

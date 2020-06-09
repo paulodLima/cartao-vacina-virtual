@@ -29,12 +29,12 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
   public paciente = '';
   public sucesso = false;
   public required = false;
-  private locais: any;
-  private local: Unidades;
-  private locall = '';
-  private dataFormatada: string;
-  private historico: Vacina[] = [];
-  private mensagem: string;
+  public locais: any;
+  public local: Unidades;
+  public locall = '';
+  public dataFormatada: string;
+  public historico: Vacina[] = [];
+  public mensagem: string;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,

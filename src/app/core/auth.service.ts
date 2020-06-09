@@ -6,6 +6,7 @@ import {PessoasService} from '../pages/services/pessoas.service';
 import {Pessoa} from '../pages/shared/pessoa';
 import {CLIENTID, CLIENTSECURITY, PASSWORD, URL_AUTH, USER} from '../app.api';
 import {Subscription} from 'rxjs';
+import {Token} from './model/token';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class AuthService {
 
   public getRoles(): Subscription {
 
-    return this.gerarToken().subscribe(token => {
+    return this.gerarToken().subscribe((token: Token) => {
 
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);

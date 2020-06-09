@@ -25,10 +25,10 @@ export class DashboardComponent implements OnInit {
   public salesChart;
   public clicked = true;
   public clicked1 = false;
-  private pessoas: Pessoa[];
+  public pessoas: Pessoa[];
   public nmrPessoa = 0;
   public nmrVacinas = 0;
-  private vacinas: Vacina[];
+  public vacinas: Vacina[];
 
   constructor(private pessoaService: PessoasService,
               private vacinaService: VacinaService) { }
