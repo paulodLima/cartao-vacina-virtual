@@ -57,7 +57,6 @@ export class AuthService {
 
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
-      headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
       this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'} ).subscribe(resposta => {
         console.log(resposta);
