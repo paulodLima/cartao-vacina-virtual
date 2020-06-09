@@ -15,6 +15,8 @@ export class PessoasComponent implements OnInit {
   public pessoas: Pessoa[];
   public pessoaPesquisa: Observable<Pessoa[]>;
   public dataFormatada: string;
+  public focus = false;
+
 
   public copy: string;
   searchterm = '';

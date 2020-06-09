@@ -18,7 +18,7 @@ export class CadastrarPessoaComponent implements OnInit {
   private value: FormControl[] = [];
   private uuid: string;
   private permissao: string;
-  private roles: string;
+  public roles: string;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -55,8 +55,9 @@ export class CadastrarPessoaComponent implements OnInit {
   public vacinas: Vacina[];
   public erro = false;
   public mensagemErro: string;
-  private sucesso = false;
+  public sucesso = false;
   valida = false;
+  public password: any;
 
   ngOnInit(): void {
     this.route.params.pipe(

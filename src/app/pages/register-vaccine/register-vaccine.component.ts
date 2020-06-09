@@ -25,6 +25,7 @@ export class RegisterVaccineComponent implements OnInit {
   private mensagem: string;
   private id: string;
   private historico: Vacina[] = [];
+  public focus = false;
 
   constructor(private modalVacina: NgbModal,
               private vacinaService: VacinaService,

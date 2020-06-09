@@ -26,7 +26,7 @@ export class AdicionarVacinaComponent implements OnInit {
   public sucesso = false;
   public required = false;
   public vacinauuid = '';
-  private obrigatorio = false;
+  public obrigatorio = false;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
