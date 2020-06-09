@@ -3,10 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutRoutes } from './auth-layout.routing';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from '../../pages/login/login.component';
-import {RegistrarComponent} from '../../pages/registrar/registrar.component';
 
 
 @NgModule({
@@ -17,8 +15,7 @@ import {RegistrarComponent} from '../../pages/registrar/registrar.component';
         ReactiveFormsModule
     ],
   declarations: [
-    LoginComponent,
-    RegistrarComponent
+    LoginComponent
   ]
 })
 export class AuthLayoutModule { }

@@ -271,7 +271,7 @@ export function chartOptions() {
 }
 
 export const parseOptions = (parent, options) => {
-		for (var item in options) {
+		for (const item in options) {
 			if (typeof options[item] !== 'object') {
 				parent[item] = options[item];
 			} else {

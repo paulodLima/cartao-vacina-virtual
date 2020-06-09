@@ -1,0 +1,79 @@
+<div class="header bg-gradient-danger py-4">
+  <div class="container">
+    <div class="header-body text-center mb-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Cadastre uma campanha</h1>
+          <p class="text-lead text-light">Preencha com atenção todos os dados!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="col-4 center">
+  <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+    Campanha enviada com sucesso!
+  </div>
+</div>
+<div class="col-4 center" *ngIf="erro">
+  <div class="alert alert-danger center" role="alert">
+    Erro ao enviar campanha, favor tentar mais tarde!
+  </div>
+</div>
+  <!-- pagina content -->
+<div class="container-fluid mt--7 mt">
+  <div class="card bg-secondary shadow my--10 my-auto">
+    <div class="card-header bg-white border-0 ">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 class="mb-0">Adicionar Campanha</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formEmail" #form ='ngForm' novalidate>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-6 ">
+              <div class="form-group">
+                <label form-control-label>Nome da campanha</label>
+                <input class="form-control" placeholder="Nome da campanha" [value]="subject" formControlName="subject">
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('subject').errors?.required
+                                  && form.submitted">
+                  Nome da campanha obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Selecione o anexo</label>
+                <input class="form-control" type="file"
+                       [value]="annex" placeholder="Anexo" (change)="inputFile($event)">
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('annex').errors?.required
+                                  && form.submitted">
+                  Anexo obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="form-control-label">Mensagem</label>
+                <textarea class="form-control" rows="5"
+                          [value]="composeEmail" placeholder="Mensagem" formControlName="composeEmail"> </textarea>
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('composeEmail').errors?.required
+                                  && form.submitted">
+                  Mensagem obrigatório!
+                </small>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-info offset-lg-8 active mt-10" (click)="envioEmail()">
+            Enviar campanha
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

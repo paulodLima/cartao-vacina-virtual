@@ -8,12 +8,16 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PessoasComponent} from '../../pages/pessoas/pessoas.component';
-import { RegistrarComponent} from '../../pages/registrar/registrar.component';
 import {RegisterVaccineComponent} from '../../pages/register-vaccine/register-vaccine.component';
 import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-pessoa.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {FilterPipe} from '../../filter/filter.pipe';
+import {FilterVacinaPipe} from '../../filter/filter-vacina.pipe';
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import {FilterLocais} from '../../filter/filter-locais';
+import {SortPipe} from '../../filter/sort.pipe';
 
 
 @NgModule({
@@ -24,16 +28,27 @@ import {CadastrarPessoaComponent} from '../../pages/cadastrar-pessoa/cadastrar-p
     HttpClientModule,
     NgbModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule,
+    GooglePlaceModule
+  ],
+  exports: [
+    FilterPipe,
+    FilterVacinaPipe,
+    FilterLocais,
+    SortPipe
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    TablesComponent,
     PessoasComponent,
     MapsComponent,
     RegisterVaccineComponent,
-    CadastrarPessoaComponent
+    CadastrarPessoaComponent,
+    FilterPipe,
+    FilterLocais,
+    FilterVacinaPipe,
+    SortPipe
   ]
 })
 

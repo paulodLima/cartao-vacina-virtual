@@ -1,3 +1,12 @@
-export const URL_API_PESSOA = 'http://localhost:8080/v1/api/persons';
-export const URL_API_VACINA = ' http://localhost:3000/vacina_crianca';
-export const URL_API_CEP = 'https://viacep.com.br/ws'
+import {environment} from './environment/environment';
+
+export const URL_API_PESSOA = environment.URL_API_PESSOA;
+export const URL_API_CEP = environment.URL_API_CEP;
+export const URL_API_VACINA = environment.URL_API_VACINA;
+export const URL_API_VACCINECARD = environment.URL_API_VACCINECARD;
+export const USER = environment.USER;
+export const PASSWORD = environment.PASSWORD;
+export const CLIENTID = environment.CLIENTID;
+export const CLIENTSECURITY = environment.CLIENTSECURITY;
+export const URL_AUTH = environment.URL_TOKEN;
+

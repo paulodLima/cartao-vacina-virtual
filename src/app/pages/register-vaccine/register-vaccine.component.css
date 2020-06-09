@@ -54,3 +54,16 @@
 .margin-card{
   margin-bottom: 1rem !important;
 }
+/*
+.mg-bt{
+  margin-top: -50px;
+  margin-bottom: -190px;
+}
+*/
+.mbt{
+  margin-bottom: 20px;
+  margin-top: -30px;
+}
+.mt-20{
+  margin-top: 20px !important;
+}

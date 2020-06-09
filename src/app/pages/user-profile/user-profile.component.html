@@ -1,190 +1,180 @@
+<div class="header bg-gradient-danger py-4">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
 
-<div class="header bg-gradient-danger py-8 py-lg-12">
   <div class="container">
-    <div class="header-body text-center mb-6">
+    <div class="header-body text-center mb-2">
       <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-9">
-          <h1 class="text-white"> Meus Dados </h1>
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Meu perfil</h1>
+          <p class="text-lead text-light">Favor manter todos os dados atualizados!</p>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid mt--8">
-  <div class="row">
-    <div class="col-xl-12 order-xl-1">
+
+<div class="container-fluid">
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
             <div class="col-8">
-              <h3 class="mb-0">Dados Pessoais</h3>
+              <h3 class="mb-0">Minha conta</h3>
             </div>
           </div>
         </div>
+        <div class="col-4 center">
+          <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+            Perfil atualizado com sucesso!
+          </div>
+        </div>
+        <div class="col-4 center" *ngIf="erro">
+          <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
+            {{mensagem}}
+          </div>
+        </div>
         <div class="card-body">
-          <form>
-            <h6 class="heading-small text-muted mb-4">Informação do usuário</h6>
+          <form [formGroup]="formPerson">
+            <h6 class="heading-small text-muted mb-4">Informações do usuário</h6>
             <div class="pl-lg-4">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nome do usuário</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="" value="">
+                    <label class="form-control-label">Nome</label>
+                    <input  disabled [disabled]="desabilitado" type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email">E-mail</label>
-                    <input type="email" id="email" class="form-control form-control-alternative">
+                    <label class="form-control-label">Email</label>
+                    <input type="email" disabled [disabled]="desabilitado" formControlName="email" id="email" class="form-control form-control-alternative" [value]="pessoa.email">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">Primeiro nome</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="" value="">
+                    <label class="form-control-label">Nome da Mãe</label>
+                    <input disabled  [disabled]="desabilitado" type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name"> Último nome</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="" value="">
+                    <label class="form-control-label">Nome do Pai</label>
+                    <input disabled [disabled]="desabilitado" type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
                   </div>
-                  </div>
-                  <div class="col-lg-6">
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-lg-4 ">
                     <div class="form-group">
-                      <label class="form-control-label" for="input-first-name">Nome da Mãe</label>
-                      <input type="text" id="nomaMae" class="form-control form-control-alternative" placeholder="" value="">
+                      <label class="form-control-label">CPF</label>
+                      <input disabled  [disabled]="desabilitado" id="documentNumber" class="form-control" placeholder="CPF"
+                             formControlName="documentNumber" [value]="pessoa.documentNumber">
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-4 ">
                     <div class="form-group">
-                      <label class="form-control-label" for="input-first-name">Nome da Pai</label>
-                      <input type="text" id="nomaPai" class="form-control form-control-alternative" placeholder="" value="">
+                      <label class="form-control-label">Data de Nascimento</label>
+                      <input disabled [disabled]="desabilitado" type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
+                             formControlName="birthDate" [value]="pessoa.birthDate">
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Data de Nascimentos</label>
-                        <input type="text" id="dataNascimento" class="form-control form-control-alternative">
-                      </div>
+                  <div class="col-lg-4 ">
+                    <div class="form-group">
+                      <label class="form-control-label">Sexo</label>
+                      <select disabled [disabled]="desabilitado" id="sexType" class="form-control" formControlName="sexType" [value]="pessoa.sexType">
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                      </select>
                     </div>
-                    <div class="col-lg-5">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">CPF</label>
-                        <input type="text" id="CPF" class="form-control form-control-alternative">
-                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-2" formArrayName="phone">
+                    <div class="form-group">
+                      <label class="form-control-label">DDD</label>
+                      <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode"
+                             [value]="areaCode">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 " formArrayName="phone">
+                    <div class="form-group">
+                      <label class="form-control-label">Telefone</label>
+                      <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                             [value]="number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3" formArrayName="height">
+                    <div class="form-group">
+                      <label class="form-control-label">Altura</label>
+                      <input type="number" id="height" class="form-control" placeholder="Altura" formControlName="height"
+                             [value]="height">
+                    </div>
+                  </div>
+                  <div class="col-lg-3" formArrayName="weight">
+                    <div class="form-group">
+                      <label class="form-control-label">Peso(KG)</label>
+                      <input type="number" id="weight" class="form-control" placeholder="Peso" formControlName="weight"
+                             [value]="weight">
                     </div>
                   </div>
               </div>
             </div>
             <hr class="my-4" />
-            <!-- Endereço -->
-            <h6 class="heading-small text-muted mb-4">Informações de Contato</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Endereço</label>
-                    <input id="input-address" class="form-control form-control-alternative" placeholder="" value="" type="text">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Município de Nascimentos</label>
-                    <input id="mNascimento" class="form-control form-control-alternative">
-                  </div>
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Informações do endereço</h6>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">CEP</label>
+                  <input [disabled]="edit" type="number" id="zipCode" class="form-control" placeholder="cep"
+                         [value]="zipCode" formControlName="zipCode">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-city">Cidade</label>
-                    <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="" value="">
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">País</label>
-                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="" value="">
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">UF</label>
-                    <input type="text" id="uf" class="form-control form-control-alternative">
-                  </div>
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Logradouro</label>
+                  <input [disabled]="edit" class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood"
+                         formControlName="neighborhood">
                 </div>
               </div>
-              
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-city">Bairro</label>
-                    <input type="text" id="bairro" class="form-control form-control-alternative">
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">CEP</label>
-                    <input type="text" id="cep" class="form-control form-control-alternative">
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Unidade que frequenta</label>
-                    <input type="text" id="unidadeFre" class="form-control form-control-alternative">
-                  </div>
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Bairro</label>
+                  <input [disabled]="edit" class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
                 </div>
               </div>
             </div>
-
-            <h6 class="heading-small text-muted mb-4">Registros</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Nº do Prontuário na UBS</label>
-                    <input id="ubs" class="form-control form-control-alternative" placeholder="">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Nº da Declaração de Nascido Vivo</label>
-                    <input id="nNascimento" class="form-control form-control-alternative" placeholder="">
-                  </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Cidade</label>
+                  <input [disabled]="edit" type="text" id="city" class="form-control" placeholder="Cidade" [value]="city"
+                         formControlName="city">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Nº do Registro Civil de Nascimento</label>
-                    <input type="text" id="registroCivil" class="form-control form-control-alternative" placeholder="">
-                  </div>
+              <div class="col-lg-2">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Estado</label>
+                  <input [disabled]="edit" type="text" id="state" class="form-control" placeholder="Estado" [value]="state"
+                         formControlName="state">
                 </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Nº do Cartão do SUS</label>
-                    <input type="text" id="nSus" class="form-control form-control-alternative">
-                  </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Complemento</label>
+                  <input [disabled]="edit" type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
+                         formControlName="complement">
                 </div>
               </div>
             </div>
-
-            <hr class="my-4" />
-            <!-- Descrição -->
-            <h6 class="heading-small text-muted mb-4">Sobre mim</h6>
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <label>Sobre mim</label>
-                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">Seja bem vindo ao seu cartão virtual.</textarea>
+            <div class="row">
+              <div class="col-lg-12">
+                <button class="btn btn-sm  btn-default float-right" (click)="editarDados()">Salvar alterações</button>
               </div>
             </div>
-          </form>
+           </form>
         </div>
       </div>
     </div>
   </div>
-</div>

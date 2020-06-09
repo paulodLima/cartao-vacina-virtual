@@ -7,7 +7,11 @@ import {
   parseOptions,
   chartExample1,
   chartExample2
-} from "../../variables/charts";
+} from '../../variables/charts';
+import {PessoasService} from '../services/pessoas.service';
+import {Pessoa} from '../shared/pessoa';
+import {VacinaService} from '../services/vacina.service';
+import {Vacina} from '../shared/vacina.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,10 +23,15 @@ export class DashboardComponent implements OnInit {
   public datasets: any;
   public data: any;
   public salesChart;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
+  public clicked = true;
+  public clicked1 = false;
+  private pessoas: Pessoa[];
+  public nmrPessoa = 0;
+  public nmrVacinas = 0;
+  private vacinas: Vacina[];
 
-  constructor() { }
+  constructor(private pessoaService: PessoasService,
+              private vacinaService: VacinaService) { }
 
   ngOnInit() {
 
@@ -33,33 +42,46 @@ export class DashboardComponent implements OnInit {
     this.data = this.datasets[0];
 
 
-    var chartOrders = document.getElementById('chart-orders');
+    const chartOrders = document.getElementById('chart-orders');
 
     parseOptions(Chart, chartOptions());
 
 
-    var ordersChart = new Chart(chartOrders, {
+    const ordersChart = new Chart(chartOrders, {
       type: 'bar',
       options: chartExample2.options,
       data: chartExample2.data
     });
 
-    var chartSales = document.getElementById('chart-sales');
+    const chartSales = document.getElementById('chart-sales');
 
     this.salesChart = new Chart(chartSales, {
 			type: 'line',
 			options: chartExample1.options,
 			data: chartExample1.data
 		});
+
+    this.listarPessoas();
+    this.listarVacinas();
   }
-
-
-
-
-
   public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
     this.salesChart.update();
   }
 
+  listarPessoas() {
+    this.pessoaService.listarPessoas().subscribe(pessoas => {
+      this.pessoas = pessoas;
+      this.nmrPessoa = this.pessoas.length;
+    }, erro => {
+      console.log('Erro ao listar pessoas', erro);
+    });
+  }
+
+  listarVacinas() {
+    this.vacinaService.getVacinas().subscribe(vacinas => {
+      this.vacinas = vacinas;
+      this.nmrVacinas = this.vacinas.length;
+    }, error => console.log('erro ao listar vacinas', error));
+  }
 }

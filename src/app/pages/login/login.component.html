@@ -1,60 +1,63 @@
 <div class="header bg-gradient-danger py-7 py-lg-8">
+  <a class="alinhar" routerLinkActive="active" [routerLink]="['/dashboard']">
+    <img src="./assets/img/CVV_letra_branca.png" class="mg" alt="...">
+  </a>
   <div class="container">
     <div class="header-body text-center mb-7">
-      <div class="row justify-content-center" style="margin-top: -100px">
+      <div class="row justify-content-center mp">
         <div class="col-lg-5 col-md-6">
           <h1 class="text-white">Bem Vindo!</h1>
-          <p class="text-lead text-light">O cartão de vacina virtual, possibilita um fácil
+          <h3 class="text-lead text-light">O cartão de vacina virtual, possibilita um fácil
             acesso das vacinas o seu histórico, evitando
-            problemas como cartões duplicados e perda de cartão.</p>
+            problemas como cartões duplicados e perda de cartão.</h3>
         </div>
       </div>
     </div>
   </div>
-  <div class="separator separator-bottom separator-skew zindex-100">
-    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-    </svg>
-  </div>
 </div>
 <!-- Page content -->
-<div class="container mt--8 pb-5">
+<div class="container mt--8 pb-5 mt-20">
   <div class="row justify-content-center">
-    <div class="col-lg-5 col-md-7">
+    <div class="col-lg-8 col-md-10">
       <div class="card bg-secondary shadow border-0">
         <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-3"><small>Entrar Com</small></div>
-          <div class="btn-wrapper text-center">
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-              <span class="btn-inner--text">Github</span>
-            </a>
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-              <span class="btn-inner--text">Google</span>
-            </a>
-          </div>
-        </div>
-        <div class="card-body px-lg-5 py-lg-5">
-          <div class="text-center text-muted mb-4">
-            <small>Ou entre com credenciais</small>
-          </div>
-          <form role="form">
+          <div class="text-muted text-center mt-2 mb-3 mb"><small>Entrar Com</small></div>
+
+          <form role="form" #form= 'ngForm' [formGroup]="formLogin"
+                novalidate (submit)="login()">
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nome Completo" type="nmCompleto">
+                <input class="form-control" placeholder="Nome Completo" type="text"
+                       formControlName="usuario">
               </div>
+                <small *ngIf="formLogin.get('usuario').errors?.required  && form.submitted">
+                  Usuário obrigatório!
+                </small>
+                <small *ngIf="formLogin.get('usuario').errors?.pattern  && form.submitted">
+                  Nome incorreto
+                </small>
             </div>
             <div class="form-group">
-              <div class="input-group input-group-alternative">
+              <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="CPF" type="cpf">
+                <input class="form-control" placeholder="CPF" type="password" id="senha"
+                       formControlName="senha">
               </div>
+                <small class="text-danger d-block mt-2"  *ngIf="formLogin.get('senha').errors?.required  && form.submitted">
+                       Senha obrigatório
+                </small>
+                <small  class="text-danger d-block mt-2"  *ngIf="formLogin.get('senha').errors?.pattern  && form.submitted">
+                      Tamanho da senha é de 8 a 15 caracteres
+                </small>
+              <small class="text-danger d-block mt-2" *ngIf="formLogin.get('senha').errors?.required
+                                  && form.submitted">
+                E-mail obrigatório!
+              </small>
             </div>
             <div class="custom-control custom-control-alternative custom-checkbox">
               <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
@@ -63,17 +66,14 @@
               </label>
             </div>
             <div class="text-center" >
-              <button type="button" class="btn btn-primary my-4"[routerLink]="['/dashboard']">Entrar</button>
+              <button type="button" class="btn btn-primary my-4" (click)="login()">Entrar</button>
             </div>
           </form>
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-6">
-          <a href="javascript:void(0)" class="text-light"><small>Esqueceu a senha?</small></a>
-        </div>
-        <div class="col-6 text-right" >
-          <!--  <a href="javascript:void(0)" class="text-light" [routerLink]="['/register']"><small>Criar nova conta</small></a>-->
+        <div class="col-12">
+          <a href="javascript:void(0)" class="text-light float-right"><small>Esqueceu a senha?</small></a>
         </div>
       </div>
     </div>

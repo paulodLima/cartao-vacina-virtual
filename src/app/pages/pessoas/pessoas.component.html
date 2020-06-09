@@ -11,66 +11,111 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="header-body">
-      <!-- Page content -->
-      <div class="container-fluid mt--7 ">
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
+      <!-- Page content
+        <div class="container float-right mbt">
+          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+            <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control " placeholder="Pesquisar" type="text"
+                       #termoPesquisa (keyup)="pesquisarPessoa(termoPesquisa.value)">
               </div>
-              <input class="form-control" placeholder="Pesquisar" type="text" (focus)="focus = true"
-                     (blur)="focus = false">
             </div>
-          </div>
-        </form>
-        <!-- Table -->
-            <div class="card shadow ml--100i mr--100i" >
-              <div class="card-header bg-transparent">
-                <h3 class="mb-0">Usuários</h3>
-              </div>
-              <div class="card">
-                  <div class="table-responsive ">
-                    <table class="table-sm" >
-                          <tr>
-                            <th >Nome</th>
-                            <th >Documento</th>
-                            <th >Telefone</th>
-                            <th >Nome da Mãe</th>
-                            <th >Nome do Pai</th>
-                            <th >Email</th>
-                            <th >Data de Nascimento</th>
-                            <th>Endereço</th>
-                            <th >Peso</th>
-                            <th >Altura</th>
-                            <th>Ações</th>
-                          </tr>
-                          <tr *ngFor="let pessoa of pessoas" >
-                            <td>{{pessoa.fullName}}</td>
-                            <td>{{pessoa.documentNumber}}</td>
-                            <td>{{pessoa.phone.areaCode}} {{pessoa.phone.number}}</td>
-                            <td>{{pessoa.mothersName}}</td>
-                            <td>{{pessoa.fathersName}}</td>
-                            <td>{{pessoa.email}}</td>
-                            <td>{{pessoa.birthDate}}</td>
-                            <td>
-                              {{pessoa.address.city}}
-                              {{pessoa.address.street}}
-                              {{pessoa.address.neighborhood}}
-                              {{pessoa.address.state}}
-                              {{pessoa.address.complement}}
-                            </td>
-                            <td>{{pessoa.height.height}}</td>
-                            <td>{{pessoa.height.weight}}</td>
-                            <td><button class="btn btn-danger">Editar</button></td>
-                          </tr>
-                    </table>
+          </form>
+        </div>-->
+
+<div class="container-fluid mt--7" >
+  <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto mbt">
+    <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input class="form-control " placeholder="Pesquisar por nome" type="text"  #termoPesquisa (keyup)="pesquisa(termoPesquisa.value)">
+      </div>
+    </div>
+  </form>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Tabela de Pessoas</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Documento</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Data de nascimento</th>
+              <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pessoa of pessoas | filterPipe:searchterm">
+              <th scope="row">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">{{pessoa.fullName}}</span>
                   </div>
-              </div>
-          </div>
+                </div>
+              </th>
+              <td>
+                {{pessoa.documentNumber}}
+              </td>
+              <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i>{{pessoa.phone.areaCode}} {{pessoa.phone.number}}
+                  </span>
+              </td>
+              <td>{{pessoa.email}}</td>
+              <td>{{pessoa.birthDate}}</td>
+              <td class="text-right">
+                <div ngbDropdown placement="bottom-right">
+                  <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" (click)="editarPessoa(pessoa.uuid)">Perfil completo/Editar</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                  <i class="fas fa-angle-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="javascript:void(0)">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">
+                  <i class="fas fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </div>

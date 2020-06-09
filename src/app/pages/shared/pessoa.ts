@@ -1,6 +1,7 @@
 export class Pessoa {
-
-  public fullName = '53w';
+  public id: number;
+  public uuid: string;
+  public fullName: string;
   public documentNumber: string;
   public fathersName: string;
   public mothersName: string;
@@ -10,5 +11,4 @@ export class Pessoa {
   public address: Array<object>;
   public phone: Array<object>;
   public height: Array<object>;
-
 }

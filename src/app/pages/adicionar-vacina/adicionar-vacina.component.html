@@ -1,0 +1,110 @@
+<div class="header bg-gradient-danger py-4">
+  <div class="container">
+    <div class="header-body text-center mb-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Adicionar vacina ao calendario</h1>
+          <p class="text-lead text-light">Preencha com atenção todos os dados!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="col-4 center">
+  <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+    Vacina adicionada com sucesso!
+  </div>
+</div>
+<!-- pagina content -->
+<div class="container-fluid mt--7 mt">
+  <div class="card bg-secondary shadow my--10 my-auto">
+    <div class="card-header bg-white border-0 ">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 class="mb-0">Adicionar vacina</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form novalidate>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-4 ">
+              <div class="form-group">
+                <label class="form-control-label">Pessoa</label>
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                  <input class="form-control " placeholder="Pesquisar pessoa" type="text" [value]="paciente" #termoPesquisa (keyup)="pesquisa(termoPesquisa.value)">
+                </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Vacina</label>
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Pesquisar vacina" type="text" #vacina [value]="vacinaa" #termoVacina (keyup)="pesquisVacina(termoVacina.value)">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="form-control-label">Obrigatoriedade</label>
+                <input class="form-control float-left" type="checkbox" #obrigatorio>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+          <div class="row">
+            <div class="col-lg-12"  *ngIf="termo">
+              <div class="table-responsive align-items-center">
+                <table class="table align-items-center table-flush">
+                  <tbody>
+                  <tr *ngFor="let pessoa of pessoas | filterPipe:searchterm">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <button class="btn btn-outline-secondary">
+                            <span class="mb-0 text-sm" (click)="selecionado(pessoa)">Nome: {{pessoa.fullName}} | CPF: {{pessoa.documentNumber}}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-12" *ngIf="termoVacinas">
+              <div class="table-responsive align-items-center">
+                <table class="table align-items-center table-flush">
+                  <tbody>
+                  <tr *ngFor="let vacina of vacinas | filterVacina:searchtermVacina">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <button class="btn btn-outline-secondary">
+                            <span class="mb-0 text-sm" (click)="vacinaSelecionada(vacina)">{{vacina.name}}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          </div>
+          <button class="btn btn-info offset-lg-8 active mt-10" (click)="adicionarVacina(obrigatorio.value)">
+            Adicionar vacina
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

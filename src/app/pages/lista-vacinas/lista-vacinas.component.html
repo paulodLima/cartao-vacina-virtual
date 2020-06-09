@@ -1,0 +1,119 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container">
+    <div class="header-body text-center mb-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Minhas Vacinas</h1>
+          <p class="text-white">O botão info serve para abrir as informações da vacina!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas">
+          <div class="card card-stats mb-4 mb-xl-0 margin-card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">{{vacina.name}}
+                  </h5>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <img class="imgTam" [src]=[img_vacina]>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <button class=" mr-2 btn btn-sm btn-default float-right" (click)=abrirModal(modalVacina,vacina)>Informações</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #modalVacina>
+    <div class="modal-register">
+      <div class="modal-body">
+        <table class="table align-items-center table-flush" >
+          <thead class="thead-light" >
+          <tr class=" table-active">
+            <th scope="col">
+              <p class="pn1">DETALHAMENTO </p>
+              <p class="pn">{{vacinaPorNome.name}}</p>
+            </th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="row">
+            <td class="col tdn"> Proteção Contra:</td>
+            <td class="col">{{vacinaPorNome.disease}} </td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Composição:</td>
+            <td class="col">{{vacinaPorNome.composition}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Nº Doses:</td>
+            <td class="col"> {{vacinaPorNome.basicVaccination}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Revacinação</td>
+            <td class="col"></td>
+          </tr>
+          <tr class="row">
+            <th class="col">
+              <p class="pn">INÍCIO DA VACINAÇÃO</p>
+            </th>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Minima:</td>
+            <td class="col"></td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Máxima:</td>
+            <td class="col"></td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Intervalo entre as doses:</td>
+            <td class="col">Recomendado: Min:</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Dosagem:</td>
+            <td class="col"></td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn">Via de administração:</td>
+            <td class="col">{{vacinaPorNome.routeAdministration}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Local da aplicação:</td>
+            <td class="col">{{vacinaPorNome.applicationLocation}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdn"> Agulha hipodérmica recomendada:</td>
+            <td class="col">{{vacinaPorNome.needle}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg"> Tempo de validade após aberto frasco:</td>
+            <td class="col">{{vacinaPorNome.validityAfterOpen}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg"> Alguns eventos adversos:</td>
+            <td class="col tdgn"> {{vacinaPorNome.sideEffect}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="fechar(modalVacina)">Fechar</button>
+      </div>
+    </div>
+  </ng-template>
+</div>
