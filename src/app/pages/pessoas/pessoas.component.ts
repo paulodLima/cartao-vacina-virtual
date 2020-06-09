@@ -31,7 +31,7 @@ export class PessoasComponent implements OnInit {
   listarPessoas() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
-
+      console.log(pessoas);
     for (let i = 0; i <= pessoas.length; i++) {
       const dataFormat = this.pessoas[i].birthDate;
       const str = dataFormat.split('-');

@@ -17,6 +17,7 @@ export class Vacina {
  public eventos_adversos: string;
  public perfil: string;
  public dosages: Array<any>;
+ public dosagesInformation: Array<any>;
 
   public applicationLocationId: string;
   public basicVaccinationId: string;

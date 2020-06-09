@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Vacina} from './pages/shared/vacina.model';
+import {Vacina} from '../pages/shared/vacina.model';
 
 @Pipe({
   name: 'filterVacina'

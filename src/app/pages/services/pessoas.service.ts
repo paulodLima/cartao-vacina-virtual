@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Endereco} from '../shared/endereco';
 import {Pessoa} from '../shared/pessoa';
-import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD} from '../../app.api';
-import {catchError, retry} from 'rxjs/operators';
+import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD, URL_AUTH} from '../../app.api';
+
 import {Email} from '../shared/email';
-import {getResponseURL} from '@angular/http/src/http_utils';
-import {any} from 'codelyzer/util/function';
+import {retry} from 'rxjs/operators';
+
 
 @Injectable()
 export class PessoasService {
@@ -46,11 +46,11 @@ export class PessoasService {
   }
 
   public salvarAnexo (anexo: FormData): Observable<FormData> {
-    return this.http.post<FormData>(`${URL_API_VACCINECARD}/calendar/anexo`, anexo);
+    return this.http.post<FormData>(`${URL_API_VACCINECARD}/mail/anexo`, anexo);
   }
 
   public enviarEmail (email: Email): Observable<Email> {
-    return this.http.post<Email>(`${URL_API_VACCINECARD}/calendar/email`, email);
+    return this.http.post<Email>(`${URL_API_VACCINECARD}/mail`, email);
   }
 
   public cadastrarCalendario(calendario): Observable<any> {

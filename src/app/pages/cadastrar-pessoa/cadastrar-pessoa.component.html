@@ -19,6 +19,11 @@
         </div>
       </div>
     </div>
+    <div class="col-4 center">
+      <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+        Pessoa cadastrada com sucesso!
+      </div>
+    </div>
     <div class="col-4 center" *ngIf="erro">
       <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
          {{mensagem}}
@@ -29,6 +34,19 @@
         <h6 class="heading-small text-muted mb-4">Informações do Usuário</h6>
         <div class="pl-lg-4">
           <div class="row">
+            <div class="col-lg-2 ">
+              <div class="form-group" formArrayName="credential">
+                <label class="form-control-label">Tipo de usuário</label>
+                <select id="role" class="form-control" form="id" [value]="role" #permissao (blur)="teste(permissao.value)">
+                  <option value="pessoa" selected>Pessoa</option>
+                  <option value="admin">Administrador</option>
+                </select>
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
+                                  && form.submitted">
+                  Sexo obrigatório!
+                </small>
+              </div>
+            </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">Nome completo</label>
@@ -43,10 +61,10 @@
                 </small>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <div class="form-group">
                 <label class="form-control-label">Email</label>
-                <input type="email" id="email" required class="form-control" placeholder="nome@exemplo.com"
+                <input type="email" id="email" disabled="{{disableds}}" class="form-control" placeholder="nome@exemplo.com"
                        formControlName="email" [value]="email">
                 <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.required
                                   && form.submitted">
@@ -136,7 +154,7 @@
             <div class="col-lg-2" formArrayName="phone">
               <div class="form-group">
                 <label class="form-control-label">DDD</label>
-                <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode"
+                <input type="number" id="areaCode" class="form-control" placeholder="61" formControlName="areaCode"
                        [value]="areaCode">
                 <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.required
                                   && form.submitted">
@@ -265,6 +283,27 @@
             </div>
           </div>
           <hr class="my-4"/>
+          <h6 class="heading-small text-muted mb-4">Autenticação</h6>
+          <div class="row">
+
+            <div class="col-lg-4 ">
+              <div class="form-group">
+                <label class="form-control-label">Senha</label>
+                <input id="senha" class="form-control" placeholder="CPF" type="password"
+                       formControlName="Senha" [value]="senha" #senha>
+              </div>
+            </div>
+            <div class="col-lg-4 ">
+              <div class="form-group" formArrayName="credential">
+                <label class="form-control-label">Confirmar senha</label>
+                <input type="password" id="confirmeSenha" class="form-control" placeholder="Senha"
+                       formControlName="password" [value]="password" #confirmar (keyup)="comparar(senha.value,confirmar.value,permissao.value)">
+              </div>
+              <small class="text-danger d-block mt-2" *ngIf="valida">
+                As senhas são diferentes!
+              </small>
+            </div>
+          </div>
           <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id == undefined"
                   (click)=cadastrar()>
             Prosseguir
@@ -281,7 +320,7 @@
             <div class="col-lg-2">
               <div class="form-group float-left">
                 <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
-                        (click)="cadastrar()">
+                        (click)="atualizar()">
                   Atualizar Dados
                 </button>
               </div>

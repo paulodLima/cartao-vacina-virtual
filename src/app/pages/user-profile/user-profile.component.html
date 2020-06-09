@@ -22,6 +22,11 @@
             </div>
           </div>
         </div>
+        <div class="col-4 center">
+          <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+            Perfil atualizado com sucesso!
+          </div>
+        </div>
         <div class="col-4 center" *ngIf="erro">
           <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
             {{mensagem}}
@@ -35,13 +40,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome</label>
-                    <input  disabled type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
+                    <input  disabled [disabled]="desabilitado" type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Email</label>
-                    <input type="email"  formControlName="email" id="email" class="form-control form-control-alternative" [value]="pessoa.email">
+                    <input type="email" disabled [disabled]="desabilitado" ]formControlName="email" id="email" class="form-control form-control-alternative" [value]="pessoa.email">
                   </div>
                 </div>
               </div>
@@ -49,13 +54,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome da Mãe</label>
-                    <input disabled type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
+                    <input disabled  [disabled]="desabilitado" type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome do Pai</label>
-                    <input disabled type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
+                    <input disabled [disabled]="desabilitado" type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
                   </div>
                 </div>
               </div>
@@ -63,21 +68,21 @@
                   <div class="col-lg-4 ">
                     <div class="form-group">
                       <label class="form-control-label">CPF</label>
-                      <input disabled id="documentNumber" class="form-control" placeholder="CPF"
+                      <input disabled  [disabled]="desabilitado" id="documentNumber" class="form-control" placeholder="CPF"
                              formControlName="documentNumber" [value]="pessoa.documentNumber">
                     </div>
                   </div>
                   <div class="col-lg-4 ">
                     <div class="form-group">
                       <label class="form-control-label">Data de Nascimento</label>
-                      <input disabled type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
+                      <input disabled [disabled]="desabilitado" type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
                              formControlName="birthDate" [value]="pessoa.birthDate">
                     </div>
                   </div>
                   <div class="col-lg-4 ">
                     <div class="form-group">
                       <label class="form-control-label">Sexo</label>
-                      <select disabled id="sexType" class="form-control" formControlName="sexType" [value]="pessoa.sexType">
+                      <select disabled [disabled]="desabilitado" id="sexType" class="form-control" formControlName="sexType" [value]="pessoa.sexType">
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                       </select>

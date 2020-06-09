@@ -91,7 +91,7 @@ export class CampanhaComponent implements OnInit {
 
           setTimeout(() => {
             this.erro = false;
-          }, 6000);
+          }, 3000);
           console.log('erro ao enviar email', erro);
         });
     }

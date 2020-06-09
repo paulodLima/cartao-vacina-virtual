@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthService} from '../../core/auth.service';
-import {AdminLayoutComponent} from '../../layouts/admin-layout/admin-layout.component';
 
 declare interface RouteInfo {
     path: string;
@@ -11,22 +10,24 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
-    { path: '/maps', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
+    { path: '/locais', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
     { path: '/user-profile', title: 'User profile',  icon: 'ni-single-02 text-yellow', class: '' },
     { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' }
 ];
 
 export const ROUTESADMIN: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
-  { path: '/maps', title: 'Locais',  icon: 'ni-tv-2 text-primary', class: ''},
+  { path: '/locais', title: 'Locais',  icon: 'ni-tv-2 text-primary', class: ''},
   { path: '/pessoas', title: 'Consulta de Pessoas',  icon: 'fas fa-search', class: '' },
-  { path: '/adicionar-vacina', title: 'Adicionar vacina a pessoa',  icon: 'ni-planet text-blue', class: '' },
+  { path: '/adicionar-vacina', title: 'Adicionar vacina a calendario',  icon: 'ni-planet text-blue', class: '' },
   { path: '/user-profile', title: 'Perfil',  icon: 'ni-single-02 text-yellow', class: '' },
   { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' },
   { path: '/campanha', title: 'Campanha',  icon: 'ni-single-02 text-yellow', class: '' },
+  { path: '/lista-vacinas', title: 'Lista de vacinas',  icon: 'fas fa-search', class: '' },
+  { path: '/add-vacina-pessoa', title: 'Aplicar vaciana pessoa',  icon: 'ni-single-02 text-yellow', class: '' },
   { path: '/cadastrar-vacina', title: 'Cadastrar Nova Vacina',  icon: 'ni-key-25 text-info', class: '' },
-  { path: '/register-vaccine', title: 'Listar Vacinas',  icon: 'fas fa-search', class: '' },
   { path: '/cadastrar-pessoa', title: 'Cadastro de pessoa',  icon: 'fas fa-users', class: '' },
+  { path: '/cadastrar-postos', title: 'Cadastro de Postos de vacinação',  icon: 'fas fa-users', class: '' }
 ];
 
 @Component({

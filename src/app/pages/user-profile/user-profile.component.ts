@@ -15,6 +15,8 @@ export class UserProfileComponent implements OnInit {
   public id: number;
   public erro = false;
   public mensagemErro: string;
+  private sucesso = false;
+  desabilitado = true;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService) {
@@ -92,9 +94,32 @@ export class UserProfileComponent implements OnInit {
 
   editarDados() {
     if (this.formPerson.value) {
+      this.formPerson.patchValue({
+        weight: ({
+          weight:  `${this.formPerson.get('weight.weight').value}`
+        }),
+        height: ({
+          height:  `${this.formPerson.get('height.height').value}`
+        })
+      });
       localStorage.clear();
       localStorage.setItem('usuario', JSON.stringify(this.formPerson.value));
       this.pessoasService.atualizarPessoa(this.pessoa.uuid, this.formPerson.value).subscribe(pessoa => {
+
+        this.sucesso = true;
+
+        setTimeout(() => {
+          this.sucesso = false;
+        }, 5000);
+
+        const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20); // how far to scroll on each step
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
         console.log(pessoa);
       }, erro => {console.log('erro ao atualizar', erro);
       this.mensagemErro = erro.error.messages;

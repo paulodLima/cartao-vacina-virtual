@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="card-body">
-      <form novalidate [formGroup]="formAddVacina" #form='ngForm' >
+      <form novalidate>
         <div class="pl-lg-4">
           <div class="row">
             <div class="col-lg-4 ">
@@ -39,21 +39,21 @@
                 </div>
                </div>
             </div>
-            <div class="col-lg-4"  formArrayName="vaccines">
+            <div class="col-lg-4">
               <div class="form-group">
                 <label class="form-control-label">Vacina</label>
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                   </div>
-                  <input class="form-control "formControlName="vaccineUuid" placeholder="Pesquisar vacina" type="text" #vacina [value]="vacinaa" #termoVacina (keyup)="pesquisVacina(termoVacina.value)">
+                  <input class="form-control" placeholder="Pesquisar vacina" type="text" #vacina [value]="vacinaa" #termoVacina (keyup)="pesquisVacina(termoVacina.value)">
                 </div>
               </div>
             </div>
-            <div class="col-lg-2"  formArrayName="vaccines">
+            <div class="col-lg-2">
               <div class="form-group">
                 <label class="form-control-label">Obrigatoriedade</label>
-                <input class="form-control float-left" type="checkbox" formControlName="required" #obrigatorio>
+                <input class="form-control float-left" type="checkbox" #obrigatorio>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@
             </div>
           </div>
           </div>
-          <button class="btn btn-info offset-lg-8 active mt-10" (click)="adicionarVacina(obrigatorio.value , vacina.value)">
+          <button class="btn btn-info offset-lg-8 active mt-10" (click)="adicionarVacina(obrigatorio.value)">
             Adicionar vacina
           </button>
         </div>

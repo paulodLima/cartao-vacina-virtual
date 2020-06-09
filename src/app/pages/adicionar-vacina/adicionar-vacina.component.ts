@@ -21,29 +21,21 @@ export class AdicionarVacinaComponent implements OnInit {
   public searchtermVacina = '';
   public termo = false;
   public termoVacinas = false;
-  public dataFormatada = '';
   public vacinaa = '';
   public paciente = '';
   public sucesso = false;
   public required = false;
   public vacinauuid = '';
+  private obrigatorio = false;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
               private vacinaService: VacinaService) { }
 
   ngOnInit(): void {
-    this.dataAtualFormatada();
     this.listarPessoas();
     this.listarVacinas();
   }
-
-  buildervacina(obrigatorio: any, vacina: any) {
-
-    return this.formBuilder.array([
-            new FormControl({'required': this.required, vaccineUuid: this.vacinauuid})]);
-  }
-
   listarPessoas() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
         this.pessoas = pessoas;
@@ -90,45 +82,49 @@ export class AdicionarVacinaComponent implements OnInit {
     this.termoVacinas = false;
   }
 
-  adicionarVacina(obrigatorio: any, vacina: any) {
-    this.required = obrigatorio;
-    this.vacinauuid = vacina;
-    if (this.required) {
-      this.required = true;
-    }
+  formVacina() {
     this.formAddVacina = this.formBuilder.group({
-      vaccines: this.buildervacina(this.required, this.vacinauuid)
+      vaccines: this.buildervacina()
     });
+  }
 
-    console.log(this.formAddVacina.value);
-    if (this.formAddVacina.valid) {
-      this.formAddVacina.patchValue({
-          applicationDate: this.dataFormatada,
-          personUuid: this.pessoa.uuid,
-          vaccineUuid: this.vacina.uuid
-      });
-      if (this.formAddVacina.valid) {
-        this.vacinaService.cadastrarVaccineCard(this.formAddVacina.value).subscribe(vaccineCard => {
-            this.formAddVacina.reset();
+  buildervacina() {
+    this.vacinauuid = this.vacina.uuid;
+    if (this.obrigatorio) {
+      this.obrigatorio = true;
+    }
+   return this.formBuilder.array([
+      new FormControl({'required': this.obrigatorio, vaccineUuid: this.vacinauuid})]);
+  }
+
+  adicionarVacina(obrigatorio) {
+     this.obrigatorio = obrigatorio;
+      this.vacinaService.geCalendarioPessoa(this.pessoa.uuid).subscribe(calendario => {
+        this.buildervacina();
+        this.formVacina();
+        console.log('dentro do adicionar 2', this.formAddVacina.value);
+        this.vacinaService.updateDeCalendario(this.formAddVacina.value, calendario[0].uuid).subscribe(vaccineCard => {
+          this.formAddVacina.reset();
           this.sucesso = true;
 
           setTimeout(() => {
             this.sucesso = false;
           }, 6000);
+
         }, error => console.log('erro ao cadastrar vaccineCard', error));
-        console.log('form adicionar vacina', this.formAddVacina.value);
+
+      }, error => console.log('erro ao listar calendario de pessoa', error));
+
         this.formAddVacina.reset();
       }
-    }
-  }
 
-   dataAtualFormatada() {
-    const data = new Date(),
-      dia  = data.getDate().toString(),
-      diaF = (dia.length === 1) ? '0' + dia : dia,
-      mes  = (data.getMonth() + 1).toString(),
-      mesF = (mes.length === 1) ? '0' + mes : mes,
-      anoF = data.getFullYear();
-      this.dataFormatada = anoF + '-' + mesF + '-' + diaF;
-  }
+// dataAtualFormatada() {
+// const data = new Date(),
+//    dia  = data.getDate().toString(),
+//    diaF = (dia.length === 1) ? '0' + dia : dia,
+//    mes  = (data.getMonth() + 1).toString(),
+//    mesF = (mes.length === 1) ? '0' + mes : mes,
+//    anoF = data.getFullYear();
+//    this.dataFormatada = anoF + '-' + mesF + '-' + diaF;
+// }
 }

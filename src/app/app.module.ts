@@ -22,6 +22,9 @@ import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
 import { MinhasVacinasComponent } from './pages/minhas-vacinas/minhas-vacinas.component';
 import {TextMaskModule} from 'angular2-text-mask';
 import { GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import { LocaisVacinacaoComponent } from './pages/locais-vacinacao/locais-vacinacao.component';
+import { AdicionarVacinaPessoaComponent } from './pages/adicionar-vacina-pessoa/adicionar-vacina-pessoa.component';
+import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.component';
 
 @NgModule({
   imports: [
@@ -46,7 +49,10 @@ import { GooglePlaceModule} from 'ngx-google-places-autocomplete';
         ConfirmModalComponent,
         CadastrarVacinaComponent,
         AdicionarVacinaComponent,
-        MinhasVacinasComponent
+        MinhasVacinasComponent,
+        LocaisVacinacaoComponent,
+        AdicionarVacinaPessoaComponent,
+        ListaVacinasComponent
     ],
     providers: [
         PessoasService,

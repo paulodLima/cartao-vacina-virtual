@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Pessoa} from './pages/shared/pessoa';
+import {Pessoa} from '../pages/shared/pessoa';
 
 @Pipe({
   name: 'filterPipe'

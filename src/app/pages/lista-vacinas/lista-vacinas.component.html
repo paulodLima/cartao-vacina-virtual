@@ -12,36 +12,6 @@
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
-      <div class="col-lg-6">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label">Vacinas obrigatórias</label>
-              <select class="form-control" #obrigatoria>
-                <option selected value="--">Selecione...</option>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label">Vacinas tomadas</label>
-              <select class="form-control" #tomada>
-                <option selected value="--">Selecione...</option>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label">Pesquisar</label>
-                <button class=" form-control btn btn-sm btn-default" (click)=aplicada(tomada.value,obrigatoria.value)>Pesquisar</button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas">
           <div class="card card-stats mb-4 mb-xl-0 margin-card">

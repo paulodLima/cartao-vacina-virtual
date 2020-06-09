@@ -1,8 +1,8 @@
 .imgTam {
-    width: 400% !important;
+  width: 400% !important;
 }
 .imgAtencao{
-    width: 20px;
+  width: 20px;
 }
 .p1{
   margin-left:20px;
@@ -63,7 +63,4 @@
 .mbt{
   margin-bottom: 20px;
   margin-top: -30px;
-}
-.mt-20{
-  margin-top: 20px !important;
 }
