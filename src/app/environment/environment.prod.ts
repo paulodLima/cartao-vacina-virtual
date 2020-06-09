@@ -3,7 +3,7 @@ export const environment = {
   URL_API_PESSOA: 'https://api-person.herokuapp.com/v1/api/person',
   URL_API_CEP: 'https://viacep.com.br/ws',
   URL_API_VACINA: 'https://vaccine-card-api.herokuapp.com/',
-  URL_API_VACCINECARD: 'http://virtual-vaccine-card-api.herokuapp.com',
+  URL_API_VACCINE_CARD: 'http://virtual-vaccine-card-api.herokuapp.com',
   USER: 'gtr1',
   PASSWORD: 'brincante',
   CLIENTID: 'tcc',
