@@ -33,7 +33,7 @@ export class AuthService {
       localStorage.setItem('usuario', JSON.stringify(''));
       this.admin = true;
       this.loginService.autenticarUsario();
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/lista-vacinas');
 
     }
 
@@ -65,4 +65,5 @@ export class AuthService {
     }, error => console.log('erro ao gerar token', error));
 
   }
+
 }
