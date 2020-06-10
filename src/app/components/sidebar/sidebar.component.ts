@@ -9,14 +9,12 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
     { path: '/locais', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
     { path: '/user-profile', title: 'User profile',  icon: 'ni-single-02 text-yellow', class: '' },
     { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' }
 ];
 
 export const ROUTESADMIN: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: ''},
   { path: '/locais', title: 'Locais',  icon: 'ni-tv-2 text-primary', class: ''},
   { path: '/pessoas', title: 'Consulta de Pessoas',  icon: 'fas fa-search', class: '' },
   { path: '/adicionar-vacina', title: 'Adicionar vacina a calendario',  icon: 'ni-planet text-blue', class: '' },

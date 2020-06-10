@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { PessoasComponent } from '../../pages/pessoas/pessoas.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
@@ -17,7 +16,6 @@ import {ListaVacinasComponent} from '../../pages/lista-vacinas/lista-vacinas.com
 
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'user-profile',   component: UserProfileComponent, canActivate: [AuthGuard] },
     { path: 'locais',           component: MapsComponent, canActivate: [AuthGuard] },
     { path: 'campanha',      component: CampanhaComponent, canActivate: [AuthGuard] },
