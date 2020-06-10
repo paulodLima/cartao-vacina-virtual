@@ -1,4 +1,4 @@
-import {environment} from './environment/environment';
+import {environment} from './environments/environment';
 
 export const URL_API_PESSOA = environment.URL_API_PESSOA;
 export const URL_API_CEP = environment.URL_API_CEP;

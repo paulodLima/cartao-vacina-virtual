@@ -14,8 +14,11 @@ export class LocaisVacinacaoComponent implements OnInit {
 
   public formLocais: FormGroup;
   public cepvalico = false;
-  private uuid: string;
-  private name: '';
+  public uuid: string;
+  public name: '';
+  public sucesso: boolean;
+  public mensagemErro: string;
+  public erro: any;
 
   constructor(private pessoasService: PessoasService,
               private router: Router,

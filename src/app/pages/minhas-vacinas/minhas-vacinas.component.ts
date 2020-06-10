@@ -11,7 +11,7 @@ import {Pessoa} from '../shared/pessoa';
 })
 export class MinhasVacinasComponent implements OnInit {
 
-  private historico: Vacina[] = [];
+  public historico: Vacina[] = [];
   public vacinas: Vacina[] = [];
   public pessoaString = localStorage.getItem('usuario');
   public pessoaJson = JSON.parse(this.pessoaString);

@@ -9,13 +9,13 @@ import {PessoasService} from '../services/pessoas.service';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  private pessoa: Pessoa;
+  public pessoa: Pessoa;
   public formPerson: FormGroup;
   edit = true;
   public id: number;
   public erro = false;
   public mensagemErro: string;
-  private sucesso = false;
+  public sucesso = false;
   desabilitado = true;
 
   constructor(private formBuilder: FormBuilder,

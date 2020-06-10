@@ -37,7 +37,7 @@
             <div class="col-lg-2 ">
               <div class="form-group" formArrayName="credential">
                 <label class="form-control-label">Tipo de usuário</label>
-                <select id="role" class="form-control" form="id" [value]="role" #permissao (blur)="teste(permissao.value)">
+                <select id="role" class="form-control" form="id" [value]="roles" #permissao (blur)="teste(permissao.value)">
                   <option value="pessoa" selected>Pessoa</option>
                   <option value="admin">Administrador</option>
                 </select>
