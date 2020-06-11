@@ -7,6 +7,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {Pessoa} from '../shared/pessoa';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -25,7 +26,8 @@ export class CadastrarPessoaComponent implements OnInit {
               private pessoasService: PessoasService,
               private route: ActivatedRoute,
               private modal: NgbModal,
-              private vacinaService: VacinaService) {
+              private vacinaService: VacinaService,
+              private authService: AuthService) {
   }
 
   public formPerson: FormGroup;
@@ -60,6 +62,9 @@ export class CadastrarPessoaComponent implements OnInit {
   public password: any;
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.route.params.pipe(
       map((params) => params.id ),
       switchMap(id => this.pessoasService.consutarPessoa(this.id = id))

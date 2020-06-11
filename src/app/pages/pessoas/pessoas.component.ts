@@ -3,6 +3,8 @@ import {PessoasService} from '../services/pessoas.service';
 import {Pessoa} from '../shared/pessoa';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {VacinaService} from '../services/vacina.service';
+import {AuthService} from '../../core/auth.service';
 
 
 @Component({
@@ -23,10 +25,14 @@ export class PessoasComponent implements OnInit {
 
 
   constructor(private pessoasService: PessoasService,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarPessoas();
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
 import {Pessoa} from '../shared/pessoa';
+import {VacinaService} from '../services/vacina.service';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-campanha',
@@ -22,9 +24,13 @@ export class CampanhaComponent implements OnInit {
   public fileName: '';
 
     constructor(private formBuilder: FormBuilder,
-                private pessoasService: PessoasService) { }
+                private pessoasService: PessoasService,
+                private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
       this.formEmail = this.formBuilder.group({
           recipients:   ['', [Validators.required]],
           subject:      ['', [Validators.required]],

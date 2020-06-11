@@ -5,6 +5,7 @@ import {Vacina} from '../shared/vacina.model';
 import {PessoasService} from '../services/pessoas.service';
 import {VacinaService} from '../services/vacina.service';
 import {Unidades} from '../shared/unidades';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-adicionar-vacina-pessoa',
@@ -38,9 +39,13 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
-              private vacinaService: VacinaService) { }
+              private vacinaService: VacinaService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarPessoas();
     this.listarLocais();
     this.dataAtualFormatada();

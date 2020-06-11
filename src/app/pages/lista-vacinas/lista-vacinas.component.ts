@@ -3,6 +3,7 @@ import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {Pessoa} from '../shared/pessoa';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-lista-vacinas',
@@ -16,9 +17,13 @@ export class ListaVacinasComponent implements OnInit {
   public vacinaPorNome: Vacina[];
 
   constructor(private vacinaService: VacinaService,
-              private modalVacina: NgbModal) { }
+              private modalVacina: NgbModal,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarVacinas();
   }
 
