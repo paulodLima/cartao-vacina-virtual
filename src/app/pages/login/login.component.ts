@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.formLogin = this.formBuilder.group({
-      usuario: [null, [Validators.required, Validators.pattern(/^-?(0|[a-z0-9]{2,15}\d*)?$/)]],
+      usuario: [null, [Validators.required, Validators.email]],
       senha: [null, [Validators.required, Validators.pattern(/^-?(0|[a-z0-9]{8,15}\d*)?$/)]]
     });
     this.listarPessoas();
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.formLogin.valid) {
       this.auth.autenticacao(this.formLogin.get('usuario').value, this.formLogin.get('senha').value, this.person);
     } else {
-      alert('Usuário ou senha incorretas');
+      alert('Usuário ou senha esta em formato incorreto');
     }
   }
 
