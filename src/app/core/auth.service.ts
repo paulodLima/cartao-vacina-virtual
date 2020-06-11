@@ -17,6 +17,7 @@ export class AuthService {
   private ACCESS_TOKEN = 'access_token';
   private CURRENT_USER = 'currentUser';
   public admin = false;
+  public roles;
   private accessToken;
   private token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
   private refreshToken = {clientId: CLIENTID, clientSecret: CLIENTSECURITY, refreshToken: null};
@@ -68,7 +69,7 @@ export class AuthService {
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
 
       this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'}).subscribe(resposta => {
-        console.log(resposta);
+        this.roles = resposta;
       }, error => console.log('erro', error));
 
     }, error => console.log('erro ao gerar token', error));
