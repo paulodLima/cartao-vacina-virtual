@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {VacinaService} from '../services/vacina.service';
 import {map, switchMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-locais-vacinacao',
@@ -24,9 +25,13 @@ export class LocaisVacinacaoComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute,
-              private vacinaService: VacinaService) { }
+              private vacinaService: VacinaService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.formLocais = this.formBuilder.group({
       name: ['', [Validators.required]],
       openingHours: ['', [Validators.required]],

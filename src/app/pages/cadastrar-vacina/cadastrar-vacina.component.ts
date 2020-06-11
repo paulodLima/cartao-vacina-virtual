@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {VacinaService} from '../services/vacina.service';
 import {ListarVacina} from '../shared/listar-vacina';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-cadastrar-vacina',
@@ -28,9 +29,13 @@ export class CadastrarVacinaComponent implements OnInit {
   public sucesso = false;
 
   constructor(private formBuilder: FormBuilder,
-              private vacinaService: VacinaService) { }
+              private vacinaService: VacinaService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.formulario();
     this.listar();
 

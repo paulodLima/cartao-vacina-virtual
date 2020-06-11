@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Pessoa} from '../shared/pessoa';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
+import {VacinaService} from '../services/vacina.service';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,10 +21,14 @@ export class UserProfileComponent implements OnInit {
   desabilitado = true;
 
   constructor(private formBuilder: FormBuilder,
-              private pessoasService: PessoasService) {
+              private pessoasService: PessoasService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.formPerson = this.formBuilder.group({
       fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
       documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],

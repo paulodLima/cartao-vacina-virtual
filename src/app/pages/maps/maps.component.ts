@@ -2,6 +2,7 @@ import {Component, Directive, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {VacinaService} from '../services/vacina.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../core/auth.service';
 declare const google: any;
 
 @Component({
@@ -16,9 +17,13 @@ export class MapsComponent implements OnInit {
 
   constructor(private modalVacina: NgbModal,
               private vacinaService: VacinaService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarLocais();
   }
 

@@ -4,6 +4,7 @@ import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-register-vaccine',
@@ -30,9 +31,13 @@ export class RegisterVaccineComponent implements OnInit {
   constructor(private modalVacina: NgbModal,
               private vacinaService: VacinaService,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarLocais();
     this.dataAtualFormatada();
 
