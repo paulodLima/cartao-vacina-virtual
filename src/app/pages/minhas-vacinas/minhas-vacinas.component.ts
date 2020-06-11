@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Pessoa} from '../shared/pessoa';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-minhas-vacinas',
@@ -19,9 +20,14 @@ export class MinhasVacinasComponent implements OnInit {
   public vacinaPorNome: Vacina[];
 
   constructor(private vacinaService: VacinaService,
-              private modalVacina: NgbModal) { }
+              private modalVacina: NgbModal,
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.buscarHistorico();
   }
 
@@ -31,15 +37,15 @@ export class MinhasVacinasComponent implements OnInit {
 
       Object.assign(this.historico, historico);
 
-        this.buscarVacinas();
+      this.buscarVacinas();
     }, error => console.log('erro ao listar historico', error));
   }
 
   buscarVacinas() {
     for (let i = 0; i <= this.historico.length; i++) {
-        this.vacinaService.getVacinaUuid(this.historico[i].vaccineUuid).subscribe(vacina => {
-            this.vacinas = this.vacinas.concat(vacina);
-        }, error => console.log('erro ao listar vacina por uuis', error));
+      this.vacinaService.getVacinaUuid(this.historico[i].vaccineUuid).subscribe(vacina => {
+        this.vacinas = this.vacinas.concat(vacina);
+      }, error => console.log('erro ao listar vacina por uuis', error));
     }
 
   }
@@ -48,27 +54,30 @@ export class MinhasVacinasComponent implements OnInit {
     this.vacinaService.getVacinasNome(pessoa.uuid).subscribe(vacina => {
       this.vacinaPorNome = vacina;
       console.log(this.vacinaPorNome);
-    }, error => {console.log('Ocorreu um err' +
-      '\o ao buscar vacina pelo nome', error); });
+    }, error => {
+      console.log('Ocorreu um err' +
+        '\o ao buscar vacina pelo nome', error);
+    });
 
 
     this.modalVacina.open(modal);
   }
 
-fechar(modal) {
-  this.modalVacina.dismissAll(modal);
-}
+  fechar(modal) {
+    this.modalVacina.dismissAll(modal);
+  }
+
   aplicada(tomada: string, obrigatoria: string) {
 
     if (tomada === '--' && obrigatoria === '--') {
-     this.buscarHistorico();
+      this.buscarHistorico();
     }
     const boolTomada = (/true/i).test(tomada);
     const boolObrigatoria = (/true/i).test(obrigatoria);
 
     this.vacinaService.getHistoricoVacinaFiltro(this.pessoaJson.uuid, boolTomada, boolObrigatoria).subscribe(historico => {
       this.historico = historico;
-      this.vacinas  = [];
+      this.vacinas = [];
       this.buscarVacinas();
     }, error => console.log('erro ao listar historico', error));
   }
