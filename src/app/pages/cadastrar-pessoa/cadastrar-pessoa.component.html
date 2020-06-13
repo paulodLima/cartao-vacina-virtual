@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-    <div class="col-2 center" *ngIf="sucesso">
+      <div class="col-2 center" *ngIf="sucesso">
         <ngx-spinner
           bdColor="rgba(51,51,51,0.8)"
           size="medium"
@@ -45,7 +45,7 @@
                   <select id="role" class="form-control" [value]="rolesId" #permissao
                           (blur)="teste(permissao.value, $event)">
                     <option selected>selecione...</option>
-                  <option *ngFor="let roles of listRolesPt" [value]="roles.id" >{{roles.name}}</option>
+                    <option *ngFor="let roles of listRolesPt" [value]="roles.id">{{roles.name}}</option>
                   </select>
                 </div>
               </div>
@@ -76,7 +76,7 @@
                   </small>
                   <small class="text-danger d-block mt-2"
                          *ngIf="formPerson.get('email')?.invalid  && form.submitted">
-                    E-mail  obrigatório!
+                    E-mail obrigatório!
                   </small>
                 </div>
               </div>
@@ -117,10 +117,10 @@
               <div class="col-lg-4 ">
                 <div class="form-group">
                   <label class="form-control-label">CPF</label>
-                  <input id="documentNumber" class="form-control" placeholder="CPF"
+                  <input id="documentNumber" [textMask]="{mask: cpfMask}" class="form-control" placeholder="CPF"
                          formControlName="documentNumber" [value]="documentNumber">
                   <small class="text-danger d-block mt-2"
-                         *ngIf="formPerson.get('documentNumber')?.dirty && formPerson.get('documentNumber')?.invalid || formPerson.get('documentNumber').errors?.pattern">
+                         *ngIf="formPerson.get('documentNuqmber')?.dirty && formPerson.get('documentNumber')?.invalid || formPerson.get('documentNumber').errors?.pattern">
                     CPF inválido! </small>
                   <small class="text-danger d-block mt-2"
                          *ngIf=" formPerson.get('documentNumber')?.invalid  && form.submitted">
@@ -172,7 +172,8 @@
               <div class="col-lg-4 " formArrayName="phone">
                 <div class="form-group">
                   <label class="form-control-label">Telefone</label>
-                <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control" placeholder="999999999" formControlName="number"
+                  <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control"
+                         placeholder="999999999" formControlName="number"
                          [value]="number">
                   <small class="text-danger d-block mt-2"
                          *ngIf="formPerson.get('phone.number')?.dirty && formPerson.get('phone.number')?.invalid || formPerson.get('phone.number').errors?.pattern">
@@ -221,7 +222,7 @@
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">CEP</label>
-                <input type="text" [textMask]="{mask: cefMask}" id="zipCode" class="form-control" placeholder="cep"
+                  <input type="text" [textMask]="{mask: cefMask}" id="zipCode" class="form-control" placeholder="cep"
                          [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
                   <small class="text-danger d-block mt-2"
                          *ngIf="formPerson.get('address.zipCode')?.dirty && formPerson.get('address.zipCode')?.invalid || formPerson.get('address.zipCode').errors?.pattern">
@@ -287,32 +288,32 @@
                 </div>
               </div>
             </div>
-          <div *ngIf="id == undefined">
-            <hr class="my-4"/>
-            <h6 class="heading-small text-muted mb-4">Autenticação</h6>
-            <div class="row">
+            <div *ngIf="id == undefined">
+              <hr class="my-4"/>
+              <h6 class="heading-small text-muted mb-4">Autenticação</h6>
+              <div class="row">
 
-              <div class="col-lg-4 ">
-                <div class="form-group">
-                  <label class="form-control-label">Senha</label>
-                  <input id="senha" class="form-control" placeholder="CPF" type="password"
-                       formControlName="Senha" [value]="senha" #senha (blur)="tamalho(senha.value)">
-                <small class="text-danger d-block mt-2" *ngIf="tamanhoValido">
-                  A senha deve ter o tamaho de 8!
-                </small>
+                <div class="col-lg-4 ">
+                  <div class="form-group">
+                    <label class="form-control-label">Senha</label>
+                    <input id="senha" class="form-control" placeholder="CPF" type="password"
+                           formControlName="Senha" [value]="senha" #senha (blur)="tamalho(senha.value)">
+                    <small class="text-danger d-block mt-2" *ngIf="tamanhoValido">
+                      A senha deve ter o tamaho de 8!
+                    </small>
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-4 ">
-                <div class="form-group" formArrayName="credential">
-                  <label class="form-control-label">Confirmar senha</label>
-                  <input type="password" id="confirmeSenha" class="form-control" placeholder="Senha"
-                         formControlName="password" [value]="password" #confirmar
-                         (keyup)="comparar(senha.value,confirmar.value,permissao.value)">
+                <div class="col-lg-4 ">
+                  <div class="form-group" formArrayName="credential">
+                    <label class="form-control-label">Confirmar senha</label>
+                    <input type="password" id="confirmeSenha" class="form-control" placeholder="Senha"
+                           formControlName="password" [value]="password" #confirmar
+                           (keyup)="comparar(senha.value,confirmar.value,permissao.value)">
+                  </div>
+                  <small class="text-danger d-block mt-2" *ngIf="valida">
+                    As senhas são diferentes!
+                  </small>
                 </div>
-                <small class="text-danger d-block mt-2" *ngIf="valida">
-                  As senhas são diferentes!
-                </small>
-            </div>
               </div>
             </div>
             <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id == undefined"
