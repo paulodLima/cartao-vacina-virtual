@@ -37,8 +37,7 @@
               <div class="form-group">
                 <label form-control-label>Nome da campanha</label>
                 <input class="form-control" placeholder="Nome da campanha" [value]="subject" formControlName="subject">
-                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('subject').errors?.required
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('subject')?.dirty && formEmail.get('subject')?.invalid">
                   Nome da campanha obrigatório!
                 </small>
               </div>
@@ -46,10 +45,8 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">Selecione o anexo</label>
-                <input class="form-control" type="file"
-                       [value]="annex" placeholder="Anexo" (change)="inputFile($event)">
-                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('annex').errors?.required
-                                  && form.submitted">
+                <input class="form-control" type="file" placeholder="Anexo" (change)="inputFile($event)">
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('annex')?.dirty && formEmail.get('annex')?.invalid">
                   Anexo obrigatório!
                 </small>
               </div>
@@ -61,8 +58,7 @@
                 <label class="form-control-label">Mensagem</label>
                 <textarea class="form-control" rows="5"
                           [value]="composeEmail" placeholder="Mensagem" formControlName="composeEmail"> </textarea>
-                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('composeEmail').errors?.required
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formEmail.get('composeEmail')?.dirty && formEmail.get('composeEmail')?.invalid">
                   Mensagem obrigatório!
                 </small>
               </div>

@@ -3,9 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Endereco} from '../shared/endereco';
 import {Pessoa} from '../shared/pessoa';
-import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD, URL_AUTH} from '../../app.api';
-
-import {Email} from '../shared/email';
+import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD} from '../../app.api';
 import {retry} from 'rxjs/operators';
 
 
@@ -15,10 +13,6 @@ export class PessoasService {
 
   constructor(private http: HttpClient) {
   }
-  // Headers
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   public listarPessoas(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(`${URL_API_PESSOA}`);
@@ -44,12 +38,8 @@ export class PessoasService {
     return this.http.patch(`${URL_API_PESSOA}/${id}`, pessoa);
   }
 
-  public salvarAnexo (anexo: FormData): Observable<FormData> {
-    return this.http.post<FormData>(`${URL_API_VACCINECARD}/mail/anexo`, anexo);
-  }
-
-  public enviarEmail (email: Email): Observable<Email> {
-    return this.http.post<Email>(`${URL_API_VACCINECARD}/mail`, email);
+  public enviarEmail(formData: FormData): Observable<FormData> {
+    return this.http.post<FormData>(`${URL_API_VACCINECARD}/mail`, formData);
   }
 
   public async cadastrarCalendario(calendario): Promise<any> {

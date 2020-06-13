@@ -101,8 +101,8 @@ export class CadastrarPessoaComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
-      mothersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
       address: this.formBuilder.group({
         zipCode: ['', [Validators.required]],
         city: ['', Validators.required],

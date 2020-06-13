@@ -39,7 +39,7 @@ export class MinhasVacinasComponent implements OnInit {
     }, error => console.log('erro ao consultar pessoa', error));
   }
 
-  buscarHistorico(uuid) {
+  buscarHistorico(uuid?) {
 
     this.vacinaService.getHistoricoVacina(uuid).then(async historico => {
       this.historico = historico;
@@ -82,7 +82,7 @@ export class MinhasVacinasComponent implements OnInit {
     switch (true) {
       case tomada === '--' && obrigatoria === '--':
         this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico(this.pessoaUuid);
+        this.buscarHistorico();
         break;
 
       case (tomada === '--' || boolTomada === false) && (obrigatoria === '--' || boolObrigatoria === false):
@@ -91,7 +91,7 @@ export class MinhasVacinasComponent implements OnInit {
           boolTomada = false;
         }
         this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico(this.pessoaUuid);
+        this.buscarHistorico();
         break;
 
       case (tomada === '--' || boolTomada === false) && boolObrigatoria === true:
