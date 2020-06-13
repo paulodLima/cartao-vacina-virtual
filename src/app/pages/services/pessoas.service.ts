@@ -33,7 +33,6 @@ export class PessoasService {
   }
 
   public pesquisarPessoas(termoPesquisa: string): Observable<Pessoa[]> {
-    console.log('pesquisa pessoa ', this.http.get<Pessoa[]>(`${URL_API_PESSOA}?fullName_like=${termoPesquisa}`).pipe(retry(10)));
     return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?fullName_like=${termoPesquisa}`).pipe(retry(10));
   }
 
@@ -53,8 +52,11 @@ export class PessoasService {
     return this.http.post<Email>(`${URL_API_VACCINECARD}/mail`, email);
   }
 
-  public cadastrarCalendario(calendario): Observable<any> {
-    return this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario);
+  public async cadastrarCalendario(calendario): Promise<any> {
+    return await this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario).toPromise();
   }
 
+  public pesquisarPessoasEmail(termoPesquisa: string): Observable<Pessoa[]> {
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?email=${termoPesquisa}`);
+  }
 }

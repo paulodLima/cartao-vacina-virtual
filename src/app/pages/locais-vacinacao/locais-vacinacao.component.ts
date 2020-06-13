@@ -20,6 +20,8 @@ export class LocaisVacinacaoComponent implements OnInit {
   public sucesso: boolean;
   public mensagemErro: string;
   public erro: any;
+  cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+  telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private pessoasService: PessoasService,
               private router: Router,
@@ -45,7 +47,7 @@ export class LocaisVacinacaoComponent implements OnInit {
     }),
       phone: this.formBuilder.group({
       areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,3}\d*)?$/)]],
-      number: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{8,9}\d*)?$/)]]
+      number: ['', [Validators.required]]
     })
     });
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
@@ -8,6 +8,7 @@ import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {Pessoa} from '../shared/pessoa';
 import {AuthService} from '../../core/auth.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -19,7 +20,11 @@ export class CadastrarPessoaComponent implements OnInit {
   private value: FormControl[] = [];
   private uuid: string;
   private permissao: string;
-  public roles: string;
+  public rolesId: string;
+  public rolesName: string;
+  public listRoles: string;
+  public listRolesPt: string;
+  private tamanhoValido = false;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -27,7 +32,8 @@ export class CadastrarPessoaComponent implements OnInit {
               private route: ActivatedRoute,
               private modal: NgbModal,
               private vacinaService: VacinaService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private spinner: NgxSpinnerService) {
   }
 
   public formPerson: FormGroup;
@@ -59,6 +65,9 @@ export class CadastrarPessoaComponent implements OnInit {
   public mensagemErro: string;
   public sucesso = false;
   valida = false;
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/ , /\d/];
+  cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+  telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public password: any;
 
   ngOnInit(): void {
@@ -66,7 +75,7 @@ export class CadastrarPessoaComponent implements OnInit {
       this.authService.logout();
     }
     this.route.params.pipe(
-      map((params) => params.id ),
+      map((params) => params.id),
       switchMap(id => this.pessoasService.consutarPessoa(this.id = id))
     ).subscribe(pessoa => this.atualizarFormulario(pessoa));
     this.formPersonBulder();
@@ -74,17 +83,26 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.id !== undefined) {
       this.disableds = true;
     }
+    this.listRoles = JSON.parse(this.authService.roles);
+
+    console.log('LIST TOLES', this.listRoles);
+
+    const value = Object.assign({}, this.listRoles);
+
+    this.listRolesPt = Object.assign(value, [{'id': 'Paciente', 'name': 'test'}, {'id': 'Gerente', 'name': 'test'}, {'id': 'Administrador', 'name': 'test'}]);
+
+    console.log('list roles', this.listRoles);
   }
 
   formPersonBulder() {
     this.formPerson = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
-      documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      documentNumber: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
-      mothersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
       address: this.formBuilder.group({
         zipCode: ['', [Validators.required]],
         city: ['', Validators.required],
@@ -94,8 +112,8 @@ export class CadastrarPessoaComponent implements OnInit {
         neighborhood: ['', Validators.required]
       }),
       phone: this.formBuilder.group({
-        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,3}\d*)?$/)]],
-        number: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{8,9}\d*)?$/)]]
+        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,2}\d*)?$/)]],
+        number: ['', [Validators.required]]
       }),
       height: this.formBuilder.group({
         height: ['', [Validators.required]],
@@ -103,16 +121,18 @@ export class CadastrarPessoaComponent implements OnInit {
       weight: this.formBuilder.group({
         weight: ['', [Validators.required]]
       }),
-      credential: this.formBuilder.group ({
+      credential: this.formBuilder.group({
         password: ['', [Validators.required]],
-        roles: this.bulderRoles()})
+        roles: this.bulderRoles()
+      })
     });
   }
 
   bulderRoles() {
     return this.formBuilder.array([
-      new FormControl({'id': '', 'name': this.roles})]);
+      new FormControl({'id': this.rolesId, 'name': this.rolesName})]);
   }
+
   atualizarFormulario(pessoa) {
     this.formPerson.patchValue({
       id: pessoa.id,
@@ -143,33 +163,56 @@ export class CadastrarPessoaComponent implements OnInit {
       })
     });
   }
-teste(roles) {
-  this.roles = roles;
-  this.formPersonBulder();
-}
+
+  teste(roles, event) {
+    this.rolesId = roles;
+    this.rolesName = event.target.options[event.target.options.selectedIndex].text;
+    this.formPersonBulder();
+  }
+
   cadastrar() {
+    this.formPerson.patchValue({
+      weight: ({
+        weight: `${this.formPerson.get('weight.weight').value}`
+      }),
+      height: ({
+        height: `${this.formPerson.get('height.height').value}`
+      })
+    });
+    console.log(this.formPerson);
 
-    console.log(this.formPerson.value);
+    if (this.formPerson.valid) {
+        this.sucesso = true;
 
-    if ( this.formPerson.valid) {
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
+        this.spinner.show();
+        const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20);
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
+
         this.criarCalendario(pessoa);
-        this.pessoasService.cadastrarCalendario(this.formCalendario.value).subscribe(calendario => {
 
+        this.pessoasService.cadastrarCalendario(this.formCalendario.value).then(calendario => {
+          this.router.navigate(['/register-vaccine', this.uuid]);
         }, error => console.log('erro ao cadastrar calendario de vacina', error));
-        this.router.navigate(['/register-vaccine', this.uuid]);
-      }, erro => {console.log('erro ao cadastrar pessoa', erro.error.messages);
-          this.mensagemErro = erro.error.messages;
-          this.erro = true;
+      }, erro => {
+        console.log('erro ao cadastrar pessoa', erro.error.messages);
+        this.mensagemErro = erro.error.messages;
+        this.erro = true;
 
-          setTimeout(() => {
+        setTimeout(() => {
 
           this.erro = false;
 
         }, 6000);
 
-          const scrollToTop = window.setInterval(() => {
+        const scrollToTop = window.setInterval(() => {
           const pos = window.pageYOffset;
           if (pos > 0) {
             window.scrollTo(0, pos - 20); // how far to scroll on each step
@@ -180,20 +223,22 @@ teste(roles) {
       });
     }
   }
+
   atualizar() {
-    if ( this.formPerson.valid) {
+    if (this.formPerson.valid) {
       this.formPerson.patchValue({
         weight: ({
-          weight:  `${this.formPerson.get('weight.weight').value}`
+          weight: `${this.formPerson.get('weight.weight').value}`
         }),
         height: ({
-          height:  `${this.formPerson.get('height.height').value}`
+          height: `${this.formPerson.get('height.height').value}`
         })
       });
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
         this.formPerson.reset();
         this.router.navigateByUrl('/pessoas');
-      }, error1 => console.log(error1)); }
+      }, error1 => console.log(error1));
+    }
   }
 
   public buscarCep(cep: string): void {
@@ -224,9 +269,9 @@ teste(roles) {
 
   criarCalendario(pessoa) {
 
-    this.formCalendario =  this.formBuilder.group({
+    this.formCalendario = this.formBuilder.group({
       personUuid: pessoa.uuid,
-      vaccines : this.bulderVaccines()
+      vaccines: this.bulderVaccines()
     });
 
   }
@@ -234,23 +279,31 @@ teste(roles) {
   bulderVaccines() {
     for (let i = 0; i < this.vacinas.length; i++) {
 
-       this.value = this.value.concat(new FormControl({'required': true, 'vaccineUuid': this.vacinas[i].uuid}));
+      this.value = this.value.concat(new FormControl({'required': true, 'vaccineUuid': this.vacinas[i].uuid}));
 
     }
-     return this.formBuilder.array(this.value);
+    return this.formBuilder.array(this.value);
   }
 
   listarVacinas() {
     this.vacinaService.getVacinas().subscribe(vacinas => {
-          this.vacinas = vacinas;
+      this.vacinas = vacinas;
     }, erro => console.log('erro ao listar vacinas', erro));
   }
 
   voltar() {
     this.router.navigateByUrl('/pessoas');
   }
+  tamalho(senha) {
+    console.log(senha);
+    if (senha.length !== 8) {
+      this.tamanhoValido = true;
+    } else {
+      this.tamanhoValido = false;
+    }
+  }
   comparar(senha, confirmar, permissao) {
-  if (confirmar.length >= 5) {
+    if (confirmar.length >= 8) {
       if (senha !== '' && confirmar !== '' && senha === confirmar) {
         this.permissao = permissao;
         this.valida = false;
@@ -258,5 +311,11 @@ teste(roles) {
         this.valida = true;
       }
     }
+  }
+
+  getRoles() {
+    const teste = JSON.stringify(this.authService.roles);
+    this.listRoles = teste;
+    console.log('teste', this.listRoles);
   }
 }

@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   public mensagemErro: string;
   public sucesso = false;
   desabilitado = true;
+  private pessoaToken: Pessoa[];
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
@@ -57,15 +58,20 @@ export class UserProfileComponent implements OnInit {
       })
     });
 
-    this.pessoa = JSON.parse(localStorage.getItem('usuario'));
-
-    this.atualizarPerfil(this.pessoa);
+    this.buscarUsuario();
 
   }
-
+  buscarUsuario() {
+    this.pessoasService.pesquisarPessoasEmail(this.authService.token.username).subscribe(usuario => {
+      this.pessoaToken = usuario;
+      console.log('pessoa token', this.pessoaToken);
+      this.atualizarPerfil(usuario[0]);
+      this.pessoa = this.pessoaToken[0];
+    }, error => console.log('erro ao consultar pessoa', error));
+  }
   atualizarPerfil(pessoa) {
+    console.log('dentro de atualizar pessoa', pessoa);
     this.formPerson.patchValue({
-      id: pessoa.id,
       fullName: pessoa.fullName,
       documentNumber: pessoa.documentNumber,
       email: pessoa.email,
@@ -108,8 +114,7 @@ export class UserProfileComponent implements OnInit {
           height:  `${this.formPerson.get('height.height').value}`
         })
       });
-      localStorage.clear();
-      localStorage.setItem('usuario', JSON.stringify(this.formPerson.value));
+      console.log('uuid', this.pessoa.uuid);
       this.pessoasService.atualizarPessoa(this.pessoa.uuid, this.formPerson.value).subscribe(pessoa => {
 
         this.sucesso = true;
