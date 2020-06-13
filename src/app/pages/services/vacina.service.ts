@@ -67,7 +67,19 @@ export class VacinaService {
     return this.historico;
   }
 
-  public getHistoricoVacinaFiltro(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+  public getHistoricoVacinaFiltroObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoNaoObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoObg(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
     return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
   }
 

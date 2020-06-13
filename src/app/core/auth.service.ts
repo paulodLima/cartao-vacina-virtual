@@ -18,8 +18,7 @@ export class AuthService {
   private CURRENT_USER = 'currentUser';
   public admin = false;
   public roles;
-  private accessToken;
-  private token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
+  token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
   private refreshToken = {clientId: CLIENTID, clientSecret: CLIENTSECURITY, refreshToken: null};
 
   constructor(private http: HttpClient,
@@ -64,7 +63,6 @@ export class AuthService {
 
     return this.login(this.token.username, this.token.password).subscribe((token: Token) => {
 
-      console.log(this.getDecodedToken(token, 'access_token'));
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
 

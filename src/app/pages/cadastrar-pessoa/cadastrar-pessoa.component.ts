@@ -153,10 +153,18 @@ teste(roles, event) {
   this.formPersonBulder();
 }
   cadastrar() {
-
+    this.formPerson.patchValue({
+      weight: ({
+        weight:  `${this.formPerson.get('weight.weight').value}`
+      }),
+      height: ({
+        height:  `${this.formPerson.get('height.height').value}`
+      })
+    });
     console.log(this.formPerson.value);
 
     if ( this.formPerson.valid) {
+
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
         console.log('pessao criada', pessoa);

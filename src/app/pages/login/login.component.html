@@ -1,5 +1,5 @@
 <div class="header bg-gradient-danger py-7 py-lg-8">
-  <a class="alinhar" routerLinkActive="active" [routerLink]="['/dashboard']">
+  <a class="alinhar" routerLinkActive="active">
     <img src="./assets/img/CVV_letra_branca.png" class="mg" alt="...">
   </a>
   <div class="container">
@@ -14,12 +14,11 @@
       </div>
     </div>
   </div>
-</div>
 <!-- Page content -->
 <div class="container mt--8 pb-5 mt-20">
   <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-10">
-      <div class="card bg-secondary shadow border-0">
+    <div class="col-lg-8 col-md-10" style="margin-top: 100px !important;">
+      <div class="card bg-secondary shadow my--10 my-auto">
         <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-3 mb"><small>Entrar Com</small></div>
 
@@ -73,9 +72,8 @@
       </div>
       <div class="row mt-3">
         <div class="col-12">
-          <a href="javascript:void(0)" class="text-light float-right"><small>Esqueceu a senha?</small></a>
+          <a routerLink="/recuperar-senha" class="text-light float-right"><small>Esqueceu a senha?</small></a>
         </div>
       </div>
     </div>
   </div>
-</div>
