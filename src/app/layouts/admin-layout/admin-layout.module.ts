@@ -17,6 +17,8 @@ import {FilterVacinaPipe} from '../../filter/filter-vacina.pipe';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {FilterLocais} from '../../filter/filter-locais';
 import {SortPipe} from '../../filter/sort.pipe';
+import {TextMaskModule} from 'angular2-text-mask';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {SortPipe} from '../../filter/sort.pipe';
     ClipboardModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    TextMaskModule,
+    NgxSpinnerModule
   ],
   exports: [
     FilterPipe,

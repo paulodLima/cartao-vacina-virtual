@@ -42,16 +42,16 @@ export class MinhasVacinasComponent implements OnInit {
   buscarHistorico(uuid) {
 
     this.vacinaService.getHistoricoVacina(uuid).then(async historico => {
-      this.historico = await historico;
+      this.historico = historico;
+      this.buscarVacinas();
     }, error => console.log('erro ao listar historico', error));
-
-    this.buscarVacinas();
   }
 
   buscarVacinas() {
     this.historico.forEach((s, k) => {
       this.vacinaService.getVacinaUuid(s.vaccineUuid).subscribe(vacina => {
         this.vacinas = this.vacinas.concat(vacina);
+        console.log(vacina, 'vacinas');
       }, error => console.log('erro ao listar vacina por uuis', error));
     });
 

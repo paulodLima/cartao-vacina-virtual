@@ -19,10 +19,15 @@
         </div>
       </div>
     </div>
-    <div class="col-4 center">
-      <div class="alert alert-success center" role="alert" *ngIf="sucesso">
-        Pessoa cadastrada com sucesso!
-      </div>
+    <div class="col-2 center" *ngIf="sucesso">
+        <ngx-spinner
+          bdColor="rgba(51,51,51,0.8)"
+          size="medium"
+          color="#F0335C"
+          type="square-jelly-box"
+          fullScreen="true"
+        >
+        </ngx-spinner>
     </div>
     <div class="col-4 center" *ngIf="erro">
       <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
@@ -39,12 +44,8 @@
                 <label class="form-control-label">Tipo de usuário</label>
                 <select id="role" class="form-control" [value]="rolesId" #permissao (blur)="teste(permissao.value, $event)">
                   <option selected>selecione...</option>
-                  <option *ngFor="let roles of listRoles" [value]="roles.id" >{{roles.name}}</option>
+                  <option *ngFor="let roles of listRolesPt" [value]="roles.id" >{{roles.name}}</option>
                 </select>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
-                                  && form.submitted">
-                  Sexo obrigatório!
-                </small>
               </div>
             </div>
             <div class="col-lg-6">
@@ -70,8 +71,7 @@
                                   && form.submitted">
                   E-mail obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.pattern">
                   E-mail inválido!
                 </small>
               </div>
@@ -87,8 +87,7 @@
                                   && form.submitted">
                   Nome da Mãe obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.pattern">
                   Nome da Mãe inválido!
                 </small>
               </div>
@@ -102,8 +101,7 @@
                                   && form.submitted">
                   Nome do Pai obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.pattern">
                   Nome do Pai inválido!
                 </small>
               </div>
@@ -114,13 +112,12 @@
               <div class="form-group">
                 <label class="form-control-label">CPF</label>
                 <input id="documentNumber" class="form-control" placeholder="CPF"
-                       formControlName="documentNumber" [value]="documentNumber">
+                       formControlName="documentNumber" [value]="documentNumber" [textMask]="{mask: cpfMask}">
                 <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.required
                                   && form.submitted">
                   CPF obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.pattern">
                   CPF inválido!
                 </small>
               </div>
@@ -130,8 +127,7 @@
                 <label class="form-control-label">Data de Nascimento</label>
                 <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
                        formControlName="birthDate" [value]="birthDate">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('birthDate').errors?.required
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('birthDate').errors?.required && form.submitted">
                   Data de Nascimento obrigatório!
                 </small>
               </div>
@@ -160,8 +156,7 @@
                                   && form.submitted">
                   DDD obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.pattern">
                   DDD inválido!
                 </small>
               </div>
@@ -169,15 +164,11 @@
             <div class="col-lg-4 " formArrayName="phone">
               <div class="form-group">
                 <label class="form-control-label">Telefone</label>
-                <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control" placeholder="999999999" formControlName="number"
                        [value]="number">
                 <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.required
                                   && form.submitted">
                   Telefone obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.pattern
-                                  && form.submitted">
-                  Telefone inválido!
                 </small>
               </div>
             </div>
@@ -190,8 +181,7 @@
                                   && form.submitted">
                   Altura obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.pattern">
                   Altura inválido!
                 </small>
               </div>
@@ -205,8 +195,7 @@
                                   && form.submitted">
                   Peso obrigatório!
                 </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('weight.weight').errors?.pattern
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('weight.weight').errors?.pattern">
                   Peso inválido!
                 </small>
               </div>
@@ -218,14 +207,10 @@
             <div class="col-lg-4">
               <div class="form-group" formArrayName="address">
                 <label class="form-control-label">CEP</label>
-                <input type="number" id="zipCode" class="form-control" placeholder="cep"
+                <input type="text" [textMask]="{mask: cefMask}" id="zipCode" class="form-control" placeholder="cep"
                        [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.zipCode').errors?.required
-                                  && form.submitted">
+                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.zipCode').errors?.required && form.submitted">
                   CEP obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="cepvalico">
-                  CEP inválido!
                 </small>
               </div>
             </div>
@@ -282,6 +267,7 @@
               </div>
             </div>
           </div>
+          <div *ngIf="id == undefined">
           <hr class="my-4"/>
           <h6 class="heading-small text-muted mb-4">Autenticação</h6>
           <div class="row">
@@ -290,7 +276,10 @@
               <div class="form-group">
                 <label class="form-control-label">Senha</label>
                 <input id="senha" class="form-control" placeholder="CPF" type="password"
-                       formControlName="Senha" [value]="senha" #senha>
+                       formControlName="Senha" [value]="senha" #senha (blur)="tamalho(senha.value)">
+                <small class="text-danger d-block mt-2" *ngIf="tamanhoValido">
+                  A senha deve ter o tamaho de 8!
+                </small>
               </div>
             </div>
             <div class="col-lg-4 ">
@@ -303,6 +292,7 @@
                 As senhas são diferentes!
               </small>
             </div>
+          </div>
           </div>
           <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id == undefined"
                   (click)=cadastrar()>

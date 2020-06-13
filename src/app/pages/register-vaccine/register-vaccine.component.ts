@@ -111,11 +111,11 @@ export class RegisterVaccineComponent implements OnInit {
 
         this.vacinaService.atualizarDosagem(this.historico[i].dosagesInformation[0].uuid, this.formDosage.value).subscribe(dosage => {
           this.mensagem = 'Dosagem aplicada com sucesso';
+          this.modalVacina.dismissAll(modal);
         }, errorrs => console.log('dosagem aplicadas com sucesso', errorrs));
 
       }
     }
-    this.modalVacina.dismissAll(modal);
   }
 
   dataAtualFormatada() {

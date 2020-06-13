@@ -27,6 +27,7 @@ import { LocaisVacinacaoComponent } from './pages/locais-vacinacao/locais-vacina
 import { AdicionarVacinaPessoaComponent } from './pages/adicionar-vacina-pessoa/adicionar-vacina-pessoa.component';
 import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha
     AdminLayoutModule,
     TextMaskModule,
     GooglePlaceModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxSpinnerModule
   ],
     declarations: [
         AppComponent,
