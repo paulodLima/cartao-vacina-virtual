@@ -82,13 +82,13 @@ export class CadastrarPessoaComponent implements OnInit {
 
   formPersonBulder() {
     this.formPerson = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
       documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
-      mothersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
       address: this.formBuilder.group({
         zipCode: ['', [Validators.required]],
         city: ['', Validators.required],

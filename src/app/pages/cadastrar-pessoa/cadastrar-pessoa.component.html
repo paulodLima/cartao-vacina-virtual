@@ -9,326 +9,331 @@
       </div>
     </div>
   </div>
-<!-- pagina content -->
-<div class="container-fluid mt--7 mt">
-  <div class="card bg-secondary shadow my--10 my-auto">
-    <div class="card-header bg-white border-0">
-      <div class="row align-items-center">
-        <div class="col-8">
-          <h3 class="mb-0">Cadastro de Usuário</h3>
+  <!-- pagina content -->
+  <div class="container-fluid mt--7 mt">
+    <div class="card bg-secondary shadow my--10 my-auto">
+      <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h3 class="mb-0">Cadastro de Usuário</h3>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-4 center">
-      <div class="alert alert-success center" role="alert" *ngIf="sucesso">
-        Pessoa cadastrada com sucesso!
+      <div class="col-4 center">
+        <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+          Pessoa cadastrada com sucesso!
+        </div>
       </div>
-    </div>
-    <div class="col-4 center" *ngIf="erro">
-      <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
-         {{mensagem}}
+      <div class="col-4 center" *ngIf="erro">
+        <div class="alert alert-danger center" role="alert" style="float: bottom" *ngFor="let mensagem of mensagemErro">
+          {{mensagem}}
+        </div>
       </div>
-    </div>
-    <div class="card-body">
-      <form #form='ngForm' [formGroup]="formPerson" novalidate>
-        <h6 class="heading-small text-muted mb-4">Informações do Usuário</h6>
-        <div class="pl-lg-4">
-          <div class="row">
-            <div class="col-lg-2 ">
-              <div class="form-group" formArrayName="credential">
-                <label class="form-control-label">Tipo de usuário</label>
-                <select id="role" class="form-control" [value]="rolesId" #permissao (blur)="teste(permissao.value, $event)">
-                  <option selected>selecione...</option>
-                  <option *ngFor="let roles of listRoles" [value]="roles.id" >{{roles.name}}</option>
-                </select>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
-                                  && form.submitted">
-                  Sexo obrigatório!
-                </small>
+      <div class="card-body">
+        <form #form='ngForm' [formGroup]="formPerson" novalidate>
+          <h6 class="heading-small text-muted mb-4">Informações do Usuário</h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-2 ">
+                <div class="form-group" formArrayName="credential">
+                  <label class="form-control-label">Tipo de usuário</label>
+                  <select id="role" class="form-control" [value]="rolesId" #permissao
+                          (blur)="teste(permissao.value, $event)">
+                    <option selected>selecione...</option>
+                    <option *ngFor="let roles of listRoles" [value]="roles.id">{{roles.name}}</option>
+                  </select>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('credential.roles')?.invalid">
+                    Sexo obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">Nome completo</label>
+                  <input type="text" id="fullName" class="form-control" placeholder="name" [value]="fullName"
+                         required minlength="5" formControlName="fullName">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('fullName')?.dirty && formPerson.get('fullName')?.invalid || formPerson.get('fullName').errors?.pattern">
+                    Nome inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('fullName')?.invalid  && form.submitted">
+                    Nome completo obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Email</label>
+                  <input type="email" id="email" disabled="{{disableds}}" class="form-control"
+                         placeholder="nome@exemplo.com"
+                         formControlName="email" [value]="email">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('email')?.dirty && formPerson.get('email')?.invalid || formPerson.get('email').errors?.pattern">
+                    E-mail inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('email')?.invalid  && form.submitted">
+                    Nome completo obrigatório!
+                  </small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-control-label">Nome completo</label>
-                <input type="text" id="fullName" class="form-control" placeholder="name" [value]="fullName"
-                       required minlength="5" formControlName="fullName">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fullName').errors?.required
-                                  && form.submitted">
-                  Nome completo obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fullName').errors?.pattern">
-                  Nome inválido!
-                </small>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">Nome da Mãe</label>
+                  <input type="text" id="mothersName" class="form-control" placeholder="Nome da Mãe"
+                         formControlName="mothersName" [value]="mothersName">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('mothersName')?.dirty && formPerson.get('mothersName')?.invalid || formPerson.get('mothersName').errors?.pattern">
+                    Nome da Mãe inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('mothersName')?.invalid  && form.submitted">
+                    Nome da Mãe obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">Nome do Pai</label>
+                  <input type="text" id="fathersName" class="form-control" placeholder="Nome do Pai"
+                         formControlName="fathersName" [value]="fathersName">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('fathersName')?.dirty && formPerson.get('fathersName')?.invalid || formPerson.get('fathersName').errors?.pattern">
+                    Nome do Pai inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('fathersName')?.invalid  && form.submitted">
+                    Nome do Pai obrigatório!
+                  </small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="form-group">
-                <label class="form-control-label">Email</label>
-                <input type="email" id="email" disabled="{{disableds}}" class="form-control" placeholder="nome@exemplo.com"
-                       formControlName="email" [value]="email">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.required
-                                  && form.submitted">
-                  E-mail obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('email').errors?.pattern
-                                  && form.submitted">
-                  E-mail inválido!
-                </small>
+            <div class="row">
+              <div class="col-lg-4 ">
+                <div class="form-group">
+                  <label class="form-control-label">CPF</label>
+                  <input id="documentNumber" class="form-control" placeholder="CPF"
+                         formControlName="documentNumber" [value]="documentNumber">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('documentNumber')?.dirty && formPerson.get('documentNumber')?.invalid || formPerson.get('documentNumber').errors?.pattern">
+                    CPF inválido! </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf=" formPerson.get('documentNumber')?.invalid  && form.submitted">
+                    CPF obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4 ">
+                <div class="form-group">
+                  <label class="form-control-label">Data de Nascimento</label>
+                  <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
+                         formControlName="birthDate" [value]="birthDate">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('birthDate')?.invalid  && form.submitted">
+                    Data de Nascimento obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4 ">
+                <div class="form-group">
+                  <label class="form-control-label">Sexo</label>
+                  <select id="sexType" class="form-control" formControlName="sexType" [value]="sexType">
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                  </select>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('sexType')?.invalid  && form.submitted">
+                    Sexo obrigatório!
+                  </small>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-control-label">Nome da Mãe</label>
-                <input type="text" id="mothersName" class="form-control" placeholder="Nome da Mãe"
-                       formControlName="mothersName" [value]="mothersName">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.required
-                                  && form.submitted">
-                  Nome da Mãe obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('mothersName').errors?.pattern
-                                  && form.submitted">
-                  Nome da Mãe inválido!
-                </small>
+            <div class="row">
+              <div class="col-lg-2" formArrayName="phone">
+                <div class="form-group">
+                  <label class="form-control-label">DDD</label>
+                  <input type="number" id="areaCode" class="form-control" placeholder="61" formControlName="areaCode"
+                         [value]="areaCode">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('phone.areaCode')?.dirty && formPerson.get('phone.areaCode')?.invalid || formPerson.get('phone.areaCode').errors?.pattern">
+                    DDD inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('phone.areaCode')?.invalid  && form.submitted">
+                    DDD obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4 " formArrayName="phone">
+                <div class="form-group">
+                  <label class="form-control-label">Telefone</label>
+                  <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                         [value]="number">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('phone.number')?.dirty && formPerson.get('phone.number')?.invalid || formPerson.get('phone.number').errors?.pattern">
+                    Telefone inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('phone.number')?.invalid  && form.submitted">
+                    Telefone obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-3" formArrayName="height">
+                <div class="form-group">
+                  <label class="form-control-label">Altura</label>
+                  <input type="number" id="height" class="form-control" placeholder="Altura" formControlName="height"
+                         [value]="height">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('height.height')?.dirty && formPerson.get('height.height')?.invalid || formPerson.get('height.height').errors?.pattern">
+                    Altura inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('height.height')?.invalid  && form.submitted">
+                    Altura obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-3" formArrayName="weight">
+                <div class="form-group">
+                  <label class="form-control-label">Peso(KG)</label>
+                  <input type="number" id="weight" class="form-control" placeholder="Peso" formControlName="weight"
+                         [value]="weight">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('weight.weight')?.dirty && formPerson.get('weight.weight')?.invalid || formPerson.get('weight.weight').errors?.pattern">
+                    Peso inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('weight.weight')?.invalid  && form.submitted">
+                    Peso obrigatório!
+                  </small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label class="form-control-label">Nome do Pai</label>
-                <input type="text" id="fathersName" class="form-control" placeholder="Nome do Pai"
-                       formControlName="fathersName" [value]="fathersName">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.required
-                                  && form.submitted">
-                  Nome do Pai obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('fathersName').errors?.pattern
-                                  && form.submitted">
-                  Nome do Pai inválido!
-                </small>
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Endereço</h6>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">CEP</label>
+                  <input type="number" id="zipCode" class="form-control" placeholder="cep"
+                         [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.zipCode')?.dirty && formPerson.get('address.zipCode')?.invalid || formPerson.get('address.zipCode').errors?.pattern">
+                    CEP inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.zipCode')?.invalid  && form.submitted">
+                    CEP obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Logradouro</label>
+                  <input class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood"
+                         formControlName="neighborhood">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.neighborhood')?.invalid  && form.submitted">
+                    Logradouro obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Bairro</label>
+                  <input class="form-control" id="street" placeholder="Bairro" [value]="street"
+                         formControlName="street">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.street')?.invalid  && form.submitted">
+                    Bairro obrigatório!
+                  </small>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 ">
-              <div class="form-group">
-                <label class="form-control-label">CPF</label>
-                <input id="documentNumber" class="form-control" placeholder="CPF"
-                       formControlName="documentNumber" [value]="documentNumber">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.required
-                                  && form.submitted">
-                  CPF obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('documentNumber').errors?.pattern
-                                  && form.submitted">
-                  CPF inválido!
-                </small>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Cidade</label>
+                  <input type="text" id="city" class="form-control" placeholder="Cidade" [value]="city"
+                         formControlName="city">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.city')?.invalid  && form.submitted">
+                    Cidade obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Estado</label>
+                  <input type="text" id="state" class="form-control" placeholder="Estado" [value]="state"
+                         formControlName="state">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formPerson.get('address.state')?.invalid  && form.submitted">
+                    Estado obrigatório!
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" formArrayName="address">
+                  <label class="form-control-label">Complemento</label>
+                  <input type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
+                         formControlName="complement">
+                </div>
               </div>
             </div>
-            <div class="col-lg-4 ">
-              <div class="form-group">
-                <label class="form-control-label">Data de Nascimento</label>
-                <input type="date" id="birthDate" class="form-control" placeholder="Data de nascimento"
-                       formControlName="birthDate" [value]="birthDate">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('birthDate').errors?.required
-                                  && form.submitted">
-                  Data de Nascimento obrigatório!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-4 ">
-              <div class="form-group">
-                <label class="form-control-label">Sexo</label>
-                <select id="sexType" class="form-control" formControlName="sexType" [value]="sexType">
-                  <option value="M">Masculino</option>
-                  <option value="F">Feminino</option>
-                </select>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
-                                  && form.submitted">
-                  Sexo obrigatório!
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-2" formArrayName="phone">
-              <div class="form-group">
-                <label class="form-control-label">DDD</label>
-                <input type="number" id="areaCode" class="form-control" placeholder="61" formControlName="areaCode"
-                       [value]="areaCode">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.required
-                                  && form.submitted">
-                  DDD obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.areaCode').errors?.pattern
-                                  && form.submitted">
-                  DDD inválido!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-4 " formArrayName="phone">
-              <div class="form-group">
-                <label class="form-control-label">Telefone</label>
-                <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
-                       [value]="number">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.required
-                                  && form.submitted">
-                  Telefone obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('phone.number').errors?.pattern
-                                  && form.submitted">
-                  Telefone inválido!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-3" formArrayName="height">
-              <div class="form-group">
-                <label class="form-control-label">Altura</label>
-                <input type="number" id="height" class="form-control" placeholder="Altura" formControlName="height"
-                       [value]="height">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.required
-                                  && form.submitted">
-                  Altura obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('height.height').errors?.pattern
-                                  && form.submitted">
-                  Altura inválido!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-3" formArrayName="weight">
-              <div class="form-group">
-                <label class="form-control-label">Peso(KG)</label>
-                <input type="number" id="weight" class="form-control" placeholder="Peso" formControlName="weight"
-                       [value]="weight">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('weight.weight').errors?.required
-                                  && form.submitted">
-                  Peso obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('weight.weight').errors?.pattern
-                                  && form.submitted">
-                  Peso inválido!
-                </small>
-              </div>
-            </div>
-          </div>
-          <!-- Address -->
-          <h6 class="heading-small text-muted mb-4">Endereço</h6>
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">CEP</label>
-                <input type="number" id="zipCode" class="form-control" placeholder="cep"
-                       [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.zipCode').errors?.required
-                                  && form.submitted">
-                  CEP obrigatório!
-                </small>
-                <small class="text-danger d-block mt-2" *ngIf="cepvalico">
-                  CEP inválido!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">Logradouro</label>
-                <input class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood"
-                       formControlName="neighborhood">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.neighborhood').errors?.required
-                                  && form.submitted">
-                  Logradouro obrigatório!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">Bairro</label>
-                <input class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.street').errors?.required
-                                  && form.submitted">
-                  Bairro obrigatório!
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">Cidade</label>
-                <input type="text" id="city" class="form-control" placeholder="Cidade" [value]="city"
-                       formControlName="city">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.city').errors?.required
-                                  && form.submitted">
-                  Cidade obrigatório!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">Estado</label>
-                <input type="text" id="state" class="form-control" placeholder="Estado" [value]="state"
-                       formControlName="state">
-                <small class="text-danger d-block mt-2" *ngIf="formPerson.get('address.state').errors?.required
-                                  && form.submitted">
-                  Estado obrigatório!
-                </small>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group" formArrayName="address">
-                <label class="form-control-label">Complemento</label>
-                <input type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
-                       formControlName="complement">
-              </div>
-            </div>
-          </div>
-          <hr class="my-4"/>
-          <h6 class="heading-small text-muted mb-4">Autenticação</h6>
-          <div class="row">
+            <hr class="my-4"/>
+            <h6 class="heading-small text-muted mb-4">Autenticação</h6>
+            <div class="row">
 
-            <div class="col-lg-4 ">
-              <div class="form-group">
-                <label class="form-control-label">Senha</label>
-                <input id="senha" class="form-control" placeholder="CPF" type="password"
-                       formControlName="Senha" [value]="senha" #senha>
+              <div class="col-lg-4 ">
+                <div class="form-group">
+                  <label class="form-control-label">Senha</label>
+                  <input id="senha" class="form-control" placeholder="CPF" type="password"
+                         formControlName="Senha" [value]="senha" #senha>
+                </div>
+              </div>
+              <div class="col-lg-4 ">
+                <div class="form-group" formArrayName="credential">
+                  <label class="form-control-label">Confirmar senha</label>
+                  <input type="password" id="confirmeSenha" class="form-control" placeholder="Senha"
+                         formControlName="password" [value]="password" #confirmar
+                         (keyup)="comparar(senha.value,confirmar.value,permissao.value)">
+                </div>
+                <small class="text-danger d-block mt-2" *ngIf="valida">
+                  As senhas são diferentes!
+                </small>
               </div>
             </div>
-            <div class="col-lg-4 ">
-              <div class="form-group" formArrayName="credential">
-                <label class="form-control-label">Confirmar senha</label>
-                <input type="password" id="confirmeSenha" class="form-control" placeholder="Senha"
-                       formControlName="password" [value]="password" #confirmar (keyup)="comparar(senha.value,confirmar.value,permissao.value)">
+            <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id == undefined"
+                    (click)=cadastrar()>
+              Prosseguir
+            </button>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="form-group float-right">
+                  <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
+                          (click)="voltar()">
+                    Voltar
+                  </button>
+                </div>
               </div>
-              <small class="text-danger d-block mt-2" *ngIf="valida">
-                As senhas são diferentes!
-              </small>
+              <div class="col-lg-2">
+                <div class="form-group float-left">
+                  <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
+                          (click)="atualizar()">
+                    Atualizar Dados
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id == undefined"
-                  (click)=cadastrar()>
-            Prosseguir
-          </button>
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="form-group float-right">
-                <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
-                        (click)="voltar()">
-                  Voltar
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div class="form-group float-left">
-                <button class="btn btn-info offset-lg-8 active float-left" *ngIf="id !== undefined"
-                        (click)="atualizar()">
-                  Atualizar Dados
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
