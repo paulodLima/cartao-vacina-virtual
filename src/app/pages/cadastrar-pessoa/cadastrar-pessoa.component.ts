@@ -8,6 +8,7 @@ import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
 import {Pessoa} from '../shared/pessoa';
 import {AuthService} from '../../core/auth.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -22,6 +23,8 @@ export class CadastrarPessoaComponent implements OnInit {
   public rolesId: string;
   public rolesName: string;
   public listRoles: string;
+  public listRolesPt: string;
+  private tamanhoValido = false;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -29,7 +32,8 @@ export class CadastrarPessoaComponent implements OnInit {
               private route: ActivatedRoute,
               private modal: NgbModal,
               private vacinaService: VacinaService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private spinner: NgxSpinnerService) {
   }
 
   public formPerson: FormGroup;
@@ -61,6 +65,9 @@ export class CadastrarPessoaComponent implements OnInit {
   public mensagemErro: string;
   public sucesso = false;
   valida = false;
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/ , /\d/];
+  cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+  telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public password: any;
 
   ngOnInit(): void {
@@ -78,12 +85,19 @@ export class CadastrarPessoaComponent implements OnInit {
     }
     this.listRoles = JSON.parse(this.authService.roles);
 
+    console.log('LIST TOLES', this.listRoles);
+
+    const value = Object.assign({}, this.listRoles);
+
+    this.listRolesPt = Object.assign(value, [{'id': 'Paciente', 'name': 'test'}, {'id': 'Gerente', 'name': 'test'}, {'id': 'Administrador', 'name': 'test'}]);
+
+    console.log('list roles', this.listRoles);
   }
 
   formPersonBulder() {
     this.formPerson = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
-      documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      documentNumber: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
@@ -98,8 +112,8 @@ export class CadastrarPessoaComponent implements OnInit {
         neighborhood: ['', Validators.required]
       }),
       phone: this.formBuilder.group({
-        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,3}\d*)?$/)]],
-        number: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{8,9}\d*)?$/)]]
+        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,2}\d*)?$/)]],
+        number: ['', [Validators.required]]
       }),
       height: this.formBuilder.group({
         height: ['', [Validators.required]],
@@ -165,14 +179,25 @@ export class CadastrarPessoaComponent implements OnInit {
         height: `${this.formPerson.get('height.height').value}`
       })
     });
-    console.log(this.formPerson.value);
+    console.log(this.formPerson);
 
     if (this.formPerson.valid) {
+        this.sucesso = true;
 
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
-        console.log('pessao criada', pessoa);
+        this.spinner.show();
+        const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20);
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
+
         this.criarCalendario(pessoa);
+
         this.pessoasService.cadastrarCalendario(this.formCalendario.value).then(calendario => {
           this.router.navigate(['/register-vaccine', this.uuid]);
         }, error => console.log('erro ao cadastrar calendario de vacina', error));
@@ -269,9 +294,16 @@ export class CadastrarPessoaComponent implements OnInit {
   voltar() {
     this.router.navigateByUrl('/pessoas');
   }
-
+  tamalho(senha) {
+    console.log(senha);
+    if (senha.length !== 8) {
+      this.tamanhoValido = true;
+    } else {
+      this.tamanhoValido = false;
+    }
+  }
   comparar(senha, confirmar, permissao) {
-    if (confirmar.length >= 5) {
+    if (confirmar.length >= 8) {
       if (senha !== '' && confirmar !== '' && senha === confirmar) {
         this.permissao = permissao;
         this.valida = false;

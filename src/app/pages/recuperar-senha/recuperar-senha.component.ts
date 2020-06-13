@@ -41,7 +41,7 @@ export class RecuperarSenhaComponent implements OnInit {
         headers = headers.append('email',  email);
 
         this.http.put(`${URL_AUTH}/v1/api/auth/user/password-reset`, null, {headers, responseType: 'text'}).subscribe(resposta => {
-
+          this.formEmail.reset();
           this.mensagem = 'Link de recuperação de senha enviado para seu e-mail';
           this.sucesso = true;
 
