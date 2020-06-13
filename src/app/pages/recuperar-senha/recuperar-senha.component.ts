@@ -3,6 +3,7 @@ import {AuthService} from '../../core/auth.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL_AUTH} from '../../app.api';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -10,16 +11,22 @@ import {Router} from '@angular/router';
   styleUrls: ['./recuperar-senha.component.css']
 })
 export class RecuperarSenhaComponent implements OnInit {
-  private captcha: string;
-  private mensagem: string;
-  private erro = false;
-  private sucesso: boolean;
+  public captcha: string;
+  public mensagem: string;
+  public erro = false;
+  public sucesso: boolean;
+  public formEmail: FormGroup;
 
   constructor(private authService: AuthService,
               private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.formEmail = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      captcha: ['', [Validators.required]],
+    });
   }
 
   public resolved(captchaResponse: string) {
@@ -28,7 +35,8 @@ export class RecuperarSenhaComponent implements OnInit {
   }
 
   recuperarEmail(email: string) {
-    if (this.captcha !== undefined) {
+
+    if (this.captcha !== undefined && this.formEmail.valid) {
         let headers = new HttpHeaders();
         headers = headers.append('email',  email);
 

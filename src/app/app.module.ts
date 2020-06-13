@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -66,6 +66,9 @@ import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha
     ],
     exports: [
     ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

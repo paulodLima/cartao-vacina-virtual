@@ -28,23 +28,34 @@
       <div class="col-lg-8 col-md-10" style="margin-top: 220px">
         <div class="card bg-secondary shadow border-0" style="margin-bottom: 150px !important;">
       <div class="card-body">
-        <form>
+        <form [formGroup]="formEmail" #form='ngForm' novalidate>
           <div class="pl-lg-4">
             <div class="row">
               <div class="col-lg-6 ">
                 <div class="form-group">
                   <label form-control-label>Digite seu e-mail</label>
-                  <input class="form-control" type="email" placeholder="E-mail" #email required>
+                  <input class="form-control" placeholder="E-mail" #email formControlName="email">
+                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('email').errors?.required
+                                  && form.submitted">
+                    Email obrigatório!
+                  </small>
+                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('email').errors?.email && form.submitted">
+                    Email inválido!
+                  </small>
                 </div>
               </div>
               <div class="col-lg-6 ">
-                <div class="form-group" required>
+                <div class="form-group" formControlName="captcha">
                   <recaptcha-demo-wrapper>
                     <re-captcha
                       (resolved)="resolved($event)"
                       siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"
                     ></re-captcha>
                   </recaptcha-demo-wrapper>
+                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('captcha').errors?.required
+                                  && form.submitted">
+                    recaptcha obrigatório!
+                  </small>
                 </div>
               </div>
             </div>
@@ -52,7 +63,7 @@
             <div class="row">
               <div class="col-lg-12 ">
                 <div class="form-group">
-                  <button class="btn btn-info offset-lg-8 active mt-10 float-left" (click)="recuperarEmail(email.value)">
+                  <button class="btn btn-info offset-lg-8 active mt-10 float-left" type="submit" (click)="recuperarEmail(email.value)">
                     Enviar
                   </button>
                 </div>
