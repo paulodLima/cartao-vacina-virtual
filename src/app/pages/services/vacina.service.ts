@@ -11,60 +11,76 @@ import {URL_API_VACCINECARD, URL_API_VACINA} from '../../app.api';
 export class VacinaService {
   private historico: Object = new Object;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   public getVacinas(): Observable<Vacina[]> {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine`);
   }
+
   public getVacinaUuid(uuid: string): Observable<Vacina[]> {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
+
   public getVacinasNome(uuid: string): Observable<Vacina[]> {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
+
   public getApplicationLocation(): Observable<any> {
-      return this.http.get(`${URL_API_VACINA}/v1/api/application-location`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/application-location`);
   }
+
   public geValidityAfterOpen(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/validity-after-open`);
   }
+
   public getSideEffect(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/side-effect`);
   }
+
   public getRouteAdministration(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/route-administration`);
   }
+
   public getNeedle(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/needle`);
   }
+
   public getDosage(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/dosage`);
   }
+
   public getDisease(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/disease`);
   }
+
   public getComposition(): Observable<any> {
     return this.http.get(`${URL_API_VACINA}/v1/api/composition`);
   }
+
   public getBasicVaccina(): Observable<any> {
-      return this.http.get(`${URL_API_VACINA}/v1/api/basic-vaccination`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/basic-vaccination`);
   }
+
   public cadastrarVacina(vacina: Object[]): Observable<any> {
-      return this.http.post(`${URL_API_VACINA}/v1/api/vaccine`, vacina);
+    return this.http.post(`${URL_API_VACINA}/v1/api/vaccine`, vacina);
   }
+
   public updateDeCalendario(vacina, uuid): Observable<any> {
     console.log('vacina api', vacina);
     return this.http.put(`${URL_API_VACCINECARD}/calendar/${uuid}`, vacina);
   }
+
   public geCalendarioPessoa(pessoa: string): Observable<any> {
     return this.http.get(`${URL_API_VACCINECARD}/calendar?personUuid=${pessoa}`);
   }
 
-  public async getHistoricoVacina(pessoa: string): Promise<Object> {
+  public async getHistoricoVacina(pessoa: string): Promise<any> {
 
-    const objectPromise = await this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}`).toPromise();
-    Object.assign(this.historico, objectPromise);
-    return this.historico;
+    console.log('id', pessoa);
+    const object = await this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}`).toPromise();
+    console.log('objeto retornado', object);
+    return object;
   }
 
   public getHistoricoVacinaFiltroObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {

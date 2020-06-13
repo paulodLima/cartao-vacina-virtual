@@ -5,7 +5,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Pessoa} from '../shared/pessoa';
 import {AuthService} from '../../core/auth.service';
 import {PessoasService} from '../services/pessoas.service';
-import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-minhas-vacinas',
@@ -35,27 +34,26 @@ export class MinhasVacinasComponent implements OnInit {
 
   buscarUuid() {
     this.pessoasService.pesquisarPessoasEmail(this.authService.token.username).subscribe(usuario => {
-        this.pessoaUuid = usuario[0].uuid;
-        this.buscarHistorico(usuario[0].uuid);
+      this.pessoaUuid = usuario[0].uuid;
+      this.buscarHistorico(usuario[0].uuid);
     }, error => console.log('erro ao consultar pessoa', error));
   }
-  buscarHistorico(uuid?) {
 
-    this.vacinaService.getHistoricoVacina(uuid).then(historico => {
-      Object.assign(this.historico, historico);
-      console.log('historico', this.historico);
+  buscarHistorico(uuid) {
 
-      this.buscarVacinas();
+    this.vacinaService.getHistoricoVacina(uuid).then(async historico => {
+      this.historico = await historico;
     }, error => console.log('erro ao listar historico', error));
+
+    this.buscarVacinas();
   }
 
   buscarVacinas() {
-    console.log(this.historico);
-    for (let i = 0; i <= this.historico.length; i++) {
-      this.vacinaService.getVacinaUuid(this.historico[i].vaccineUuid).subscribe(vacina => {
+    this.historico.forEach((s, k) => {
+      this.vacinaService.getVacinaUuid(s.vaccineUuid).subscribe(vacina => {
         this.vacinas = this.vacinas.concat(vacina);
       }, error => console.log('erro ao listar vacina por uuis', error));
-    }
+    });
 
   }
 
@@ -84,7 +82,7 @@ export class MinhasVacinasComponent implements OnInit {
     switch (true) {
       case tomada === '--' && obrigatoria === '--':
         this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico();
+        this.buscarHistorico(this.pessoaUuid);
         break;
 
       case (tomada === '--' || boolTomada === false) && (obrigatoria === '--' || boolObrigatoria === false):
@@ -93,7 +91,7 @@ export class MinhasVacinasComponent implements OnInit {
           boolTomada = false;
         }
         this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico();
+        this.buscarHistorico(this.pessoaUuid);
         break;
 
       case (tomada === '--' || boolTomada === false) && boolObrigatoria === true:

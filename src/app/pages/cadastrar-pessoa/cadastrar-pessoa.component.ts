@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
@@ -68,7 +68,7 @@ export class CadastrarPessoaComponent implements OnInit {
       this.authService.logout();
     }
     this.route.params.pipe(
-      map((params) => params.id ),
+      map((params) => params.id),
       switchMap(id => this.pessoasService.consutarPessoa(this.id = id))
     ).subscribe(pessoa => this.atualizarFormulario(pessoa));
     this.formPersonBulder();
@@ -107,9 +107,10 @@ export class CadastrarPessoaComponent implements OnInit {
       weight: this.formBuilder.group({
         weight: ['', [Validators.required]]
       }),
-      credential: this.formBuilder.group ({
+      credential: this.formBuilder.group({
         password: ['', [Validators.required]],
-        roles: this.bulderRoles()})
+        roles: this.bulderRoles()
+      })
     });
   }
 
@@ -117,6 +118,7 @@ export class CadastrarPessoaComponent implements OnInit {
     return this.formBuilder.array([
       new FormControl({'id': this.rolesId, 'name': this.rolesName})]);
   }
+
   atualizarFormulario(pessoa) {
     this.formPerson.patchValue({
       id: pessoa.id,
@@ -147,42 +149,45 @@ export class CadastrarPessoaComponent implements OnInit {
       })
     });
   }
-teste(roles, event) {
-  this.rolesId = roles;
-  this.rolesName = event.target.options[event.target.options.selectedIndex].text;
-  this.formPersonBulder();
-}
+
+  teste(roles, event) {
+    this.rolesId = roles;
+    this.rolesName = event.target.options[event.target.options.selectedIndex].text;
+    this.formPersonBulder();
+  }
+
   cadastrar() {
     this.formPerson.patchValue({
       weight: ({
-        weight:  `${this.formPerson.get('weight.weight').value}`
+        weight: `${this.formPerson.get('weight.weight').value}`
       }),
       height: ({
-        height:  `${this.formPerson.get('height.height').value}`
+        height: `${this.formPerson.get('height.height').value}`
       })
     });
     console.log(this.formPerson.value);
 
-    if ( this.formPerson.valid) {
+    if (this.formPerson.valid) {
 
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
         console.log('pessao criada', pessoa);
         this.criarCalendario(pessoa);
-        this.pessoasService.cadastrarCalendario(this.formCalendario.value).subscribe(calendario => {
+        this.pessoasService.cadastrarCalendario(this.formCalendario.value).then(calendario => {
+          this.router.navigate(['/register-vaccine', this.uuid]);
         }, error => console.log('erro ao cadastrar calendario de vacina', error));
-        this.router.navigate(['/register-vaccine', this.uuid]);
-      }, erro => {console.log('erro ao cadastrar pessoa', erro.error.messages);
-          this.mensagemErro = erro.error.messages;
-          this.erro = true;
+      }, erro => {
+        console.log('erro ao cadastrar pessoa', erro.error.messages);
+        this.mensagemErro = erro.error.messages;
+        this.erro = true;
 
-          setTimeout(() => {
+        setTimeout(() => {
 
           this.erro = false;
 
         }, 6000);
 
-          const scrollToTop = window.setInterval(() => {
+        const scrollToTop = window.setInterval(() => {
           const pos = window.pageYOffset;
           if (pos > 0) {
             window.scrollTo(0, pos - 20); // how far to scroll on each step
@@ -193,20 +198,22 @@ teste(roles, event) {
       });
     }
   }
+
   atualizar() {
-    if ( this.formPerson.valid) {
+    if (this.formPerson.valid) {
       this.formPerson.patchValue({
         weight: ({
-          weight:  `${this.formPerson.get('weight.weight').value}`
+          weight: `${this.formPerson.get('weight.weight').value}`
         }),
         height: ({
-          height:  `${this.formPerson.get('height.height').value}`
+          height: `${this.formPerson.get('height.height').value}`
         })
       });
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
         this.formPerson.reset();
         this.router.navigateByUrl('/pessoas');
-      }, error1 => console.log(error1)); }
+      }, error1 => console.log(error1));
+    }
   }
 
   public buscarCep(cep: string): void {
@@ -237,9 +244,9 @@ teste(roles, event) {
 
   criarCalendario(pessoa) {
 
-    this.formCalendario =  this.formBuilder.group({
+    this.formCalendario = this.formBuilder.group({
       personUuid: pessoa.uuid,
-      vaccines : this.bulderVaccines()
+      vaccines: this.bulderVaccines()
     });
 
   }
@@ -247,23 +254,24 @@ teste(roles, event) {
   bulderVaccines() {
     for (let i = 0; i < this.vacinas.length; i++) {
 
-       this.value = this.value.concat(new FormControl({'required': true, 'vaccineUuid': this.vacinas[i].uuid}));
+      this.value = this.value.concat(new FormControl({'required': true, 'vaccineUuid': this.vacinas[i].uuid}));
 
     }
-     return this.formBuilder.array(this.value);
+    return this.formBuilder.array(this.value);
   }
 
   listarVacinas() {
     this.vacinaService.getVacinas().subscribe(vacinas => {
-          this.vacinas = vacinas;
+      this.vacinas = vacinas;
     }, erro => console.log('erro ao listar vacinas', erro));
   }
 
   voltar() {
     this.router.navigateByUrl('/pessoas');
   }
+
   comparar(senha, confirmar, permissao) {
-  if (confirmar.length >= 5) {
+    if (confirmar.length >= 5) {
       if (senha !== '' && confirmar !== '' && senha === confirmar) {
         this.permissao = permissao;
         this.valida = false;
@@ -274,8 +282,8 @@ teste(roles, event) {
   }
 
   getRoles() {
-     const teste = JSON.stringify(this.authService.roles);
-     this.listRoles = teste;
-      console.log('teste', this.listRoles);
+    const teste = JSON.stringify(this.authService.roles);
+    this.listRoles = teste;
+    console.log('teste', this.listRoles);
   }
 }

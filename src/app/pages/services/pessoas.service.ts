@@ -52,8 +52,8 @@ export class PessoasService {
     return this.http.post<Email>(`${URL_API_VACCINECARD}/mail`, email);
   }
 
-  public cadastrarCalendario(calendario): Observable<any> {
-    return this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario);
+  public async cadastrarCalendario(calendario): Promise<any> {
+    return await this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario).toPromise();
   }
 
   public pesquisarPessoasEmail(termoPesquisa: string): Observable<Pessoa[]> {
