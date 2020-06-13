@@ -1,12 +1,11 @@
 <div class="header bg-gradient-danger py-7 py-lg-8">
-  <a class="alinhar" routerLinkActive="active">
-    <img src="./assets/img/CVV_letra_branca.png" class="mg" alt="...">
-  </a>
   <div class="container">
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center mp">
-        <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Bem Vindo!</h1>
+        <div class="col-lg-5 col-md-6 "  style="margin-top: 10px !important;">
+          <a class="alinhar" routerLinkActive="active">
+            <img src="./assets/img/CVV_letra_branca.png" class="mg" alt="...">
+          </a>
           <h3 class="text-lead text-light">O cartão de vacina virtual, possibilita um fácil
             acesso das vacinas o seu histórico, evitando
             problemas como cartões duplicados e perda de cartão.</h3>
@@ -21,7 +20,6 @@
       <div class="card bg-secondary shadow my--10 my-auto">
         <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-3 mb"><small>Entrar Com</small></div>
-
           <form role="form" #form= 'ngForm' [formGroup]="formLogin"
                 novalidate (submit)="login()">
             <div class="form-group mb-3">
