@@ -37,9 +37,9 @@
             <div class="col-lg-2 ">
               <div class="form-group" formArrayName="credential">
                 <label class="form-control-label">Tipo de usuário</label>
-                <select id="role" class="form-control" form="id" [value]="roles" #permissao (blur)="teste(permissao.value)">
-                  <option value="pessoa" selected>Pessoa</option>
-                  <option value="admin">Administrador</option>
+                <select id="role" class="form-control" [value]="rolesId" #permissao (blur)="teste(permissao.value, $event)">
+                  <option selected>selecione...</option>
+                  <option *ngFor="let roles of listRoles" [value]="roles.id" >{{roles.name}}</option>
                 </select>
                 <small class="text-danger d-block mt-2" *ngIf="formPerson.get('sexType').errors?.required
                                   && form.submitted">

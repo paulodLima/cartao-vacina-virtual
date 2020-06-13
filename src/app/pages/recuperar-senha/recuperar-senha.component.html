@@ -1,0 +1,74 @@
+<div class="header bg-gradient-danger py-4">
+  <a class="alinhar" routerLinkActive="active">
+    <img src="../../../assets/img/CVV_letra_branca.png" class="mg" alt="..." style="margin-top: 12px !important;">
+  </a>
+  <div class="container">
+    <div class="header-body text-center mb-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6 mt-20">
+          <h1 class="text-white">Recuperar senha</h1>
+          <p class="text-lead text-light">Para recuperar a sua senha, informe o seu email de cadastro no formulário e clique em Enviar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 center">
+    <div class="alert alert-success center" role="alert" *ngIf="sucesso">
+      {{mensagem}}
+    </div>
+  </div>
+  <div class="col-4 center" *ngIf="erro">
+    <div class="alert alert-danger center" role="alert">
+        {{mensagem}}
+    </div>
+  </div>
+  <!-- pagina content -->
+  <div class="container mt--8 pb-5 mt-20">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10" style="margin-top: 220px">
+        <div class="card bg-secondary shadow border-0" style="margin-bottom: 150px !important;">
+      <div class="card-body">
+        <form>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-6 ">
+                <div class="form-group">
+                  <label form-control-label>Digite seu e-mail</label>
+                  <input class="form-control" type="email" placeholder="E-mail" #email required>
+                </div>
+              </div>
+              <div class="col-lg-6 ">
+                <div class="form-group" required>
+                  <recaptcha-demo-wrapper>
+                    <re-captcha
+                      (resolved)="resolved($event)"
+                      siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"
+                    ></re-captcha>
+                  </recaptcha-demo-wrapper>
+                </div>
+              </div>
+            </div>
+            <div class="pl-lg-12 ">
+            <div class="row">
+              <div class="col-lg-12 ">
+                <div class="form-group">
+                  <button class="btn btn-info offset-lg-8 active mt-10 float-left" (click)="recuperarEmail(email.value)">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-12 ">
+                <div class="form-group mt-10">
+                  <p><b>ATENÇÃO:</b> O email pode ir parar na sua Caixa de Spam / Lixo Eletrônico!</p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

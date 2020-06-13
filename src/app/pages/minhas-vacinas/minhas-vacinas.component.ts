@@ -4,6 +4,8 @@ import {Vacina} from '../shared/vacina.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Pessoa} from '../shared/pessoa';
 import {AuthService} from '../../core/auth.service';
+import {PessoasService} from '../services/pessoas.service';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-minhas-vacinas',
@@ -14,34 +16,41 @@ export class MinhasVacinasComponent implements OnInit {
 
   public historico: Vacina[] = [];
   public vacinas: Vacina[] = [];
-  public pessoaString = localStorage.getItem('usuario');
-  public pessoaJson = JSON.parse(this.pessoaString);
+  public pessoaUuid: string;
   img_vacina = '../../../assets/img/vacina.png';
   public vacinaPorNome: Vacina[];
 
   constructor(private vacinaService: VacinaService,
               private modalVacina: NgbModal,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private pessoasService: PessoasService) {
   }
 
   ngOnInit(): void {
     if (this.authService.isLogged()) {
       this.authService.logout();
     }
-    this.buscarHistorico();
+    this.buscarUuid();
   }
 
-  buscarHistorico() {
+  buscarUuid() {
+    this.pessoasService.pesquisarPessoasEmail(this.authService.token.username).subscribe(usuario => {
+        this.pessoaUuid = usuario[0].uuid;
+        this.buscarHistorico(usuario[0].uuid);
+    }, error => console.log('erro ao consultar pessoa', error));
+  }
+  buscarHistorico(uuid?) {
 
-    this.vacinaService.getHistoricoVacina(this.pessoaJson.uuid).then(historico => {
-
+    this.vacinaService.getHistoricoVacina(uuid).then(historico => {
       Object.assign(this.historico, historico);
+      console.log('historico', this.historico);
 
       this.buscarVacinas();
     }, error => console.log('erro ao listar historico', error));
   }
 
   buscarVacinas() {
+    console.log(this.historico);
     for (let i = 0; i <= this.historico.length; i++) {
       this.vacinaService.getVacinaUuid(this.historico[i].vaccineUuid).subscribe(vacina => {
         this.vacinas = this.vacinas.concat(vacina);
@@ -69,13 +78,74 @@ export class MinhasVacinasComponent implements OnInit {
 
   aplicada(tomada: string, obrigatoria: string) {
 
-    if (tomada === '--' && obrigatoria === '--') {
-      this.buscarHistorico();
-    }
-    const boolTomada = (/true/i).test(tomada);
-    const boolObrigatoria = (/true/i).test(obrigatoria);
+    let boolTomada = (/true/i).test(tomada);
+    let boolObrigatoria = (/true/i).test(obrigatoria);
 
-    this.vacinaService.getHistoricoVacinaFiltro(this.pessoaJson.uuid, boolTomada, boolObrigatoria).subscribe(historico => {
+    switch (true) {
+      case tomada === '--' && obrigatoria === '--':
+        this.buscarHistoricoNaoObgTmd(false, false);
+        this.buscarHistorico();
+        break;
+
+      case (tomada === '--' || boolTomada === false) && (obrigatoria === '--' || boolObrigatoria === false):
+        if (tomada === '--' && obrigatoria === '--') {
+          boolObrigatoria = false;
+          boolTomada = false;
+        }
+        this.buscarHistoricoNaoObgTmd(false, false);
+        this.buscarHistorico();
+        break;
+
+      case (tomada === '--' || boolTomada === false) && boolObrigatoria === true:
+        if (tomada === '--') {
+          boolTomada = false;
+        }
+        this.buscarHistoricoObg(boolObrigatoria, boolTomada);
+        break;
+
+      case boolTomada === true && (obrigatoria === '--' || boolObrigatoria === false):
+        if (obrigatoria === '--') {
+          boolObrigatoria = false;
+        }
+        this.buscarHistoricoTmd(boolTomada, boolObrigatoria);
+        break;
+
+      case boolTomada === true && boolObrigatoria === true:
+        this.buscarHistoricoObgTmd(boolTomada, boolObrigatoria);
+        break;
+
+      case boolTomada === false && boolObrigatoria === false:
+        this.buscarHistoricoNaoObgTmd(boolTomada, boolObrigatoria);
+        break;
+    }
+  }
+
+  private buscarHistoricoObgTmd(boolTomada, boolObrigatoria) {
+    this.vacinaService.getHistoricoVacinaFiltroObgTmd(this.pessoaUuid, boolTomada, boolObrigatoria).subscribe(historico => {
+      this.historico = historico;
+      this.vacinas = [];
+      this.buscarVacinas();
+    }, error => console.log('erro ao listar historico', error));
+  }
+
+  private buscarHistoricoNaoObgTmd(boolTomada, boolObrigatoria) {
+    this.vacinaService.buscarHistoricoNaoObgTmd(this.pessoaUuid, boolTomada, boolObrigatoria).subscribe(historico => {
+      this.historico = historico;
+      this.vacinas = [];
+      this.buscarVacinas();
+    }, error => console.log('erro ao listar historico', error));
+  }
+
+  private buscarHistoricoObg(boolObrigatoria, boolTomada) {
+    this.vacinaService.buscarHistoricoObg(this.pessoaUuid, boolTomada, boolObrigatoria).subscribe(historico => {
+      this.historico = historico;
+      this.vacinas = [];
+      this.buscarVacinas();
+    }, error => console.log('erro ao listar historico', error));
+  }
+
+  private buscarHistoricoTmd(boolTomada, boolObrigatoria) {
+    this.vacinaService.buscarHistoricoObgTmd(this.pessoaUuid, boolTomada, boolObrigatoria).subscribe(historico => {
       this.historico = historico;
       this.vacinas = [];
       this.buscarVacinas();

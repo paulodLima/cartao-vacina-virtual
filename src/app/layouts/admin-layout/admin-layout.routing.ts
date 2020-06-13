@@ -13,6 +13,7 @@ import {MinhasVacinasComponent} from '../../pages/minhas-vacinas/minhas-vacinas.
 import {LocaisVacinacaoComponent} from '../../pages/locais-vacinacao/locais-vacinacao.component';
 import {AdicionarVacinaPessoaComponent} from '../../pages/adicionar-vacina-pessoa/adicionar-vacina-pessoa.component';
 import {ListaVacinasComponent} from '../../pages/lista-vacinas/lista-vacinas.component';
+import {RecuperarSenhaComponent} from '../../pages/recuperar-senha/recuperar-senha.component';
 
 
 export const AdminLayoutRoutes: Routes = [

@@ -14,43 +14,43 @@ export class VacinaService {
   constructor(private http: HttpClient) {}
 
   public getVacinas(): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine`);
+    return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine`);
   }
   public getVacinaUuid(uuid: string): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine/${uuid}`);
+    return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
   public getVacinasNome(uuid: string): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}vaccine/${uuid}`);
+    return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
   public getApplicationLocation(): Observable<any> {
-      return this.http.get(`${URL_API_VACINA}application-location`);
+      return this.http.get(`${URL_API_VACINA}/v1/api/application-location`);
   }
   public geValidityAfterOpen(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}validity-after-open`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/validity-after-open`);
   }
   public getSideEffect(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}side-effect`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/side-effect`);
   }
   public getRouteAdministration(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}route-administration`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/route-administration`);
   }
   public getNeedle(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}needle`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/needle`);
   }
   public getDosage(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}dosage`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/dosage`);
   }
   public getDisease(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}disease`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/disease`);
   }
   public getComposition(): Observable<any> {
-    return this.http.get(`${URL_API_VACINA}composition`);
+    return this.http.get(`${URL_API_VACINA}/v1/api/composition`);
   }
   public getBasicVaccina(): Observable<any> {
-      return this.http.get(`${URL_API_VACINA}basic-vaccination`);
+      return this.http.get(`${URL_API_VACINA}/v1/api/basic-vaccination`);
   }
   public cadastrarVacina(vacina: Object[]): Observable<any> {
-      return this.http.post(`${URL_API_VACINA}vaccine`, vacina);
+      return this.http.post(`${URL_API_VACINA}/v1/api/vaccine`, vacina);
   }
   public updateDeCalendario(vacina, uuid): Observable<any> {
     console.log('vacina api', vacina);
@@ -67,7 +67,19 @@ export class VacinaService {
     return this.historico;
   }
 
-  public getHistoricoVacinaFiltro(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+  public getHistoricoVacinaFiltroObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoNaoObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoObg(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
+    return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
+  }
+
+  public buscarHistoricoObgTmd(pessoa: string, tomada: boolean, obrigatoria: boolean): Observable<any> {
     return this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}&required=${obrigatoria}&applied=${tomada}`);
   }
 

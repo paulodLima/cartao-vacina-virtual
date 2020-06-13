@@ -19,7 +19,9 @@ export class CadastrarPessoaComponent implements OnInit {
   private value: FormControl[] = [];
   private uuid: string;
   private permissao: string;
-  public roles: string;
+  public rolesId: string;
+  public rolesName: string;
+  public listRoles: string;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -74,6 +76,8 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.id !== undefined) {
       this.disableds = true;
     }
+    this.listRoles = JSON.parse(this.authService.roles);
+
   }
 
   formPersonBulder() {
@@ -111,7 +115,7 @@ export class CadastrarPessoaComponent implements OnInit {
 
   bulderRoles() {
     return this.formBuilder.array([
-      new FormControl({'id': '', 'name': this.roles})]);
+      new FormControl({'id': this.rolesId, 'name': this.rolesName})]);
   }
   atualizarFormulario(pessoa) {
     this.formPerson.patchValue({
@@ -143,20 +147,29 @@ export class CadastrarPessoaComponent implements OnInit {
       })
     });
   }
-teste(roles) {
-  this.roles = roles;
+teste(roles, event) {
+  this.rolesId = roles;
+  this.rolesName = event.target.options[event.target.options.selectedIndex].text;
   this.formPersonBulder();
 }
   cadastrar() {
-
+    this.formPerson.patchValue({
+      weight: ({
+        weight:  `${this.formPerson.get('weight.weight').value}`
+      }),
+      height: ({
+        height:  `${this.formPerson.get('height.height').value}`
+      })
+    });
     console.log(this.formPerson.value);
 
     if ( this.formPerson.valid) {
+
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
+        console.log('pessao criada', pessoa);
         this.criarCalendario(pessoa);
         this.pessoasService.cadastrarCalendario(this.formCalendario.value).subscribe(calendario => {
-
         }, error => console.log('erro ao cadastrar calendario de vacina', error));
         this.router.navigate(['/register-vaccine', this.uuid]);
       }, erro => {console.log('erro ao cadastrar pessoa', erro.error.messages);
@@ -258,5 +271,11 @@ teste(roles) {
         this.valida = true;
       }
     }
+  }
+
+  getRoles() {
+     const teste = JSON.stringify(this.authService.roles);
+     this.listRoles = teste;
+      console.log('teste', this.listRoles);
   }
 }

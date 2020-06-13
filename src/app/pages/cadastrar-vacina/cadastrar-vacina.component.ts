@@ -97,7 +97,7 @@ export class CadastrarVacinaComponent implements OnInit {
   }
 
   cadastrarVacina() {
-
+  console.log(this.formVacina.value);
     if (this.formVacina.valid) {
       this.vacinaService.cadastrarVacina(this.formVacina.value).subscribe(vacina => {
         this.formVacina.reset();
@@ -123,8 +123,9 @@ export class CadastrarVacinaComponent implements OnInit {
       });
     }
   }
-  valorId(uuid: string) {
-   this.ids = uuid;
+  valorId(uuid) {
+    console.log('uuid', uuid.target.value);
+   this.ids = uuid.target.value;
    this.formulario();
    console.log(this.formVacina.value);
   }
