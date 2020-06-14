@@ -72,10 +72,10 @@ export class AuthService {
           this.roles = role;
           this.roles.forEach(s => {
             if (s.name === 'patient') {
-              s.namePt = 'paciente';
+              s.namePt = 'usuário';
             } else if (s.name === 'admin') {
               s.namePt = 'administrador';
-            } else if (s.name === 'manager') {
+            } else if (s.name === 'gestor') {
               s.namePt = 'gerente';
             }
           });
