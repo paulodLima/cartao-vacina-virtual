@@ -43,7 +43,7 @@
                 <div class="form-group" formArrayName="credential">
                   <label class="form-control-label">Tipo de usuário</label>
                   <select id="role" class="form-control" [value]="rolesId" #permissao
-                          (blur)="teste(permissao.value, $event)">
+                          (blur)="updateRole(permissao.value, $event)">
                     <option selected>selecione...</option>
                     <option *ngFor="let roles of listRolesPt" [value]="roles.id">{{roles.namePt}}</option>
                   </select>
@@ -297,7 +297,7 @@
                   <div class="form-group">
                     <label class="form-control-label">Senha</label>
                     <input id="senha" class="form-control" placeholder="Senha" type="password"
-                           formControlName="Senha" [value]="senha" #senha (blur)="tamalho(senha.value)">
+                           formControlName="Senha" [value]="senha" #senha (blur)="tamanho(senha.value)">
                     </div>
                 </div>
                 <div class="col-lg-4 ">

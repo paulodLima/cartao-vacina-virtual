@@ -122,6 +122,14 @@ export class CadastrarPessoaComponent implements OnInit {
     });
   }
 
+  formPersonBuilderRoles() {
+    this.formPerson.patchValue({
+      credential: ({
+        roles: [{'id': this.rolesId, 'name': this.rolesName}]
+      })
+    });
+  }
+
   bulderRoles() {
     return this.formBuilder.array([
       new FormControl({'id': this.rolesId, 'name': this.rolesName})]);
@@ -158,10 +166,19 @@ export class CadastrarPessoaComponent implements OnInit {
     });
   }
 
-  teste(roles, event) {
+  updateRole(roles, event) {
     this.rolesId = roles;
-    this.rolesName = event.target.options[event.target.options.selectedIndex].text;
-    this.formPersonBulder();
+    this.rolesName = this.getNameRoleEnglish(event.target.options[event.target.options.selectedIndex].text);
+    this.formPersonBuilderRoles();
+  }
+
+  getNameRoleEnglish(namePt) {
+
+    if (namePt === 'administrador') {
+      return 'admin';
+    } else if (namePt === 'usuário') {
+      return 'patient';
+    }
   }
 
   cadastrar() {
@@ -289,8 +306,7 @@ export class CadastrarPessoaComponent implements OnInit {
     this.router.navigateByUrl('/pessoas');
   }
 
-  tamalho(senha) {
-    console.log(senha);
+  tamanho(senha) {
     if (senha.length !== 8) {
       this.tamanhoValido = true;
     } else {
