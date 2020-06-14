@@ -22,7 +22,7 @@ export const ROUTESADMIN: RouteInfo[] = [
   { path: '/minhas-vacinas', title: 'Minhas vacinas',  icon: 'fas fa-search', class: '' },
   { path: '/campanha', title: 'Campanha',  icon: 'ni-single-02 text-yellow', class: '' },
   { path: '/lista-vacinas', title: 'Lista de vacinas',  icon: 'fas fa-search', class: '' },
-  { path: '/add-vacina-pessoa', title: 'Aplicar vaciana pessoa',  icon: 'ni-single-02 text-yellow', class: '' },
+  { path: '/add-vacina-pessoa', title: 'Aplicar vacina pessoa',  icon: 'ni-single-02 text-yellow', class: '' },
   { path: '/cadastrar-vacina', title: 'Cadastrar Nova Vacina',  icon: 'ni-key-25 text-info', class: '' },
   { path: '/cadastrar-pessoa', title: 'Cadastro de pessoa',  icon: 'fas fa-users', class: '' },
   { path: '/cadastrar-postos', title: 'Cadastro de Postos de vacinação',  icon: 'fas fa-users', class: '' }
