@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.formLogin = this.formBuilder.group({
       usuario: [null, [Validators.required, Validators.email]],
-      senha: [null, [Validators.required, Validators.pattern(/^-?(0|[a-z0-9]{8,15}\d*)?$/)]]
+      senha: [null, [Validators.required, Validators.pattern(/^-?(0|[a-z0-9]{8}\d*)?$/)]]
     });
     this.listarPessoas();
   }
