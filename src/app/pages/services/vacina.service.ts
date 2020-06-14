@@ -119,4 +119,8 @@ export class VacinaService {
   atualizarDosagem(uuid: string, dosage: any): Observable<any> {
     return this.http.put(`${URL_API_VACCINECARD}/dosage-information/${uuid}`, dosage);
   }
+
+  emailVacinasPendentes(): Observable<any> {
+    return this.http.post(`${URL_API_VACCINECARD}/mail/delayed-vaccines`, null);
+  }
 }
