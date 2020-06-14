@@ -33,13 +33,29 @@ export class PessoasComponent implements OnInit {
     if (this.authService.isLogged()) {
       this.authService.logout();
     }
-    this.listarPessoas();
+    this.listarPessoasPag1();
   }
 
-  listarPessoas() {
+  listarPessoasPag1() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
-      console.log(pessoas);
+    for (let i = 0; i <= pessoas.length; i++) {
+      const dataFormat = this.pessoas[i].birthDate;
+      const str = dataFormat.split('-');
+      this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
+      this.pessoas[i].birthDate = this.dataFormatada;
+    }
+      console.log(this.pessoas);
+
+    }, error => {
+      console.log('Erro ao listar pessoas', error);
+    });
+  }
+
+  listarPessoasPag2() {
+    this.pessoas = [];
+    this.pessoasService.listarPessoasPag2().subscribe(pessoas => {
+      this.pessoas = pessoas;
     for (let i = 0; i <= pessoas.length; i++) {
       const dataFormat = this.pessoas[i].birthDate;
       const str = dataFormat.split('-');
@@ -69,6 +85,6 @@ export class PessoasComponent implements OnInit {
 
   pesquisa(event: string) {
     this.searchterm = event;
-    this.listarPessoas();
+    this.listarPessoasPag1();
   }
 }
