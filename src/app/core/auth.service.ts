@@ -75,8 +75,8 @@ export class AuthService {
               s.namePt = 'usuário';
             } else if (s.name === 'admin') {
               s.namePt = 'administrador';
-            } else if (s.name === 'gestor') {
-              s.namePt = 'gerente';
+            } else if (s.name === 'manager') {
+              s.namePt = 'gestor';
             }
           });
         }, error => console.log('erro', error));

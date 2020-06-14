@@ -160,8 +160,17 @@ export class CadastrarPessoaComponent implements OnInit {
 
   teste(roles, event) {
     this.rolesId = roles;
-    this.rolesName = event.target.options[event.target.options.selectedIndex].text;
+    this.rolesName = this.getNameRoleEnglish(event.target.options[event.target.options.selectedIndex].text);
     this.formPersonBulder();
+  }
+
+  getNameRoleEnglish(namePt) {
+
+    if (namePt === 'administrador') {
+      return 'admin';
+    } else if (namePt === 'usuário') {
+      return 'user';
+    }
   }
 
   cadastrar() {
