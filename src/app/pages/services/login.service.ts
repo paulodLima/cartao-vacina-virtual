@@ -11,4 +11,8 @@ export class LoginService {
   autenticarUsario() {
     this.loginAutenticado = true;
   }
+
+  logout() {
+    this.loginAutenticado = false;
+  }
 }

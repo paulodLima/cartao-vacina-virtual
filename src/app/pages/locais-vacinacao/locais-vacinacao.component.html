@@ -39,12 +39,13 @@
                   <label class="form-control-label">Nome</label>
                   <input type="text" id="name" class="form-control" placeholder="Posto asa norte" [value]="name"
                          required minlength="5" formControlName="name">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('name').errors?.required
-                                  && form.submitted">
-                    Nome completo obrigatório!
-                  </small>
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('name').errors?.pattern">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('name')?.dirty && formLocais.get('name')?.invalid">
                     Nome inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('name')?.invalid  && form.submitted">
+                    Nome obrigatório!
                   </small>
                 </div>
               </div>
@@ -52,14 +53,14 @@
                 <div class="form-group">
                   <label class="form-control-label">Horário de funcionamento</label>
                   <input type="text" id="openingHours" required class="form-control" placeholder="Segunda à Sexta, das 8h às 18h30. Sábados, das 08h às 11h30"
-                         formControlName="openingHours" [value]="openingHours">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('openingHours').errors?.required
-                                  && form.submitted">
-                    E-mail obrigatório!
+                         formControlName="openingHours" >
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('openingHours')?.dirty && formLocais.get('openingHours')?.invalid">
+                    Horário de funcionamento inválido!
                   </small>
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('openingHours').errors?.pattern
-                                  && form.submitted">
-                    E-mail inválido!
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('openingHours')?.invalid  && form.submitted">
+                    Horário de funcionamento obrigatório!
                   </small>
                 </div>
               </div>
@@ -68,14 +69,13 @@
               <div class="col-lg-2" formArrayName="phone">
                 <div class="form-group">
                   <label class="form-control-label">DDD</label>
-                  <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode"
-                         [value]="areaCode">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('phone.areaCode').errors?.required
-                                  && form.submitted">
+                  <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('phone.areaCode')?.dirty && formLocais.get('phone.areaCode')?.invalid || formLocais.get('phone.areaCode').errors?.pattern">
                     DDD obrigatório!
                   </small>
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('phone.areaCode').errors?.pattern
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('phone.areaCode')?.invalid  && form.submitted">
                     DDD inválido!
                   </small>
                 </div>
@@ -83,15 +83,14 @@
               <div class="col-lg-4 " formArrayName="phone">
                 <div class="form-group">
                   <label class="form-control-label">Telefone</label>
-                  <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
-                         [value]="number">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('phone.number').errors?.required
-                                  && form.submitted">
-                    Telefone obrigatório!
-                  </small>
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('phone.number').errors?.pattern
-                                  && form.submitted">
+                  <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('phone.number')?.dirty && formLocais.get('phone.number')?.invalid || formLocais.get('phone.number').errors?.pattern">
                     Telefone inválido!
+                  </small>
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('phone.number')?.invalid  && form.submitted">
+                    Telefone obrigatório!
                   </small>
                 </div>
               </div>
@@ -104,22 +103,19 @@
                   <label class="form-control-label">CEP</label>
                   <input type="number" id="zipCode" class="form-control" placeholder="cep"
                          [value]="" (blur)="buscarCep($event.target.value)" formControlName="zipCode">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('address.zipCode').errors?.required
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('cep')?.invalid  && form.submitted">
                     CEP obrigatório!
-                  </small>
-                  <small class="text-danger d-block mt-2" *ngIf="cepvalico">
-                    CEP inválido!
                   </small>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">Logradouro</label>
-                  <input class="form-control" id="neighborhood" placeholder="Lagradouro" [value]="neighborhood"
+                  <input class="form-control" id="neighborhood" placeholder="Lagradouro"
                          formControlName="neighborhood">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('address.neighborhood').errors?.required
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('address.neighborhood')?.invalid  && form.submitted">
                     Logradouro obrigatório!
                   </small>
                 </div>
@@ -127,9 +123,9 @@
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">Bairro</label>
-                  <input class="form-control" id="street" placeholder="Bairro" [value]="street" formControlName="street">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('address.street').errors?.required
-                                  && form.submitted">
+                  <input class="form-control" id="street" placeholder="Bairro" formControlName="street">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('address.street')?.invalid  && form.submitted">
                     Bairro obrigatório!
                   </small>
                 </div>
@@ -139,10 +135,10 @@
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">Cidade</label>
-                  <input type="text" id="city" class="form-control" placeholder="Cidade" [value]="city"
+                  <input type="text" id="city" class="form-control" placeholder="Cidade"
                          formControlName="city">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('address.city').errors?.required
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('address.city')?.invalid  && form.submitted">
                     Cidade obrigatório!
                   </small>
                 </div>
@@ -150,10 +146,10 @@
               <div class="col-lg-2">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">Estado</label>
-                  <input type="text" id="state" class="form-control" placeholder="Estado" [value]="state"
+                  <input type="text" id="state" class="form-control" placeholder="Estado"
                          formControlName="state">
-                  <small class="text-danger d-block mt-2" *ngIf="formLocais.get('address.state').errors?.required
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formLocais.get('address.state')?.invalid  && form.submitted">
                     Estado obrigatório!
                   </small>
                 </div>
@@ -161,7 +157,7 @@
               <div class="col-lg-6">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">Complemento</label>
-                  <input type="text" id="complement" class="form-control" placeholder="complemento" [value]="complement"
+                  <input type="text" id="complement" class="form-control" placeholder="complemento"
                          formControlName="complement">
                 </div>
               </div>

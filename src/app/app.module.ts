@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -21,10 +21,13 @@ import { AdicionarVacinaComponent } from './pages/adicionar-vacina/adicionar-vac
 import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
 import { MinhasVacinasComponent } from './pages/minhas-vacinas/minhas-vacinas.component';
 import {TextMaskModule} from 'angular2-text-mask';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import { LocaisVacinacaoComponent } from './pages/locais-vacinacao/locais-vacinacao.component';
 import { AdicionarVacinaPessoaComponent } from './pages/adicionar-vacina-pessoa/adicionar-vacina-pessoa.component';
 import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.component';
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   imports: [
@@ -39,7 +42,9 @@ import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.compo
     Ng2SearchPipeModule,
     AdminLayoutModule,
     TextMaskModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    RecaptchaModule,
+    NgxSpinnerModule
   ],
     declarations: [
         AppComponent,
@@ -52,7 +57,8 @@ import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.compo
         MinhasVacinasComponent,
         LocaisVacinacaoComponent,
         AdicionarVacinaPessoaComponent,
-        ListaVacinasComponent
+        ListaVacinasComponent,
+        RecuperarSenhaComponent
     ],
     providers: [
         PessoasService,
@@ -62,6 +68,9 @@ import { ListaVacinasComponent } from './pages/lista-vacinas/lista-vacinas.compo
     ],
     exports: [
     ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

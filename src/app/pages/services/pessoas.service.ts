@@ -3,9 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Endereco} from '../shared/endereco';
 import {Pessoa} from '../shared/pessoa';
-import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD, URL_AUTH} from '../../app.api';
-
-import {Email} from '../shared/email';
+import {URL_API_CEP, URL_API_PESSOA, URL_API_VACCINECARD} from '../../app.api';
 import {retry} from 'rxjs/operators';
 
 
@@ -15,13 +13,13 @@ export class PessoasService {
 
   constructor(private http: HttpClient) {
   }
-  // Headers
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   public listarPessoas(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}`);
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=0&size=10&sort=id,DESC`);
+  }
+
+  public listarPessoasPag2(): Observable<Pessoa[]> {
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=1&size=10&sort=id,DESC`);
   }
 
   public buscarCep(cep: string): Observable<Endereco> {
@@ -33,7 +31,6 @@ export class PessoasService {
   }
 
   public pesquisarPessoas(termoPesquisa: string): Observable<Pessoa[]> {
-    console.log('pesquisa pessoa ', this.http.get<Pessoa[]>(`${URL_API_PESSOA}?fullName_like=${termoPesquisa}`).pipe(retry(10)));
     return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?fullName_like=${termoPesquisa}`).pipe(retry(10));
   }
 
@@ -45,16 +42,15 @@ export class PessoasService {
     return this.http.patch(`${URL_API_PESSOA}/${id}`, pessoa);
   }
 
-  public salvarAnexo (anexo: FormData): Observable<FormData> {
-    return this.http.post<FormData>(`${URL_API_VACCINECARD}/mail/anexo`, anexo);
+  public enviarEmail(formData: FormData): Observable<FormData> {
+    return this.http.post<FormData>(`${URL_API_VACCINECARD}/mail`, formData);
   }
 
-  public enviarEmail (email: Email): Observable<Email> {
-    return this.http.post<Email>(`${URL_API_VACCINECARD}/mail`, email);
+  public async cadastrarCalendario(calendario): Promise<any> {
+    return await this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario).toPromise();
   }
 
-  public cadastrarCalendario(calendario): Observable<any> {
-    return this.http.post(`${URL_API_VACCINECARD}/calendar`, calendario);
+  public pesquisarPessoasEmail(termoPesquisa: string): Observable<Pessoa[]> {
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?email=${termoPesquisa}`);
   }
-
 }

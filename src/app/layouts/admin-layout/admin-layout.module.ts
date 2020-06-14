@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +17,8 @@ import {FilterVacinaPipe} from '../../filter/filter-vacina.pipe';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {FilterLocais} from '../../filter/filter-locais';
 import {SortPipe} from '../../filter/sort.pipe';
+import {TextMaskModule} from 'angular2-text-mask';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import {SortPipe} from '../../filter/sort.pipe';
     ClipboardModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    TextMaskModule,
+    NgxSpinnerModule
   ],
   exports: [
     FilterPipe,
@@ -39,7 +42,6 @@ import {SortPipe} from '../../filter/sort.pipe';
     SortPipe
   ],
   declarations: [
-    DashboardComponent,
     UserProfileComponent,
     PessoasComponent,
     MapsComponent,

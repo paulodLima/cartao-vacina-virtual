@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { PessoasComponent } from '../../pages/pessoas/pessoas.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
@@ -14,10 +13,10 @@ import {MinhasVacinasComponent} from '../../pages/minhas-vacinas/minhas-vacinas.
 import {LocaisVacinacaoComponent} from '../../pages/locais-vacinacao/locais-vacinacao.component';
 import {AdicionarVacinaPessoaComponent} from '../../pages/adicionar-vacina-pessoa/adicionar-vacina-pessoa.component';
 import {ListaVacinasComponent} from '../../pages/lista-vacinas/lista-vacinas.component';
+import {RecuperarSenhaComponent} from '../../pages/recuperar-senha/recuperar-senha.component';
 
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'user-profile',   component: UserProfileComponent, canActivate: [AuthGuard] },
     { path: 'locais',           component: MapsComponent, canActivate: [AuthGuard] },
     { path: 'campanha',      component: CampanhaComponent, canActivate: [AuthGuard] },

@@ -6,15 +6,19 @@ import {PessoasService} from '../pages/services/pessoas.service';
 import {Pessoa} from '../pages/shared/pessoa';
 import {CLIENTID, CLIENTSECURITY, PASSWORD, URL_AUTH, USER} from '../app.api';
 import {Subscription} from 'rxjs';
+import {Token} from './model/token';
+import {DecodedToken} from './model/decoded-token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private ACCESS_TOKEN = 'access_token';
+  private CURRENT_USER = 'currentUser';
   public admin = false;
-  private accessToken;
-  private token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
+  public roles;
+  token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
   private refreshToken = {clientId: CLIENTID, clientSecret: CLIENTSECURITY, refreshToken: null};
 
   constructor(private http: HttpClient,
@@ -25,25 +29,30 @@ export class AuthService {
   }
 
   autenticacao(usuario: string, senha: string, person: Pessoa[]) {
-
-
-    if (usuario === 'admin' && senha === 'admin123') {
+    this.login(usuario, senha).subscribe((token: Token) => {
+      localStorage.setItem(usuario, token.refresh_token);
+      localStorage.setItem(this.CURRENT_USER, usuario);
       this.getRoles();
-      localStorage.setItem('usuario', JSON.stringify(''));
-      this.admin = true;
+      this.admin = this.getDecodedToken(token, this.ACCESS_TOKEN).realm_access.roles.includes('admin');
       this.loginService.autenticarUsario();
-      this.router.navigateByUrl('/dashboard');
-
-    }
-
+      if (this.admin) {
+        this.router.navigateByUrl('/lista-vacinas');
+      } else {
+        this.router.navigateByUrl('/minhas-vacinas');
+      }
+    }, error => {
+      alert('erro ao efetuar login');
+    });
   }
 
-  gerarToken() {
+  private login(user: string, password: string) {
+    this.token.username = user;
+    this.token.password = password;
     return this.http.post(`${URL_AUTH}/v1/api/auth/token`, this.token);
   }
 
 
-  geraAcToken() {
+  private geraAcToken() {
     console.log(this.refreshToken);
     return this.http.post(`${URL_AUTH}/v1/api/auth/refresh`, this.refreshToken).subscribe(refresh => {
       console.log('novo token', refresh);
@@ -52,16 +61,51 @@ export class AuthService {
 
   public getRoles(): Subscription {
 
-    return this.gerarToken().subscribe(token => {
+    return this.login(this.token.username, this.token.password).subscribe((token: Token) => {
 
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
 
       this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'}).subscribe(resposta => {
-        console.log(resposta);
+        this.roles = resposta;
       }, error => console.log('erro', error));
 
     }, error => console.log('erro ao gerar token', error));
 
   }
+
+  public getDecodedToken(token: Token, type: string): DecodedToken {
+
+    let body: string;
+    if (type === this.ACCESS_TOKEN) {
+      body = token.access_token.split('.')[1];
+    } else {
+      body = token.refresh_token.split('.')[1];
+    }
+    const decodedToken: DecodedToken = JSON.parse(atob(body));
+
+    decodedToken.realm_access.roles = decodedToken.realm_access.roles.filter((value) => value !== 'offline_access' && value !== 'uma_authorization');
+
+    return decodedToken;
+  }
+
+  public tokenIsvalid(decodedToken: DecodedToken): boolean {
+
+    const expireDate: Date = new Date(decodedToken.exp * 1000);
+
+    return expireDate <= new Date();
+  }
+
+  public logout() {
+    localStorage.removeItem(this.CURRENT_USER);
+    this.loginService.logout();
+    this.router.navigateByUrl('/login');
+  }
+
+  public isLogged(): boolean {
+    const token: Token = new Token();
+    token.refresh_token = localStorage.getItem(localStorage.getItem(this.CURRENT_USER));
+    return this.tokenIsvalid(this.getDecodedToken(token, 'refresh_token'));
+  }
+
 }

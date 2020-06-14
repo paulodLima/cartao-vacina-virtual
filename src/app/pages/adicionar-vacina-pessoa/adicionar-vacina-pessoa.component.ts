@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Pessoa} from '../shared/pessoa';
 import {Vacina} from '../shared/vacina.model';
 import {PessoasService} from '../services/pessoas.service';
 import {VacinaService} from '../services/vacina.service';
 import {Unidades} from '../shared/unidades';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-adicionar-vacina-pessoa',
@@ -29,22 +30,28 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
   public paciente = '';
   public sucesso = false;
   public required = false;
-  private locais: any;
-  private local: Unidades;
-  private locall = '';
-  private dataFormatada: string;
-  private historico: Vacina[] = [];
-  private mensagem: string;
+  public locais: any;
+  public local: Unidades;
+  public locall = '';
+  public dataFormatada: string;
+  public historico: Vacina[] = [];
+  public mensagem: string;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
-              private vacinaService: VacinaService) { }
+              private vacinaService: VacinaService,
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarPessoas();
     this.listarLocais();
     this.dataAtualFormatada();
   }
+
   listarPessoas() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
@@ -52,6 +59,7 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
       console.log('Erro ao listar pessoas', erro);
     });
   }
+
   pesquisa(event: string) {
     if (event.length <= 2) {
       this.termo = false;
@@ -117,13 +125,13 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
 
   aplicarDosagem() {
     this.formDosage = this.formBuilder.group({
-      applicationDate:  this.dataFormatada ,
+      applicationDate: this.dataFormatada,
       applied: true,
       healthCenterUuid: this.local.uuid
     });
 
     console.log('form dosagem', this.formDosage);
-    for (let i = 0; i <= this.historico.length; i++ ) {
+    for (let i = 0; i <= this.historico.length; i++) {
       if (this.historico[i].vaccineUuid === this.vacina.uuid) {
 
         this.vacinaService.atualizarDosagem(this.historico[i].dosagesInformation[0].uuid, this.formDosage.value).subscribe(dosage => {
@@ -139,10 +147,11 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
       }
     }
   }
+
   buscarHistorico() {
     this.vacinaService.getHistoricoVacina(this.pessoa.uuid).then(historico => {
 
-      Object.assign(this.historico, historico);
+      this.historico = historico;
       this.buscarVacinas();
 
     }, error => console.log('erro ao listar historico', error));
@@ -160,13 +169,14 @@ export class AdicionarVacinaPessoaComponent implements OnInit {
     console.log('vacinas', this.vacinas);
 
   }
- dataAtualFormatada() {
- const data = new Date(),
-    dia  = data.getDate().toString(),
-    diaF = (dia.length === 1) ? '0' + dia : dia,
-    mes  = (data.getMonth() + 1).toString(),
-    mesF = (mes.length === 1) ? '0' + mes : mes,
-    anoF = data.getFullYear();
+
+  dataAtualFormatada() {
+    const data = new Date(),
+      dia = data.getDate().toString(),
+      diaF = (dia.length === 1) ? '0' + dia : dia,
+      mes = (data.getMonth() + 1).toString(),
+      mesF = (mes.length === 1) ? '0' + mes : mes,
+      anoF = data.getFullYear();
     this.dataFormatada = anoF + '-' + mesF + '-' + diaF;
- }
+  }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PessoasService} from '../services/pessoas.service';
 import {Pessoa} from '../shared/pessoa';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-campanha',
@@ -16,30 +17,38 @@ export class CampanhaComponent implements OnInit {
   public composeEmail = '';
   public annex = '';
   public pessoas: Pessoa;
-  public email = [];
+  public email: Array<string> = new Array<string>();
   public sucesso = false;
   public erro = false;
   public fileName: '';
+  public formData: FormData = new FormData();
 
-    constructor(private formBuilder: FormBuilder,
-                private pessoasService: PessoasService) { }
+  constructor(private formBuilder: FormBuilder,
+              private pessoasService: PessoasService,
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-      this.formEmail = this.formBuilder.group({
-          recipients:   ['', [Validators.required]],
-          subject:      ['', [Validators.required]],
-          composeEmail: ['', [Validators.required]],
-          annex:        ['', [Validators.required]]
-      });
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
+    this.formEmail = this.formBuilder.group({
+      recipients: ['', [Validators.required]],
+      subject: ['', [Validators.required]],
+      composeEmail: ['', [Validators.required]],
+      annex: ['', [Validators.required]]
+    });
     this.listarPessoas();
   }
 
   listarPessoas() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
-      for (let i = 0; i <= pessoas.length; i++) {
-        this.pessoas = pessoas[i];
-        this.email.push(this.pessoas.email);
-      }
+
+      console.log(pessoas, 'dsadsadsa');
+
+      pessoas.forEach(pessoa => {
+        this.email.push(pessoa.email);
+      });
 
     }, erro => {
       console.log('Erro ao listar pessoas', erro);
@@ -48,44 +57,41 @@ export class CampanhaComponent implements OnInit {
 
   inputFile(event) {
 
-      if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files[0]) {
+
+      this.formEmail.patchValue({
+        annex: 'foo',
+      });
+
       const file = event.target.files[0];
 
-      this.fileName = event.target.value;
-      this.removeNome(this.fileName);
-
-      const formData = new FormData();
-      formData.append('file', file);
-
-      this.pessoasService.salvarAnexo(formData).subscribe(
-        () => {
-          console.log('passando aqui e salvando');
-        }, erro => console.log('erro ao anexar', erro)
-      );
+      console.log(file, 'dsadsa');
+      this.formData.append('file', file);
     }
   }
 
   envioEmail() {
-      this.formEmail. patchValue({
-        recipients: this.email,
-        annex: this.fileName
+    this.formEmail.patchValue({
+      recipients: this.email,
     });
 
     if (this.formEmail.valid) {
 
-      console.log('enviando email', this.formEmail);
+      this.formData.append('composeEmail', this.formEmail.get('composeEmail').value);
+      this.formData.append('subject', this.formEmail.get('subject').value);
+      this.email.forEach(email => {
+        this.formData.append('recipients', email);
+      });
 
-      this.pessoasService.enviarEmail(this.formEmail.value).subscribe(
+      this.pessoasService.enviarEmail(this.formData).subscribe(
         () => {
           this.formEmail.reset();
-
           this.sucesso = true;
-
           setTimeout(() => {
             this.sucesso = false;
           }, 6000);
 
-          }, erro => {
+        }, erro => {
 
           this.erro = true;
 
@@ -95,10 +101,5 @@ export class CampanhaComponent implements OnInit {
           console.log('erro ao enviar email', erro);
         });
     }
-  }
-
-  removeNome(nome) {
-      const res = nome.split('C:\\fakepath\\');
-      this.fileName =  res[1];
   }
 }

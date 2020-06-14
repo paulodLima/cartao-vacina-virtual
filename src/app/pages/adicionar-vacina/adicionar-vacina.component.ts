@@ -4,6 +4,7 @@ import {PessoasService} from '../services/pessoas.service';
 import {Pessoa} from '../shared/pessoa';
 import {VacinaService} from '../services/vacina.service';
 import {Vacina} from '../shared/vacina.model';
+import {AuthService} from '../../core/auth.service';
 
 @Component({
   selector: 'app-adicionar-vacina',
@@ -26,13 +27,17 @@ export class AdicionarVacinaComponent implements OnInit {
   public sucesso = false;
   public required = false;
   public vacinauuid = '';
-  private obrigatorio = false;
+  public obrigatorio = false;
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
-              private vacinaService: VacinaService) { }
+              private vacinaService: VacinaService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.authService.logout();
+    }
     this.listarPessoas();
     this.listarVacinas();
   }
