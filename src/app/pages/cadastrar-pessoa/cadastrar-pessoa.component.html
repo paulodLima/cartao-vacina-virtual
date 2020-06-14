@@ -45,7 +45,7 @@
                   <select id="role" class="form-control" [value]="rolesId" #permissao
                           (blur)="teste(permissao.value, $event)">
                     <option selected>selecione...</option>
-                    <option *ngFor="let roles of listRolesPt" [value]="roles.id">{{roles.name}}</option>
+                    <option *ngFor="let roles of listRolesPt" [value]="roles.id">{{roles.namePt}}</option>
                   </select>
                 </div>
               </div>

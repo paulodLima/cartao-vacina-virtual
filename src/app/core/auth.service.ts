@@ -8,6 +8,7 @@ import {CLIENTID, CLIENTSECURITY, PASSWORD, URL_AUTH, USER} from '../app.api';
 import {Subscription} from 'rxjs';
 import {Token} from './model/token';
 import {DecodedToken} from './model/decoded-token';
+import {Role} from './model/role';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   private ACCESS_TOKEN = 'access_token';
   private CURRENT_USER = 'currentUser';
   public admin = false;
-  public roles;
+  public roles: Array<Role> = new Array<Role>();
   token = {username: USER, password: PASSWORD, clientId: CLIENTID, clientSecret: CLIENTSECURITY};
   private refreshToken = {clientId: CLIENTID, clientSecret: CLIENTSECURITY, refreshToken: null};
 
@@ -66,9 +67,19 @@ export class AuthService {
       let headers = new HttpHeaders();
       headers = headers.append('Authorization', 'Bearer ' + token.access_token);
 
-      this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers, responseType: 'text'}).subscribe(resposta => {
-        this.roles = resposta;
-      }, error => console.log('erro', error));
+      this.http.get(`${URL_AUTH}/v1/api/auth/role`, {headers})
+        .subscribe((role: Array<Role>) => {
+          this.roles = role;
+          this.roles.forEach(s => {
+            if (s.name === 'patient') {
+              s.namePt = 'paciente';
+            } else if (s.name === 'admin') {
+              s.namePt = 'administrador';
+            } else if (s.name === 'manager') {
+              s.namePt = 'gerente';
+            }
+          });
+        }, error => console.log('erro', error));
 
     }, error => console.log('erro ao gerar token', error));
 
