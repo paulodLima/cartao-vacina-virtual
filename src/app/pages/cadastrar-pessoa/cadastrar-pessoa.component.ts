@@ -9,6 +9,7 @@ import {Vacina} from '../shared/vacina.model';
 import {Pessoa} from '../shared/pessoa';
 import {AuthService} from '../../core/auth.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {Role} from '../../core/model/role';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -23,7 +24,7 @@ export class CadastrarPessoaComponent implements OnInit {
   public rolesId: string;
   public rolesName: string;
   public listRoles: string;
-  public listRolesPt: string;
+  public listRolesPt: Array<Role>;
   private tamanhoValido = false;
 
   constructor(private router: Router,
@@ -65,7 +66,7 @@ export class CadastrarPessoaComponent implements OnInit {
   public mensagemErro: string;
   public sucesso = false;
   valida = false;
-  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/ , /\d/];
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public password: any;
@@ -83,15 +84,8 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.id !== undefined) {
       this.disableds = true;
     }
-    this.listRoles = JSON.parse(this.authService.roles);
 
-    console.log('LIST TOLES', this.listRoles);
-
-    const value = Object.assign({}, this.listRoles);
-
-    this.listRolesPt = Object.assign(value, [{'id': 'Paciente', 'name': 'test'}, {'id': 'Gerente', 'name': 'test'}, {'id': 'Administrador', 'name': 'test'}]);
-
-    console.log('list roles', this.listRoles);
+    this.listRolesPt = this.authService.roles;
   }
 
   formPersonBulder() {
@@ -182,7 +176,7 @@ export class CadastrarPessoaComponent implements OnInit {
     console.log(this.formPerson);
 
     if (this.formPerson.valid) {
-        this.sucesso = true;
+      this.sucesso = true;
 
       this.pessoasService.criarPessoa(this.formPerson.value).subscribe(pessoa => {
         this.uuid = pessoa.uuid;
@@ -294,6 +288,7 @@ export class CadastrarPessoaComponent implements OnInit {
   voltar() {
     this.router.navigateByUrl('/pessoas');
   }
+
   tamalho(senha) {
     console.log(senha);
     if (senha.length !== 8) {
@@ -302,6 +297,7 @@ export class CadastrarPessoaComponent implements OnInit {
       this.tamanhoValido = false;
     }
   }
+
   comparar(senha, confirmar, permissao) {
     if (confirmar.length >= 8) {
       if (senha !== '' && confirmar !== '' && senha === confirmar) {
