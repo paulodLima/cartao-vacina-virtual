@@ -3,7 +3,6 @@ import {PessoasService} from '../services/pessoas.service';
 import {Pessoa} from '../shared/pessoa';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {VacinaService} from '../services/vacina.service';
 import {AuthService} from '../../core/auth.service';
 
 
@@ -39,12 +38,13 @@ export class PessoasComponent implements OnInit {
   listarPessoasPag1() {
     this.pessoasService.listarPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
-    for (let i = 0; i <= pessoas.length; i++) {
-      const dataFormat = this.pessoas[i].birthDate;
-      const str = dataFormat.split('-');
-      this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
-      this.pessoas[i].birthDate = this.dataFormatada;
-    }
+      this.pessoas.forEach(pessoa => {
+        const dataFormat = pessoa.birthDate;
+        const str = dataFormat.split('-');
+        this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
+        pessoa.birthDate = this.dataFormatada;
+      });
+
       console.log(this.pessoas);
 
     }, error => {
@@ -56,12 +56,12 @@ export class PessoasComponent implements OnInit {
     this.pessoas = [];
     this.pessoasService.listarPessoasPag2().subscribe(pessoas => {
       this.pessoas = pessoas;
-    for (let i = 0; i <= pessoas.length; i++) {
-      const dataFormat = this.pessoas[i].birthDate;
-      const str = dataFormat.split('-');
-      this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
-      this.pessoas[i].birthDate = this.dataFormatada;
-    }
+      for (let i = 0; i <= pessoas.length; i++) {
+        const dataFormat = this.pessoas[i].birthDate;
+        const str = dataFormat.split('-');
+        this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
+        this.pessoas[i].birthDate = this.dataFormatada;
+      }
       console.log(this.pessoas);
 
     }, error => {
