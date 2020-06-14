@@ -298,10 +298,7 @@
                     <label class="form-control-label">Senha</label>
                     <input id="senha" class="form-control" placeholder="Senha" type="password"
                            formControlName="Senha" [value]="senha" #senha (blur)="tamalho(senha.value)">
-                    <small class="text-danger d-block mt-2" *ngIf="tamanhoValido">
-                      A senha deve ter o tamaho de 8!
-                    </small>
-                  </div>
+                    </div>
                 </div>
                 <div class="col-lg-4 ">
                   <div class="form-group" formArrayName="credential">
