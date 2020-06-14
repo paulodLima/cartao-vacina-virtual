@@ -190,7 +190,6 @@ export class CadastrarPessoaComponent implements OnInit {
         height: `${this.formPerson.get('height.height').value}`
       })
     });
-    console.log(this.formPerson);
 
     if (this.formPerson.valid) {
       this.sucesso = true;

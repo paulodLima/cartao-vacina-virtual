@@ -97,10 +97,25 @@ export class CadastrarVacinaComponent implements OnInit {
   }
 
   cadastrarVacina() {
-  console.log(this.formVacina.value);
     if (this.formVacina.valid) {
       this.vacinaService.cadastrarVacina(this.formVacina.value).subscribe(vacina => {
         this.formVacina.reset();
+        this.sucesso = true;
+
+        setTimeout(() => {
+
+          this.sucesso = false;
+
+        }, 3000);
+
+        const scrollToTop = window.setInterval(() => {
+          const pos = window.pageYOffset;
+          if (pos > 0) {
+            window.scrollTo(0, pos - 20); // how far to scroll on each step
+          } else {
+            window.clearInterval(scrollToTop);
+          }
+        }, 16);
       }, erro => {
         console.log('Ocorreu um erro ao cadastrar vacina', erro);
         this.mensagemErro = erro.error.messages;
