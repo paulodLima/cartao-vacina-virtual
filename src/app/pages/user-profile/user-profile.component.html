@@ -99,10 +99,11 @@
                   </div>
                   <div class="col-lg-4 " formArrayName="phone">
                     <div class="form-group">
-                      <label class="form-control-label">Telefone</label>
-                      <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                      <label class="form-control-label">Celular</label>
+                      <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control"
+                             placeholder="999999999" formControlName="number"
                              [value]="pessoa.phone.number">
-                    </div>
+                  </div>
                   </div>
                   <div class="col-lg-3" formArrayName="height">
                     <div class="form-group">
