@@ -40,13 +40,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome</label>
-                    <input  disabled type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Username" [value]="pessoa.fullName">
+                    <input  disabled type="text" formControlName="fullName" id="fullName" class="form-control form-control-alternative" placeholder="Nome completo" [value]="pessoa.fullName">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Email</label>
-                    <input type="email" disabled [disabled]="desabilitado" formControlName="email" id="email" class="form-control form-control-alternative" [value]="pessoa.email">
+                    <input type="email" disabled [disabled]="desabilitado" formControlName="email" id="email" placeholder="E-mail" class="form-control form-control-alternative" [value]="pessoa.email">
                   </div>
                 </div>
               </div>
@@ -54,13 +54,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome da Mãe</label>
-                    <input disabled  [disabled]="desabilitado" type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="First name" [value]="pessoa.mothersName" >
+                    <input disabled  [disabled]="desabilitado" type="text" formControlName="mothersName" id="mothersName" class="form-control form-control-alternative" placeholder="Nome da Mãe" [value]="pessoa.mothersName" >
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label">Nome do Pai</label>
-                    <input disabled [disabled]="desabilitado" type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Last name" [value]="pessoa.fathersName">
+                    <input disabled [disabled]="desabilitado" type="text" id="fathersName" formControlName="fathersName" class="form-control form-control-alternative" placeholder="Nome do Pai" [value]="pessoa.fathersName">
                   </div>
                 </div>
               </div>
