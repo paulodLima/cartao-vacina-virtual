@@ -122,6 +122,15 @@ export class CadastrarPessoaComponent implements OnInit {
     });
   }
 
+
+  formPersonBuilderRoles() {
+    this.formPerson = this.formBuilder.group({
+      credential: this.formBuilder.group({
+        roles: this.bulderRoles()
+      })
+    });
+  }
+
   bulderRoles() {
     return this.formBuilder.array([
       new FormControl({'id': this.rolesId, 'name': this.rolesName})]);
@@ -161,7 +170,7 @@ export class CadastrarPessoaComponent implements OnInit {
   teste(roles, event) {
     this.rolesId = roles;
     this.rolesName = this.getNameRoleEnglish(event.target.options[event.target.options.selectedIndex].text);
-    this.formPersonBulder();
+    this.formPersonBuilderRoles();
   }
 
   getNameRoleEnglish(namePt) {
@@ -169,7 +178,7 @@ export class CadastrarPessoaComponent implements OnInit {
     if (namePt === 'administrador') {
       return 'admin';
     } else if (namePt === 'usuário') {
-      return 'user';
+      return 'patient';
     }
   }
 
