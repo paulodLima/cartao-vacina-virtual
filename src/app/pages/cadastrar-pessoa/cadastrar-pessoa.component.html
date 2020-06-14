@@ -157,7 +157,7 @@
               <div class="col-lg-2" formArrayName="phone">
                 <div class="form-group">
                   <label class="form-control-label">DDD</label>
-                  <input type="number" id="areaCode" class="form-control" placeholder="61" formControlName="areaCode"
+                  <input type="number" id="areaCode" class="form-control" placeholder="DDD" formControlName="areaCode"
                          [value]="areaCode">
                   <small class="text-danger d-block mt-2"
                          *ngIf="formPerson.get('phone.areaCode')?.dirty && formPerson.get('phone.areaCode')?.invalid || formPerson.get('phone.areaCode').errors?.pattern">
@@ -171,7 +171,7 @@
               </div>
               <div class="col-lg-4 " formArrayName="phone">
                 <div class="form-group">
-                  <label class="form-control-label">Telefone</label>
+                  <label class="form-control-label">Celular</label>
                   <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control"
                          placeholder="999999999" formControlName="number"
                          [value]="number">
