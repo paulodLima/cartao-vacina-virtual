@@ -18,7 +18,6 @@
             <div class="form-group">
               <label class="form-control-label">Vacinas obrigatórias</label>
               <select class="form-control" #obrigatoria>
-                <option selected value="--">Nenhum</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -28,7 +27,6 @@
             <div class="form-group">
               <label class="form-control-label">Vacinas tomadas</label>
               <select class="form-control" #tomada>
-                <option selected value="--">Nenhum</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -136,6 +134,16 @@
           <tr class="row">
             <td class="col tdg"> Alguns eventos adversos:</td>
             <td class="col tdgn"> {{vacinaPorNome.sideEffect}}
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg"> Unidade de saúde onde foi aplicada:</td>
+            <td class="col tdgn"> {{uniadeSaude}}
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg">Data de aplicação:</td>
+            <td class="col tdgn">{{dataFormatada}}
             </td>
           </tr>
           </tbody>

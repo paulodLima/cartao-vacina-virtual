@@ -65,9 +65,9 @@
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="form-group">
+                <div class="form-group" *ngIf="id == undefined">
                   <label class="form-control-label">Email</label>
-                  <input type="email" id="email" disabled="{{disableds}}" class="form-control"
+                  <input type="email" id="email" class="form-control"
                          placeholder="nome@exemplo.com"
                          formControlName="email" [value]="email">
                   <small class="text-danger d-block mt-2"

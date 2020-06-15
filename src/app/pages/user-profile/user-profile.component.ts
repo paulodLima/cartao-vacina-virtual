@@ -69,8 +69,8 @@ export class UserProfileComponent implements OnInit {
   buscarUsuario() {
     this.pessoasService.pesquisarPessoasEmail(this.authService.token.username).subscribe(usuario => {
       this.pessoaToken = usuario;
-      console.log('pessoa token', this.pessoaToken);
-      this.atualizarPerfil(usuario[0]);
+      console.log('pessoa token', this.pessoaToken[0]);
+      this.atualizarPerfil(this.pessoaToken[0]);
       this.pessoa = this.pessoaToken[0];
     }, error => console.log('erro ao consultar pessoa', error));
   }

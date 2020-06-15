@@ -14,7 +14,7 @@ export class ListaVacinasComponent implements OnInit {
 
   public vacinas: Vacina[];
   public   img_vacina = '../../../assets/img/vacina.png';
-  public vacinaPorNome: Vacina[];
+  public vacinaPorNome: Vacina;
 
   constructor(private vacinaService: VacinaService,
               private modalVacina: NgbModal,

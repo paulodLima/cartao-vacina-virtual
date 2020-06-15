@@ -22,8 +22,8 @@ export class VacinaService {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
 
-  public getVacinasNome(uuid: string): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
+  public getVacinasNome(uuid: string): Observable<Vacina> {
+    return this.http.get<Vacina>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
 
   public getApplicationLocation(): Observable<any> {
@@ -76,10 +76,7 @@ export class VacinaService {
   }
 
   public async getHistoricoVacina(pessoa: string): Promise<any> {
-
-    console.log('id', pessoa);
     const object = await this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}`).toPromise();
-    console.log('objeto retornado', object);
     return object;
   }
 
