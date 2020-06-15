@@ -69,6 +69,8 @@ export class CadastrarPessoaComponent implements OnInit {
   cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  alturaMask = [/\d/, ',', /\d/, /\d/];
+  pesoMask = [/\d/, /\d/, ',', /\d/, /\d/];
   public password: any;
 
   ngOnInit(): void {

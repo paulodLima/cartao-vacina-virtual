@@ -21,6 +21,10 @@ export class UserProfileComponent implements OnInit {
   desabilitado = true;
   private pessoaToken: Pessoa[];
   telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  alturaMask = [/\d/, ',', /\d/, /\d/];
+  pesoMask = [/\d/, /\d/, ',', /\d/, /\d/];
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
