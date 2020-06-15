@@ -158,10 +158,10 @@ export class CadastrarPessoaComponent implements OnInit {
         number: pessoa.phone.number
       }),
       height: ({
-        height: pessoa.height.height
+        height: pessoa.height ? pessoa.height.height : null
       }),
       weight: ({
-        weight: pessoa.weight.weight
+        weight: pessoa.weight ? pessoa.weight.weight : null
       })
     });
   }
@@ -235,8 +235,19 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   atualizar() {
+
+    this.formPerson.patchValue({
+      credential: ({
+        roles: [{'id': this.rolesId, 'name': this.rolesName}],
+        password: 'atazera'
+      })
+    });
     if (this.formPerson.valid) {
       this.formPerson.patchValue({
+        credential: ({
+          roles: [{'id': this.rolesId, 'name': this.rolesName}],
+          password: 'atazera'
+        }),
         weight: ({
           weight: `${this.formPerson.get('weight.weight').value}`
         }),
@@ -244,6 +255,7 @@ export class CadastrarPessoaComponent implements OnInit {
           height: `${this.formPerson.get('height.height').value}`
         })
       });
+
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
         this.formPerson.reset();
         this.router.navigateByUrl('/pessoas');
@@ -306,11 +318,7 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   tamanho(senha) {
-    if (senha.length !== 8) {
-      this.tamanhoValido = true;
-    } else {
-      this.tamanhoValido = false;
-    }
+    this.tamanhoValido = senha.length !== 8;
   }
 
   comparar(senha, confirmar, permissao) {

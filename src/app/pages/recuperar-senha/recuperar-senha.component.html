@@ -35,26 +35,13 @@
                 <div class="form-group">
                   <label form-control-label>Digite seu e-mail</label>
                   <input class="form-control" placeholder="E-mail" #email formControlName="email">
-                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('email').errors?.required
-                                  && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formEmail.get('email')?.invalid  && form.submitted">
                     Email obrigatório!
                   </small>
-                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('email').errors?.email && form.submitted">
+                  <small class="text-danger d-block mt-2"
+                         *ngIf="formEmail.get('email')?.dirty && formEmail.get('email')?.invalid">
                     Email inválido!
-                  </small>
-                </div>
-              </div>
-              <div class="col-lg-6 ">
-                <div class="form-group" formControlName="captcha">
-                  <recaptcha-demo-wrapper>
-                    <re-captcha
-                      (resolved)="resolved($event)"
-                      siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"
-                    ></re-captcha>
-                  </recaptcha-demo-wrapper>
-                  <small class="text-danger d-block mt-2" *ngIf="formEmail.get('captcha').errors?.required
-                                  && form.submitted">
-                    recaptcha obrigatório!
                   </small>
                 </div>
               </div>
