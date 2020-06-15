@@ -101,7 +101,23 @@ export class VacinaService {
   }
 
   getLocais() {
-    return this.http.get(`${URL_API_VACCINECARD}/health-center`);
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=1&size=10&sort=name,ASC`);
+
+  }
+
+  deleteLocal() {
+    return this.http.delete(`${URL_API_VACCINECARD}/health-center?page=1&size=10&sort=name,ASC`);
+
+  }
+  getLocaisPag2() {
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=2&size=10&sort=name,ASC`);
+  }
+  getLocaisPag3() {
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=3&size=10&sort=name,ASC`);
+  }
+
+  apagarLocal(uuid) {
+    return this.http.delete(`${URL_API_VACCINECARD}/health-center/${uuid}`);
   }
 
   getLocalUuid(uuid) {

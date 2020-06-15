@@ -85,6 +85,7 @@ export class LocaisVacinacaoComponent implements OnInit {
   }
 
   cadastrar() {
+    console.log(this.formLocais.value);
     this.vacinaService.criarLocal(this.formLocais.value).subscribe(local => {
         this.formLocais.reset();
     }, error => console.log('erro ao cadastrar local', error));
