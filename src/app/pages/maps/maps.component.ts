@@ -41,4 +41,28 @@ export class MapsComponent implements OnInit {
   editarLocal(uuid: string) {
     this.router.navigate(['editar-local', uuid]);
   }
+
+  listarEnderecoPag1() {
+    this.vacinaService.getLocais().subscribe(locais => {
+      this.locais = locais;
+    }, error => console.log('erro ao listar locais', error));
+  }
+
+  listarenderecoPag2() {
+    this.vacinaService.getLocaisPag2().subscribe(locais => {
+      this.locais = locais;
+    }, error => console.log('erro ao listar locais', error));
+  }
+
+  listarenderecoPag3() {
+    this.vacinaService.getLocaisPag3().subscribe(locais => {
+      this.locais = locais;
+    }, error => console.log('erro ao listar locais', error));
+  }
+
+  apagarLocal(uuid: any) {
+    this.vacinaService.apagarLocal(uuid).subscribe(locais => {
+      this.listarEnderecoPag1();
+    }, error => console.log('erro ao listar locais', error));
+  }
 }

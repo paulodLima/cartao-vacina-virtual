@@ -68,8 +68,8 @@
                   <div class="col-lg-4 ">
                     <div class="form-group">
                       <label class="form-control-label">CPF</label>
-                      <input disabled  [disabled]="desabilitado" id="documentNumber" class="form-control" placeholder="CPF"
-                             formControlName="documentNumber" [value]="pessoa.documentNumber">
+                      <input disabled  [disabled]="desabilitado" id="documentNumber" [textMask]="{mask: cpfMask}" class="form-control" placeholder="CPF"
+                             formControlName="documentNumber" type="text" [value]="pessoa.documentNumber">
                     </div>
                   </div>
                   <div class="col-lg-4 ">
@@ -93,28 +93,29 @@
                   <div class="col-lg-2" formArrayName="phone">
                     <div class="form-group">
                       <label class="form-control-label">DDD</label>
-                      <input type="number" id="areaCode" class="form-control" placeholder="061" formControlName="areaCode"
+                      <input type="number" id="areaCode" class="form-control" placeholder="DDD" formControlName="areaCode"
                              [value]="pessoa.phone.areaCode">
                     </div>
                   </div>
                   <div class="col-lg-4 " formArrayName="phone">
                     <div class="form-group">
-                      <label class="form-control-label">Telefone</label>
-                      <input type="number" id="number" class="form-control" placeholder="999999999" formControlName="number"
+                      <label class="form-control-label">Celular</label>
+                      <input type="text" id="number" [textMask]="{mask: telMask}" class="form-control"
+                             placeholder="999999999" formControlName="number"
                              [value]="pessoa.phone.number">
-                    </div>
+                  </div>
                   </div>
                   <div class="col-lg-3" formArrayName="height">
                     <div class="form-group">
-                      <label class="form-control-label">Altura</label>
-                      <input type="number" id="height" class="form-control" placeholder="Altura" formControlName="height"
+                      <label class="form-control-label">Altura(M)</label>
+                      <input type="text" id="height" class="form-control" [textMask]="{mask: alturaMask}" placeholder="Altura" formControlName="height"
                              [value]="pessoa.height">
                     </div>
                   </div>
                   <div class="col-lg-3" formArrayName="weight">
                     <div class="form-group">
                       <label class="form-control-label">Peso(KG)</label>
-                      <input type="number" id="weight" class="form-control" placeholder="Peso" formControlName="weight"
+                      <input type="text" id="weight" class="form-control" [textMask]="{mask: pesoMask}" placeholder="Peso" formControlName="weight"
                              [value]="pessoa.weight">
                     </div>
                   </div>
@@ -127,8 +128,8 @@
               <div class="col-lg-4">
                 <div class="form-group" formArrayName="address">
                   <label class="form-control-label">CEP</label>
-                  <input [disabled]="edit" type="number" id="zipCode" class="form-control" placeholder="cep"
-                         [value]="pessoa.address.zipCode" formControlName="zipCode">
+                  <input [disabled]="edit" type="text" id="zipCode" class="form-control" placeholder="cep"
+                         [value]="pessoa.address.zipCode" formControlName="zipCode" [textMask]="{mask: cefMask}">
                 </div>
               </div>
               <div class="col-lg-4">

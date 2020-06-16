@@ -14,7 +14,7 @@ export class ListaVacinasComponent implements OnInit {
 
   public vacinas: Vacina[];
   public   img_vacina = '../../../assets/img/vacina.png';
-  public vacinaPorNome: Vacina[];
+  public vacinaPorNome: Vacina;
 
   constructor(private vacinaService: VacinaService,
               private modalVacina: NgbModal,
@@ -41,7 +41,18 @@ export class ListaVacinasComponent implements OnInit {
     this.modalVacina.open(modal);
   }
 
+  abrirModalEmail(modal) {
+    this.modalVacina.open(modal);
+  }
+
   fechar(modal) {
     this.modalVacina.dismissAll(modal);
+  }
+
+  EnviarEmailVacinas(modal) {
+    this.vacinaService.emailVacinasPendentes().subscribe(enviado => {
+      console.log('enviado com sucesso');
+      this.modalVacina.dismissAll(modal);
+    }, error => console.log('erro ao enviar e-mail', error));
   }
 }

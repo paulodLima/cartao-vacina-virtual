@@ -15,11 +15,11 @@ export class PessoasService {
   }
 
   public listarPessoas(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=0&size=10&sort=id,DESC`);
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=0&size=10&sort=fullName,ASC`);
   }
 
   public listarPessoasPag2(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=1&size=10&sort=id,DESC`);
+    return this.http.get<Pessoa[]>(`${URL_API_PESSOA}?page=1&size=10&sort=fullName,ASC`);
   }
 
   public buscarCep(cep: string): Observable<Endereco> {

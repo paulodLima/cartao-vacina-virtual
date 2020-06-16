@@ -17,7 +17,9 @@ export class MinhasVacinasComponent implements OnInit {
   public vacinas: Vacina[] = [];
   public pessoaUuid: string;
   img_vacina = '../../../assets/img/vacina.png';
-  public vacinaPorNome: Vacina[];
+  public vacinaPorNome: Vacina;
+  private uniadeSaude: string;
+  private dataFormatada: string;
 
   constructor(private vacinaService: VacinaService,
               private modalVacina: NgbModal,
@@ -51,7 +53,7 @@ export class MinhasVacinasComponent implements OnInit {
     this.historico.forEach((s, k) => {
       this.vacinaService.getVacinaUuid(s.vaccineUuid).subscribe(vacina => {
         this.vacinas = this.vacinas.concat(vacina);
-        console.log(vacina, 'vacinas');
+
       }, error => console.log('erro ao listar vacina por uuis', error));
     });
 
@@ -60,14 +62,25 @@ export class MinhasVacinasComponent implements OnInit {
   abrirModal(modal, pessoa: Pessoa) {
     this.vacinaService.getVacinasNome(pessoa.uuid).subscribe(vacina => {
       this.vacinaPorNome = vacina;
-      console.log(this.vacinaPorNome);
+
+    for (let i = 0; i <= this.historico.length; i++) {
+      if ( this.historico[i].dosagesInformation[0].applied === false) {
+        this.uniadeSaude = '';
+        this.dataFormatada = '';
+      } else {
+            if (this.vacinaPorNome.uuid === this.historico[i].vaccineUuid) {
+                this.uniadeSaude = this.historico[i].dosagesInformation[0].healthCenter.name;
+                this.formatarData(this.historico[i].dosagesInformation[0].applicationDate);
+                console.log('historico por nome', this.historico[i]);
+                console.log('vacina por nome', this.vacinaPorNome);
+                break;
+            }}
+    }
     }, error => {
       console.log('Ocorreu um err' +
         '\o ao buscar vacina pelo nome', error);
     });
-
-
-    this.modalVacina.open(modal);
+this.modalVacina.open(modal);
   }
 
   fechar(modal) {
@@ -76,35 +89,21 @@ export class MinhasVacinasComponent implements OnInit {
 
   aplicada(tomada: string, obrigatoria: string) {
 
-    let boolTomada = (/true/i).test(tomada);
-    let boolObrigatoria = (/true/i).test(obrigatoria);
+    const boolTomada = (/true/i).test(tomada);
+    const boolObrigatoria = (/true/i).test(obrigatoria);
 
     switch (true) {
-      case tomada === '--' && obrigatoria === '--':
+      case (boolTomada === false) && (boolObrigatoria === false):
+
         this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico();
+
         break;
 
-      case (tomada === '--' || boolTomada === false) && (obrigatoria === '--' || boolObrigatoria === false):
-        if (tomada === '--' && obrigatoria === '--') {
-          boolObrigatoria = false;
-          boolTomada = false;
-        }
-        this.buscarHistoricoNaoObgTmd(false, false);
-        this.buscarHistorico();
-        break;
-
-      case (tomada === '--' || boolTomada === false) && boolObrigatoria === true:
-        if (tomada === '--') {
-          boolTomada = false;
-        }
+      case (boolTomada === false) && boolObrigatoria === true:
         this.buscarHistoricoObg(boolObrigatoria, boolTomada);
         break;
 
-      case boolTomada === true && (obrigatoria === '--' || boolObrigatoria === false):
-        if (obrigatoria === '--') {
-          boolObrigatoria = false;
-        }
+      case boolTomada === true && (boolObrigatoria === false):
         this.buscarHistoricoTmd(boolTomada, boolObrigatoria);
         break;
 
@@ -148,5 +147,11 @@ export class MinhasVacinasComponent implements OnInit {
       this.vacinas = [];
       this.buscarVacinas();
     }, error => console.log('erro ao listar historico', error));
+  }
+
+  private formatarData(dosagesInformation) {
+    const dataFormat = dosagesInformation;
+    const str = dataFormat.split('-');
+    this.dataFormatada = str[2] + '/' + str[1] + '/' + str[0];
   }
 }

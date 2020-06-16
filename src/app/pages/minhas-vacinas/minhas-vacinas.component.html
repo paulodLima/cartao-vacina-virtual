@@ -18,7 +18,6 @@
             <div class="form-group">
               <label class="form-control-label">Vacinas obrigatórias</label>
               <select class="form-control" #obrigatoria>
-                <option selected value="--">Nenhum</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -28,7 +27,6 @@
             <div class="form-group">
               <label class="form-control-label">Vacinas tomadas</label>
               <select class="form-control" #tomada>
-                <option selected value="--">Nenhum</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -37,7 +35,7 @@
           <div class="col-lg-4">
             <div class="form-group">
               <label class="form-control-label">Pesquisar</label>
-                <button class=" form-control btn btn-sm btn-default" (click)=aplicada(tomada.value,obrigatoria.value)>Pesquisar</button>
+                <button class=" form-control btn btn-sm btn-default" (click)=aplicada(tomada.value,obrigatoria.value)>Aplicar</button>
             </div>
           </div>
         </div>
@@ -81,6 +79,10 @@
 
           <tbody>
           <tr class="row">
+            <td class="col tdn"> Descrição:</td>
+            <td class="col"style="word-break: break-word">{{vacinaPorNome.description}} </td>
+          </tr>
+          <tr class="row">
             <td class="col tdn"> Proteção Contra:</td>
             <td class="col">{{vacinaPorNome.disease}} </td>
           </tr>
@@ -110,10 +112,6 @@
             <td class="col"></td>
           </tr>
           <tr class="row">
-            <td class="col tdn"> Intervalo entre as doses:</td>
-            <td class="col">Recomendado: Min:</td>
-          </tr>
-          <tr class="row">
             <td class="col tdn"> Dosagem:</td>
             <td class="col"></td>
           </tr>
@@ -136,6 +134,16 @@
           <tr class="row">
             <td class="col tdg"> Alguns eventos adversos:</td>
             <td class="col tdgn"> {{vacinaPorNome.sideEffect}}
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg"> Unidade de saúde onde foi aplicada:</td>
+            <td class="col tdgn"> {{uniadeSaude}}
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col tdg">Data de aplicação:</td>
+            <td class="col tdgn">{{dataFormatada}}
             </td>
           </tr>
           </tbody>

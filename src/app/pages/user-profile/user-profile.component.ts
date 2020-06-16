@@ -20,6 +20,11 @@ export class UserProfileComponent implements OnInit {
   public sucesso = false;
   desabilitado = true;
   private pessoaToken: Pessoa[];
+  telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  alturaMask = [/\d/, ',', /\d/, /\d/];
+  pesoMask = [/\d/, /\d/, ',', /\d/, /\d/];
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
   constructor(private formBuilder: FormBuilder,
               private pessoasService: PessoasService,
@@ -31,13 +36,13 @@ export class UserProfileComponent implements OnInit {
       this.authService.logout();
     }
     this.formPerson = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
-      documentNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      documentNumber: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
-      mothersName: ['', [Validators.required, Validators.pattern(/^[\s\S]{5,40}$/)]],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
       address: this.formBuilder.group({
         zipCode: ['', [Validators.required]],
         city: ['', Validators.required],
@@ -47,14 +52,14 @@ export class UserProfileComponent implements OnInit {
         neighborhood: ['', Validators.required]
       }),
       phone: this.formBuilder.group({
-        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/)]],
-        number: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{8,9}\d*)?$/)]]
+        areaCode: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]{0,2}\d*)?$/)]],
+        number: ['', [Validators.required]]
       }),
       height: this.formBuilder.group({
-        height: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]],
+        height: ['', [Validators.required]],
       }),
       weight: this.formBuilder.group({
-        weight: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)*$/)]]
+        weight: ['', [Validators.required]]
       })
     });
 
@@ -64,8 +69,8 @@ export class UserProfileComponent implements OnInit {
   buscarUsuario() {
     this.pessoasService.pesquisarPessoasEmail(this.authService.token.username).subscribe(usuario => {
       this.pessoaToken = usuario;
-      console.log('pessoa token', this.pessoaToken);
-      this.atualizarPerfil(usuario[0]);
+      console.log('pessoa token', this.pessoaToken[0]);
+      this.atualizarPerfil(this.pessoaToken[0]);
       this.pessoa = this.pessoaToken[0];
     }, error => console.log('erro ao consultar pessoa', error));
   }

@@ -17,7 +17,7 @@ export class RegisterVaccineComponent implements OnInit {
   img_vacina = '../../../assets/img/vacina.png';
 
   vacinas: Vacina[] = [];
-  vacinaPorNome: Vacina[];
+  vacinaPorNome: Vacina;
   searchterm = '';
   private locais: any;
   private uuidVacina: string;

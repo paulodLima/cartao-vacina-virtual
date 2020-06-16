@@ -3,15 +3,21 @@
     <div class="header-body text-center mb-2">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Minhas Vacinas</h1>
+          <h1 class="text-white">Todas Vacinas</h1>
           <p class="text-white">O botão informações serve para detalhar a vacina.</p>
         </div>
       </div>
     </div>
   </div>
   <div class="container-fluid">
+      <div class="form-group mb-0">
+        <div  style="margin-bottom: 20px !important;">
+            <button class="btn btn-info offset-lg-8 active mt-10" (click)="abrirModalEmail(modalEnviar)">Enviar e-mail de vacinas pendentes</button>
+        </div>
+      </div>
     <div class="header-body">
       <!-- Card stats -->
+
       <div class="row">
         <div class="col-xl-3 col-lg-6" *ngFor="let vacina of vacinas">
           <div class="card card-stats mb-4 mb-xl-0 margin-card">
@@ -38,18 +44,22 @@
   </div>
   <ng-template #modalVacina>
     <div class="modal-register">
-      <div class="modal-body">
-        <table class="table align-items-center table-flush" >
+      <div class="modal-body" style="word-break: normal !important;">
+        <table class="table align-items-center table-flush table-responsive" >
           <thead class="thead-light" >
           <tr class=" table-active">
             <th scope="col">
               <p class="pn1">DETALHAMENTO </p>
-              <p class="pn">{{vacinaPorNome.name}}</p>
+              <p class="pn" >{{vacinaPorNome.name}}</p>
             </th>
           </tr>
           </thead>
 
           <tbody>
+          <tr class="row">
+            <td class="col tdn"> Descrição:</td>
+            <td class="col">{{vacinaPorNome.description}} </td>
+          </tr>
           <tr class="row">
             <td class="col tdn"> Proteção Contra:</td>
             <td class="col">{{vacinaPorNome.disease}} </td>
@@ -61,10 +71,6 @@
           <tr class="row">
             <td class="col tdn"> Nº Doses:</td>
             <td class="col"> {{vacinaPorNome.basicVaccination}}</td>
-          </tr>
-          <tr class="row">
-            <td class="col tdn"> Intervalo entre as doses:</td>
-            <td class="col">Recomendado: Min:</td>
           </tr>
           <tr class="row">
             <td class="col tdn"> Dosagem:</td>
@@ -99,4 +105,21 @@
       </div>
     </div>
   </ng-template>
+
+  <ng-template #modalEnviar >
+    <div class="modal-body">
+      <div class="row">
+        <p class="text-black-50">Deseja confirmar o envio de e-mail para todos as pessoas cadastradas, que tem vacinas pendentes?</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="col-lg-6">
+          <button type="button" class="btn btn-primary float-left" (click)="EnviarEmailVacinas(modalVacina)">Sim</button>
+      </div>
+      <div class="col-lg-6">
+          <button type="button" class="btn btn-danger float-right" (click)="fechar(modalVacina)">Não</button>
+      </div>
+    </div>
+  </ng-template>
+
 </div>

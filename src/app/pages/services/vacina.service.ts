@@ -22,8 +22,8 @@ export class VacinaService {
     return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
 
-  public getVacinasNome(uuid: string): Observable<Vacina[]> {
-    return this.http.get<Vacina[]>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
+  public getVacinasNome(uuid: string): Observable<Vacina> {
+    return this.http.get<Vacina>(`${URL_API_VACINA}/v1/api/vaccine/${uuid}`);
   }
 
   public getApplicationLocation(): Observable<any> {
@@ -76,10 +76,7 @@ export class VacinaService {
   }
 
   public async getHistoricoVacina(pessoa: string): Promise<any> {
-
-    console.log('id', pessoa);
     const object = await this.http.get(`${URL_API_VACCINECARD}/vaccination-information?personUuid=${pessoa}`).toPromise();
-    console.log('objeto retornado', object);
     return object;
   }
 
@@ -104,7 +101,23 @@ export class VacinaService {
   }
 
   getLocais() {
-    return this.http.get(`${URL_API_VACCINECARD}/health-center`);
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=1&size=10&sort=name,ASC`);
+
+  }
+
+  deleteLocal() {
+    return this.http.delete(`${URL_API_VACCINECARD}/health-center?page=1&size=10&sort=name,ASC`);
+
+  }
+  getLocaisPag2() {
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=2&size=10&sort=name,ASC`);
+  }
+  getLocaisPag3() {
+    return this.http.get(`${URL_API_VACCINECARD}/health-center?page=3&size=10&sort=name,ASC`);
+  }
+
+  apagarLocal(uuid) {
+    return this.http.delete(`${URL_API_VACCINECARD}/health-center/${uuid}`);
   }
 
   getLocalUuid(uuid) {
@@ -118,5 +131,9 @@ export class VacinaService {
 
   atualizarDosagem(uuid: string, dosage: any): Observable<any> {
     return this.http.put(`${URL_API_VACCINECARD}/dosage-information/${uuid}`, dosage);
+  }
+
+  emailVacinasPendentes(): Observable<any> {
+    return this.http.post(`${URL_API_VACCINECARD}/mail/delayed-vaccines`, null);
   }
 }

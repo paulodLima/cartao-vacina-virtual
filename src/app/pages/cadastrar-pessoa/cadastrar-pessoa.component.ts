@@ -69,6 +69,8 @@ export class CadastrarPessoaComponent implements OnInit {
   cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   cefMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   telMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  alturaMask = [/\d/, ',', /\d/, /\d/];
+  pesoMask = [/\d/, /\d/, ',', /\d/, /\d/];
   public password: any;
 
   ngOnInit(): void {
@@ -95,8 +97,8 @@ export class CadastrarPessoaComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       birthDate: ['', Validators.required],
       sexType: ['', Validators.required],
-      fathersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
-      mothersName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{5,40}$/)]],
+      fathersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
+      mothersName: ['', [Validators.required, Validators.pattern(/^[a-z A-Z]{5,40}$/)]],
       address: this.formBuilder.group({
         zipCode: ['', [Validators.required]],
         city: ['', Validators.required],
@@ -118,6 +120,14 @@ export class CadastrarPessoaComponent implements OnInit {
       credential: this.formBuilder.group({
         password: ['', [Validators.required]],
         roles: this.bulderRoles()
+      })
+    });
+  }
+
+  formPersonBuilderRoles() {
+    this.formPerson.patchValue({
+      credential: ({
+        roles: [{'id': this.rolesId, 'name': this.rolesName}]
       })
     });
   }
@@ -150,18 +160,27 @@ export class CadastrarPessoaComponent implements OnInit {
         number: pessoa.phone.number
       }),
       height: ({
-        height: pessoa.height.height
+        height: pessoa.height ? pessoa.height.height : null
       }),
       weight: ({
-        weight: pessoa.weight.weight
+        weight: pessoa.weight ? pessoa.weight.weight : null
       })
     });
   }
 
-  teste(roles, event) {
+  updateRole(roles, event) {
     this.rolesId = roles;
-    this.rolesName = event.target.options[event.target.options.selectedIndex].text;
-    this.formPersonBulder();
+    this.rolesName = this.getNameRoleEnglish(event.target.options[event.target.options.selectedIndex].text);
+    this.formPersonBuilderRoles();
+  }
+
+  getNameRoleEnglish(namePt) {
+
+    if (namePt === 'administrador') {
+      return 'admin';
+    } else if (namePt === 'usuário') {
+      return 'patient';
+    }
   }
 
   cadastrar() {
@@ -173,7 +192,6 @@ export class CadastrarPessoaComponent implements OnInit {
         height: `${this.formPerson.get('height.height').value}`
       })
     });
-    console.log(this.formPerson);
 
     if (this.formPerson.valid) {
       this.sucesso = true;
@@ -219,8 +237,19 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   atualizar() {
+
+    this.formPerson.patchValue({
+      credential: ({
+        roles: [{'id': this.rolesId, 'name': this.rolesName}],
+        password: 'atazera'
+      })
+    });
     if (this.formPerson.valid) {
       this.formPerson.patchValue({
+        credential: ({
+          roles: [{'id': this.rolesId, 'name': this.rolesName}],
+          password: 'atazera'
+        }),
         weight: ({
           weight: `${this.formPerson.get('weight.weight').value}`
         }),
@@ -228,6 +257,7 @@ export class CadastrarPessoaComponent implements OnInit {
           height: `${this.formPerson.get('height.height').value}`
         })
       });
+
       this.pessoasService.atualizarPessoa(this.id, this.formPerson.value).subscribe(pessoa => {
         this.formPerson.reset();
         this.router.navigateByUrl('/pessoas');
@@ -289,13 +319,8 @@ export class CadastrarPessoaComponent implements OnInit {
     this.router.navigateByUrl('/pessoas');
   }
 
-  tamalho(senha) {
-    console.log(senha);
-    if (senha.length !== 8) {
-      this.tamanhoValido = true;
-    } else {
-      this.tamanhoValido = false;
-    }
+  tamanho(senha) {
+    this.tamanhoValido = senha.length !== 8;
   }
 
   comparar(senha, confirmar, permissao) {
