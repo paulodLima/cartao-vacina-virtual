@@ -1,7 +1,7 @@
 <!-- Sidenav-->
 <app-sidebar *ngIf="mostrarMenu === true"></app-sidebar>
 <div class="main-content" [ngClass]="{'mostarMenu' : mostrarMenu === false}">
-  <div class="header bg-gradient-danger py-1 ">
+  <div class="header bg-gradient py-1 ">
   <img *ngIf="mostrarMenu === false" src="assets/img/mostrar.png" class="mg" (click)="mostrar()" title="Mostrar menu">
   <img *ngIf="mostrarMenu === true" src="assets/img/ocutar.png" class="float-left mgx"  (click)="ocutar()" title="Ocutar menu">
     <div class="container">
