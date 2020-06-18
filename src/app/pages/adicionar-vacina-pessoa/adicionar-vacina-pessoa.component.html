@@ -1,10 +1,10 @@
-<div class="header bg-gradient-danger py-4">
+<div class="header bg-gradient py-4">
   <div class="container">
     <div class="header-body text-center mb-2">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Aplicar vacina a pessoa</h1>
-          <p class="text-lead text-light">Preencha com atenção todos os dados!</p>
+          <h1 class="text-black-50">Aplicar vacina a pessoa</h1>
+          <p class="text-lead text-black-50">Preencha com atenção todos os dados!</p>
         </div>
       </div>
     </div>
@@ -32,32 +32,32 @@
                 <div class="form-group">
                   <label class="form-control-label">Pessoa</label>
                   <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <div class="input-group-prepend text-black-50">
+                      <span class="input-group-text text-black-50"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control " placeholder="Pesquisar pessoa" type="text" [value]="paciente" #termoPesquisa (keyup)="pesquisa(termoPesquisa.value)">
+                    <input class="form-control text-black-50" placeholder="Pesquisar pessoa" type="text" [value]="paciente" #termoPesquisa (keyup)="pesquisa(termoPesquisa.value)">
                   </div>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Vacina</label>
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  <div class="input-group input-group-alternative text-black-50">
+                    <div class="input-group-prepend text-black-50">
+                      <span class="input-group-text text-black-50"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Pesquisar vacina" type="text" #vacina [value]="vacinaa" #termoVacina (keyup)="pesquisVacina(termoVacina.value)">
+                    <input class="form-control text-black-50" placeholder="Pesquisar vacina" type="text" #vacina [value]="vacinaa" #termoVacina (keyup)="pesquisVacina(termoVacina.value)">
                   </div>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Unidade de saúde</label>
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  <label class="form-control-label text-black-50">Unidade de saúde</label>
+                  <div class="input-group input-group-alternative text-black-50">
+                    <div class="input-group-prepend text-black-50">
+                      <span class="input-group-text text-black-50"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Pesquisar unidade de saúde" type="text"  [value]="locall" #termoLocals (keyup)="pesquisLocal(termoLocals.value)">
+                    <input class="form-control text-black-50" placeholder="Pesquisar unidade de saúde" type="text"  [value]="locall" #termoLocals (keyup)="pesquisLocal(termoLocals.value)">
                   </div>
                 </div>
               </div>
